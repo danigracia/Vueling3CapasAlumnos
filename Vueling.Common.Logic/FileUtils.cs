@@ -18,7 +18,6 @@ namespace Vueling.Common.Logic
         //Deserializar
         //Crear fichero
 
-        #region Path
         public static string GetPath()
         {
             try
@@ -31,7 +30,6 @@ namespace Vueling.Common.Logic
                 throw;
             }
         }
-        #endregion
 
 
         #region TxtFileUtils
@@ -201,6 +199,25 @@ namespace Vueling.Common.Logic
             }
         }
 
+
+        public List<Student> ReadAllJson()
+        {
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".json";
+            List<Student> liststudents = new List<Student>();
+
+            if (File.Exists(path))
+            {
+                liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+
+                log.Info("Datos del student leido del file json:");
+            }
+
+
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+            return liststudents;
+        }
         #endregion
 
         #region XmlFilUtils
@@ -281,6 +298,33 @@ namespace Vueling.Common.Logic
                 throw;
             }
         }
+
+
+        public List<Student> ReadAllXml()
+        {
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".xml";
+            List<Student> liststudents = new List<Student>();
+
+            XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
+
+            if (File.Exists(path))
+            {
+                using (TextReader reader = new StreamReader(path))
+                {
+                    String readtoend = reader.ReadToEnd();
+                    StringReader streader = new StringReader(readtoend);
+                    liststudents = (List<Student>)serializer.Deserialize(streader);
+                }
+            }
+            log.Info("Datos del student leido del file xml:");
+
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+            return liststudents;
+        }
         #endregion
+
+
     }
 }

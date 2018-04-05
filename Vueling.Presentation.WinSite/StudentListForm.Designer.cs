@@ -52,9 +52,15 @@
             this.labelDni = new System.Windows.Forms.Label();
             this.labelGuid = new System.Windows.Forms.Label();
             this.labelBuscartext = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxProperties = new System.Windows.Forms.CheckedListBox();
             this.buttonBusquedaGeneral = new System.Windows.Forms.Button();
             this.textBoxBusquedaGeneral = new System.Windows.Forms.TextBox();
+            this.radioButtonId = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dGVStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +80,7 @@
             this.buttonReadTxt.TabIndex = 1;
             this.buttonReadTxt.Text = "Read From Txt File";
             this.buttonReadTxt.UseVisualStyleBackColor = true;
+            this.buttonReadTxt.Click += new System.EventHandler(this.buttonReadTxt_Click);
             // 
             // buttonReadJson
             // 
@@ -83,6 +90,7 @@
             this.buttonReadJson.TabIndex = 2;
             this.buttonReadJson.Text = "Read From Json File";
             this.buttonReadJson.UseVisualStyleBackColor = true;
+            this.buttonReadJson.Click += new System.EventHandler(this.buttonReadJson_Click);
             // 
             // buttonReadXml
             // 
@@ -90,8 +98,9 @@
             this.buttonReadXml.Name = "buttonReadXml";
             this.buttonReadXml.Size = new System.Drawing.Size(73, 45);
             this.buttonReadXml.TabIndex = 3;
-            this.buttonReadXml.Text = "Read From Json File";
+            this.buttonReadXml.Text = "Read From Xml File";
             this.buttonReadXml.UseVisualStyleBackColor = true;
+            this.buttonReadXml.Click += new System.EventHandler(this.buttonReadXml_Click);
             // 
             // textBoxId
             // 
@@ -263,20 +272,20 @@
             this.labelBuscartext.TabIndex = 23;
             this.labelBuscartext.Text = "Buscar por:";
             // 
-            // checkedListBox1
+            // checkedListBoxProperties
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.checkedListBoxProperties.FormattingEnabled = true;
+            this.checkedListBoxProperties.Items.AddRange(new object[] {
             "Id",
             "Nombre",
             "Apellidos",
             "Edad",
             "Dni",
             "Guid"});
-            this.checkedListBox1.Location = new System.Drawing.Point(250, 13);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(298, 49);
-            this.checkedListBox1.TabIndex = 24;
+            this.checkedListBoxProperties.Location = new System.Drawing.Point(623, 175);
+            this.checkedListBoxProperties.Name = "checkedListBoxProperties";
+            this.checkedListBoxProperties.Size = new System.Drawing.Size(83, 109);
+            this.checkedListBoxProperties.TabIndex = 24;
             // 
             // buttonBusquedaGeneral
             // 
@@ -286,6 +295,7 @@
             this.buttonBusquedaGeneral.TabIndex = 25;
             this.buttonBusquedaGeneral.Text = "Buscar";
             this.buttonBusquedaGeneral.UseVisualStyleBackColor = true;
+            this.buttonBusquedaGeneral.Click += new System.EventHandler(this.buttonBusquedaGeneral_Click);
             // 
             // textBoxBusquedaGeneral
             // 
@@ -294,14 +304,86 @@
             this.textBoxBusquedaGeneral.Size = new System.Drawing.Size(100, 20);
             this.textBoxBusquedaGeneral.TabIndex = 26;
             // 
+            // radioButtonId
+            // 
+            this.radioButtonId.AutoSize = true;
+            this.radioButtonId.Location = new System.Drawing.Point(279, 16);
+            this.radioButtonId.Name = "radioButtonId";
+            this.radioButtonId.Size = new System.Drawing.Size(69, 17);
+            this.radioButtonId.TabIndex = 0;
+            this.radioButtonId.TabStop = true;
+            this.radioButtonId.Text = "IdAlumno";
+            this.radioButtonId.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(279, 39);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(62, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Nombre";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(279, 62);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(62, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Apellido";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(364, 39);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(50, 17);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Edad";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(364, 16);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(41, 17);
+            this.radioButton5.TabIndex = 4;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "Dni";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(364, 62);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(90, 17);
+            this.radioButton6.TabIndex = 5;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Student_Guid";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
             // StudentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 387);
+            this.Controls.Add(this.radioButton3);
+            this.Controls.Add(this.radioButton4);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton5);
+            this.Controls.Add(this.radioButtonId);
+            this.Controls.Add(this.radioButton6);
             this.Controls.Add(this.textBoxBusquedaGeneral);
             this.Controls.Add(this.buttonBusquedaGeneral);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.checkedListBoxProperties);
             this.Controls.Add(this.labelBuscartext);
             this.Controls.Add(this.labelGuid);
             this.Controls.Add(this.labelDni);
@@ -361,8 +443,14 @@
         private System.Windows.Forms.Label labelDni;
         private System.Windows.Forms.Label labelGuid;
         private System.Windows.Forms.Label labelBuscartext;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBoxProperties;
         private System.Windows.Forms.Button buttonBusquedaGeneral;
         private System.Windows.Forms.TextBox textBoxBusquedaGeneral;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButtonId;
     }
 }

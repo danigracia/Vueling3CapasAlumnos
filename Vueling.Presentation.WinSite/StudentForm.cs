@@ -20,19 +20,15 @@ namespace Vueling.Presentation.WinSite
     {
         private Student student;
         private IStudentBL studentBL;
-        private StudentController StdCont;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
+
         public StudentForm()
         {
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
-            StdCont = new StudentController();
         }
-
-        // Botones leen textBox y llama StudentController
 
         private void buttonTxt_Click(object sender, EventArgs e)
         {
@@ -46,7 +42,6 @@ namespace Vueling.Presentation.WinSite
             {
                 MessageBox.Show("Fallo al tratar el archivo");
             }
-
 
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
 
@@ -72,7 +67,6 @@ namespace Vueling.Presentation.WinSite
         private void buttonXml_Click(object sender, EventArgs e)
         {
             this.SaveStudentData(sender);
-            //StdCont.SendToBusiness(student);
 
             try
             {
@@ -109,9 +103,9 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
-            this.Hide();           
+            this.Hide();
             StudentListForm studentlist = new StudentListForm();
-            studentlist.Show();
+            studentlist.ShowDialog();
         }
     }
 }

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Vueling.DataAccess.Dao;
 using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
+using Vueling.DataAccess.Dao.Singletons;
 
 namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
-        AbstarctFactory AbsFac;
+        
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -19,18 +20,20 @@ namespace Vueling.Business.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                    " iniciado");
+            AbstarctFactory AbsFac;
+            
+
+            Config config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
             AbsFac = new FormatFactory();
             try
             {
-                (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
+                (AbsFac.CreateStudentFormat(config)).Add(this.Complete(student));
             }
             catch (ArgumentNullException e)
             {
                 log.Error("Fallo en metodo businessLogic" + e.Message);
             }
-
-            //this.SendToDao(this.Complete(student));
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                         " terminado");
@@ -43,7 +46,6 @@ namespace Vueling.Business.Logic
 
             this.GetAge(student);
             this.HoraRegistro(student);
-
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -72,20 +74,6 @@ namespace Vueling.Business.Logic
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-        }
-
-        private void SendToDao(Student student)
-        {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
-
-            AbsFac = new FormatFactory();
-            (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(student);
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            // StudentDAO stdao
-            // stdao.DAOLogic(student);
         }
 
     }
