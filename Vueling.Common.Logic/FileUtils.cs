@@ -97,7 +97,7 @@ namespace Vueling.Common.Logic
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-            log.Info("Datos del student leido del file txt:");
+            log.Info("Datos del student leido del file json:");
 
             return studentread;
         }
@@ -145,8 +145,18 @@ namespace Vueling.Common.Logic
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
+            List<Student> alllines = new List<Student>();
             Student studentread = new Student();
-            var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+
+            XmlSerializer serializer = new XmlSerializer(alllines.GetType());
+
+            using (TextReader reader = new StreamReader(path))
+            {
+                String readtoend = reader.ReadToEnd();
+                StringReader streader = new StringReader(readtoend);
+                alllines = (List<Student>)serializer.Deserialize(streader);
+            }
+
             foreach (Student st in alllines)
             {
                 if (st.Student_Guid == studentguid) studentread = st;
@@ -154,7 +164,7 @@ namespace Vueling.Common.Logic
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-            log.Info("Datos del student leido del file txt:");
+            log.Info("Datos del student leido del file xml:");
 
             return studentread;
         }
