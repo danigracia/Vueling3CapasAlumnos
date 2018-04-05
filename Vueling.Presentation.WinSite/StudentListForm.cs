@@ -19,6 +19,7 @@ namespace Vueling.Presentation.WinSite
         FileUtils fileutils;
         SingletonJson sinjson;
         SingletonXml sinxml;
+        private Config formatconfig;
         public StudentListForm()
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace Vueling.Presentation.WinSite
             #region DataGrid's
             this.FillDataGridTxt();
             #endregion
+
+            formatconfig = Config.txt;
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -39,20 +42,25 @@ namespace Vueling.Presentation.WinSite
             studentform.ShowDialog();
         }
 
+        #region Buttons Format
         private void buttonReadTxt_Click(object sender, EventArgs e)
         {
             this.FillDataGridTxt();
+            formatconfig = Config.txt;
         }
 
         private void buttonReadJson_Click(object sender, EventArgs e)
         {
             this.FillDataGridJson();
+            formatconfig = Config.json;
         }
 
         private void buttonReadXml_Click(object sender, EventArgs e)
         {
             this.FillDataGridXml();
+            formatconfig = Config.xml;
         }
+        #endregion
 
         #region Fill DataGrids
         private void FillDataGridTxt()
@@ -64,16 +72,28 @@ namespace Vueling.Presentation.WinSite
 
         private void FillDataGridJson()
         {
-            this.dGVStudents.DataSource = sinjson.LoadAll();
+            liststudent = sinjson.LoadAll();
+            this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
 
         private void FillDataGridXml()
         {
-            this.dGVStudents.DataSource = sinxml.LoadAll();
+            liststudent = sinxml.LoadAll();
+            this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
         #endregion
 
+        private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
+        {
+            IEnumerable<Student> query = from st in liststudent
+                                         where st.Nombre == this.textBoxNombre.Text
+                                        orderby st
+                                        select st;
+
+            foreach (Student item in query)
+                Console.WriteLine(item);
+        }
     }
 }

@@ -80,9 +80,9 @@ namespace Vueling.Presentation.WinSite
             SingletonJson.Instance();
             SingletonXml.Instance();
 
-            this.Hide();           
+            this.Hide();
             StudentListForm studentlist = new StudentListForm();
-            studentlist.Show();
+            studentlist.ShowDialog();
         }
     }
 }

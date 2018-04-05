@@ -289,6 +289,7 @@
             this.buttonBusquedaGeneral.TabIndex = 25;
             this.buttonBusquedaGeneral.Text = "Buscar";
             this.buttonBusquedaGeneral.UseVisualStyleBackColor = true;
+            this.buttonBusquedaGeneral.Click += new System.EventHandler(this.buttonBusquedaGeneral_Click);
             // 
             // textBoxBusquedaGeneral
             // 
