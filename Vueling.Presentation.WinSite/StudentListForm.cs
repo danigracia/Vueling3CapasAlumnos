@@ -16,7 +16,7 @@ namespace Vueling.Presentation.WinSite
     public partial class StudentListForm : Form
     {
         List<Student> liststudent;
-        FileUtils fileutils;
+        FileUtils fileutils = new FileUtils();
         SingletonJson sinjson;
         SingletonXml sinxml;
         private Config formatconfig;
@@ -31,6 +31,9 @@ namespace Vueling.Presentation.WinSite
             #region DataGrid's
             this.FillDataGridTxt();
             #endregion
+
+            sinjson = SingletonJson.Instance();
+            sinxml = SingletonXml.Instance();
 
             formatconfig = Config.txt;
         }
@@ -87,13 +90,12 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {
-            IEnumerable<Student> query = from st in liststudent
-                                         where st.Nombre == this.textBoxNombre.Text
-                                        orderby st
-                                        select st;
+            //string chosen = checkedListBoxProperties.SelectedItem.ToString();
 
-            foreach (Student item in query)
-                Console.WriteLine(item);
+            //IEnumerable<Student> query = from st in liststudent
+            //                             where st.Nombre == this.textBoxBusquedaGeneral.Text
+            //                             orderby st
+            //                             select st;
         }
     }
 }

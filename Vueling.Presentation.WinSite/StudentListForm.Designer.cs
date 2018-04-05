@@ -52,7 +52,7 @@
             this.labelDni = new System.Windows.Forms.Label();
             this.labelGuid = new System.Windows.Forms.Label();
             this.labelBuscartext = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxProperties = new System.Windows.Forms.CheckedListBox();
             this.buttonBusquedaGeneral = new System.Windows.Forms.Button();
             this.textBoxBusquedaGeneral = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGVStudents)).BeginInit();
@@ -266,20 +266,20 @@
             this.labelBuscartext.TabIndex = 23;
             this.labelBuscartext.Text = "Buscar por:";
             // 
-            // checkedListBox1
+            // checkedListBoxProperties
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.checkedListBoxProperties.FormattingEnabled = true;
+            this.checkedListBoxProperties.Items.AddRange(new object[] {
             "Id",
             "Nombre",
             "Apellidos",
             "Edad",
             "Dni",
             "Guid"});
-            this.checkedListBox1.Location = new System.Drawing.Point(250, 13);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(298, 49);
-            this.checkedListBox1.TabIndex = 24;
+            this.checkedListBoxProperties.Location = new System.Drawing.Point(250, 13);
+            this.checkedListBoxProperties.Name = "checkedListBoxProperties";
+            this.checkedListBoxProperties.Size = new System.Drawing.Size(298, 49);
+            this.checkedListBoxProperties.TabIndex = 24;
             // 
             // buttonBusquedaGeneral
             // 
@@ -305,7 +305,7 @@
             this.ClientSize = new System.Drawing.Size(718, 387);
             this.Controls.Add(this.textBoxBusquedaGeneral);
             this.Controls.Add(this.buttonBusquedaGeneral);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.checkedListBoxProperties);
             this.Controls.Add(this.labelBuscartext);
             this.Controls.Add(this.labelGuid);
             this.Controls.Add(this.labelDni);
@@ -365,7 +365,7 @@
         private System.Windows.Forms.Label labelDni;
         private System.Windows.Forms.Label labelGuid;
         private System.Windows.Forms.Label labelBuscartext;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBoxProperties;
         private System.Windows.Forms.Button buttonBusquedaGeneral;
         private System.Windows.Forms.TextBox textBoxBusquedaGeneral;
     }
