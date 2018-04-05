@@ -21,14 +21,22 @@ namespace Vueling.Business.Logic
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                    " iniciado");
             AbstarctFactory AbsFac;
+            
 
             Config config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
             AbsFac = new FormatFactory();
-            (AbsFac.CreateStudentFormat(config)).Add(this.Complete(student));
+            try
+            {
+                (AbsFac.CreateStudentFormat(config)).Add(this.Complete(student));
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Fallo en metodo businessLogic" + e.Message);
+            }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+                        " terminado");
         }
 
         private Student Complete(Student student)

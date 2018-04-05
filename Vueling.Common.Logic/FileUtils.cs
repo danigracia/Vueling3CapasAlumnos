@@ -20,7 +20,15 @@ namespace Vueling.Common.Logic
 
         public static string GetPath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name;
+            try
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name;
+            }
+            catch (AccessViolationException)
+            {
+                log.Error("Error en el metodo GetPath()");
+                throw;
+            }
         }
 
 
@@ -30,20 +38,29 @@ namespace Vueling.Common.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            if (!File.Exists(path))
+            try
             {
-                using (StreamWriter stwriter = File.CreateText(path))
+                if (!File.Exists(path))
                 {
-                    stwriter.WriteLine(student.ToString());
+                    using (StreamWriter stwriter = File.CreateText(path))
+                    {
+                        stwriter.WriteLine(student.ToString());
+                    }
+                }
+                else
+                {
+                    using (StreamWriter strw = File.AppendText(path))
+                    {
+                        strw.WriteLine(student.ToString());
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (StreamWriter strw = File.AppendText(path))
-                {
-                    strw.WriteLine(student.ToString());
-                }
+                log.Error("Error en el metodo GetPath()" + e.Message);
+                throw;
             }
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
@@ -52,47 +69,68 @@ namespace Vueling.Common.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            var alllines = File.ReadAllLines(path);
-            string findstudent = "";
-            foreach (string line in alllines)
+            try
             {
-                if (line.Contains(studentguid.ToString()))
+                var alllines = File.ReadAllLines(path);
+                string findstudent = "";
+                foreach (string line in alllines)
                 {
-                    findstudent = line;
+                    if (line.Contains(studentguid.ToString()))
+                    {
+                        findstudent = line;
+                    }
                 }
+
+                var linesplit = findstudent.Split(',');
+                Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+                log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+                log.Info("Datos del student leido del file txt:");
+                log.Info("datebirth:" + readstudent.FechaNacimiento.ToString());
+                return readstudent;
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentFromTxtByGuid()" + e.Message);
+                throw;
+            }
+            catch (FormatException e)
+            {
+                log.Error("Error de formato en el metodo GetStudentFromTxtByGuid()" + e.Message);
+                throw;
             }
 
-            var linesplit = findstudent.Split(',');
-            Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
-
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file txt:");
-            log.Info("datebirth:" + readstudent.FechaNacimiento.ToString());
-            return readstudent;
+            
         }
 
         public List<Student> ReadAllTxt()
         {
 
-        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
-        Student readstudent;
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
+            Student readstudent;
             List<Student> liststudents = new List<Student>();
             string[] linesplit;
 
-            if (File.Exists(path))
-            {                
-                var alllines = File.ReadAllLines(path);
-                foreach (string line in alllines)
+            try
+            {
+                if (File.Exists(path))
                 {
-                    linesplit = line.Split(',');
-                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+                    var alllines = File.ReadAllLines(path);
+                    foreach (string line in alllines)
+                    {
+                        linesplit = line.Split(',');
+                        readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
 
-                    liststudents.Add(readstudent);
+                        liststudents.Add(readstudent);
+                    }
                 }
+                return liststudents;
             }
-            return liststudents;
+            catch(IOException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
         }
         #endregion
 
@@ -104,48 +142,61 @@ namespace Vueling.Common.Logic
             List<Student> liststudents;
 
             //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
-
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    }
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        writer.Write(JsonConvert.SerializeObject(liststudents));
+                    }
                 }
-                using (TextWriter writer = new StreamWriter(path))
+                else
                 {
-                    liststudents.Add(student);
-                    writer.Write(JsonConvert.SerializeObject(liststudents));
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        writer.WriteLine(student.ToJson());
+                    }
                 }
             }
-            else
+            catch(IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    writer.WriteLine(student.ToJson());
-                }
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
             }
-
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
 
-        public  static Student GetStudentFromJsonByGuid(Guid studentguid, string path)
+        public static Student GetStudentFromJsonByGuid(Guid studentguid, string path)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-
-            Student studentread = new Student();
-            var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
-            foreach (Student st in alllines)
+            try
             {
-                if (st.Student_Guid == studentguid) studentread = st;
+                Student studentread = new Student();
+                var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+                foreach (Student st in alllines)
+                {
+                    if (st.Student_Guid == studentguid) studentread = st;
+                }
+
+                log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                    " terminado");
+                log.Info("Datos del student leido del file json:");
+
+                return studentread;
             }
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file json:");
-
-            return studentread;
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
         }
 
 
@@ -177,61 +228,75 @@ namespace Vueling.Common.Logic
             List<Student> liststudents = new List<Student>();
 
             XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
-
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    String readtoend = reader.ReadToEnd();
-                    StringReader streader = new StringReader(readtoend);
-                    liststudents = (List<Student>)serializer.Deserialize(streader);
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        String readtoend = reader.ReadToEnd();
+                        StringReader streader = new StringReader(readtoend);
+                        liststudents = (List<Student>)serializer.Deserialize(streader);
+                    }
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        serializer.Serialize(writer, liststudents);
+                    }
                 }
-                using (TextWriter writer = new StreamWriter(path))
+                else
                 {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        serializer.Serialize(writer, liststudents);
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
+                log.Error("Error en el metodo SetStudentToXml()" + e.Message);
+                throw;
             }
-
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
 
         public static Student GetStudentFromXmlByGuid(Guid studentguid, string path)
         {
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
             List<Student> alllines = new List<Student>();
             Student studentread = new Student();
-
-            XmlSerializer serializer = new XmlSerializer(alllines.GetType());
-
-            using (TextReader reader = new StreamReader(path))
+            try
             {
-                String readtoend = reader.ReadToEnd();
-                StringReader streader = new StringReader(readtoend);
-                alllines = (List<Student>)serializer.Deserialize(streader);
-            }
+                XmlSerializer serializer = new XmlSerializer(alllines.GetType());
 
-            foreach (Student st in alllines)
+                using (TextReader reader = new StreamReader(path))
+                {
+                    String readtoend = reader.ReadToEnd();
+                    StringReader streader = new StringReader(readtoend);
+                    alllines = (List<Student>)serializer.Deserialize(streader);
+                }
+
+                foreach (Student st in alllines)
+                {
+                    if (st.Student_Guid == studentguid) studentread = st;
+                }
+
+                log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                    " terminado");
+                log.Info("Datos del student leido del file xml:");
+
+                return studentread;
+            }
+            catch (IOException e)
             {
-                if (st.Student_Guid == studentguid) studentread = st;
+                log.Error("Error en el metodo SetStudentToXml()" + e.Message);
+                throw;
             }
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file xml:");
-
-            return studentread;
         }
 
 
