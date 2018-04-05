@@ -60,11 +60,12 @@ namespace Vueling.Common.Logic.Models
         }
 
 
-        public Student(int id, string name, string surname, int edad, string dateregister, string dni, string st_guid)
+        public Student(int id, string name, string surname, string fechanacimiento, int edad, string dateregister, string dni, string st_guid)
         {
             this.idAlumno = id;
             this.Nombre = name;
             this.Apellido = surname;
+            this.FechaNacimiento = Convert.ToDateTime(fechanacimiento);
             this.Edad = edad;
             this.Dni = dni;
             this.HoraRegistro = Convert.ToDateTime(dateregister);

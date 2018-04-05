@@ -65,7 +65,7 @@ namespace Vueling.Common.Logic
             }
 
             var linesplit = findstudent.Split(',');
-            Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], Int32.Parse(linesplit[3]), linesplit[4], linesplit[5], linesplit[6]);
+            Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
 
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
