@@ -32,10 +32,8 @@ namespace Vueling.Presentation.WinSite
             formatconfig = Config.txt;
             filebl = new FileBL();
 
-            this.FillDataGridTxt();
+            this.FillDataGrid(formatconfig);
             filebl.FillSingletons();
-
-
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -49,45 +47,28 @@ namespace Vueling.Presentation.WinSite
         private void buttonReadTxt_Click(object sender, EventArgs e)
         {
             formatconfig = Config.txt;
-            this.FillDataGridTxt();
+            this.FillDataGrid(formatconfig);
         }
 
         private void buttonReadJson_Click(object sender, EventArgs e)
         {
             formatconfig = Config.json;
-            this.FillDataGridJson();
+            this.FillDataGrid(formatconfig);
         }
 
         private void buttonReadXml_Click(object sender, EventArgs e)
         {
             formatconfig = Config.xml;
-            this.FillDataGridXml();
+            this.FillDataGrid(formatconfig);
         }
         #endregion
 
-        #region Fill DataGrids
-        private void FillDataGridTxt()
+        private void FillDataGrid(Config format)
         {
-            liststudent = filebl.ReadFile(Config.txt);
-
+            liststudent = filebl.ReadFile(format);
             this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
-
-        private void FillDataGridJson()
-        {
-            liststudent = filebl.ReadFile(Config.json);
-            this.dGVStudents.DataSource = liststudent;
-            this.dGVStudents.Columns["SavedFormat"].Visible = false;
-        }
-
-        private void FillDataGridXml()
-        {
-            liststudent = filebl.ReadFile(Config.xml);
-            this.dGVStudents.DataSource = liststudent;
-            this.dGVStudents.Columns["SavedFormat"].Visible = false;
-        }
-        #endregion
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {

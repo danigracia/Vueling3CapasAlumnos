@@ -12,16 +12,11 @@ namespace Vueling.Business.Logic.Logics
 {
     public class FileBL : IFileBL
     {
-        public void FileBusinessLogic()
-        {
 
-        }
-
-        public List<Student> ReadFile(Config formato)
+        public List<Student> ReadFile(Config con)
         {
             AbstarctFactory formfact = new FormatFactory();
-
-            return (formfact.CreateStudentFormat(formato.ToString())).ReadAll();
+            return (formfact.CreateStudentFormat(con.ToString())).ReadAll();
         }
 
         public void FillSingletons()

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
+using Vueling.DataAccess.Dao.Factories;
 
 namespace Vueling.DataAccess.Dao.Singletons
 {
@@ -13,11 +14,11 @@ namespace Vueling.DataAccess.Dao.Singletons
         private static SingletonJson instance = null;
         private static readonly object padlock = new object();
         readonly List<Student> liststudents;
-        readonly FileUtils fu = new FileUtils();
+        readonly AbstarctFactory abfac = new FormatFactory();
 
         SingletonJson()
         {
-            liststudents = fu.ReadAllJson();
+            liststudents = (abfac.CreateStudentFormat("json")).ReadAll();
         }
 
         public static SingletonJson Instance
