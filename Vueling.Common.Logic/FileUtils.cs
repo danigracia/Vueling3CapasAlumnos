@@ -103,7 +103,7 @@ namespace Vueling.Common.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            List<Student> liststudents = new List<Student>();
+            List<Student> liststudents;
 
             //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
 
