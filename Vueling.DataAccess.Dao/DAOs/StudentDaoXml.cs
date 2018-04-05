@@ -22,35 +22,10 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            liststudents = new List<Student>();
 
             string path = FileUtils.GetPath() + ".xml";
-            //string path = ConfigurationManager.AppSettings["ConfigPathXml"].ToString();
 
-            XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
-
-            if (File.Exists(path))
-            {
-                using (TextReader reader = new StreamReader(path))
-                {
-                    String readtoend = reader.ReadToEnd();
-                    StringReader streader = new StringReader(readtoend);
-                    liststudents = (List<Student>)serializer.Deserialize(streader);
-                }
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
-            }
-            else
-            {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
-            }
+            FileUtils.SetStudentToXml(student, path);
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");

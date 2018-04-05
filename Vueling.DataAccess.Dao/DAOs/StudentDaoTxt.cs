@@ -23,13 +23,13 @@ namespace Vueling.DataAccess.Dao
             string path = FileUtils.GetPath() + ".txt";
             //string path = ConfigurationManager.AppSettings["ConfigPathTxt"].ToString();
 
-            this.SetStudent(student, path);
+            this.SetStudentToTxt(student, path);
 
-            return this.GetStudentByGuid(student.Student_Guid, path);
+            return this.GetStudentFromTxtByGuid(student.Student_Guid, path);
         }
 
 
-        private void SetStudent(Student student, string path)
+        private void SetStudentToTxt(Student student, string path)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
@@ -53,7 +53,7 @@ namespace Vueling.DataAccess.Dao
 
         }
 
-        private Student GetStudentByGuid(Guid studentguid, string path)
+        private Student GetStudentFromTxtByGuid(Guid studentguid, string path)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
