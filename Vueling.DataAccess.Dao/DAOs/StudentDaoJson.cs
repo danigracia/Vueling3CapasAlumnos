@@ -13,7 +13,6 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoJson : IStudentDao
     {
-        private List<Student> liststudents;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
@@ -21,16 +20,17 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            liststudents = new List<Student>();
 
             string path = FileUtils.GetPath() + ".json";
 
             FileUtils.SetStudentToJson(student, path);
 
+            #region coments
             //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
 
             //var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(Filename));
             //return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
+            #endregion
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");

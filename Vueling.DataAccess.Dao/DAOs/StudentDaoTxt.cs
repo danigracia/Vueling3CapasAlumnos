@@ -23,9 +23,9 @@ namespace Vueling.DataAccess.Dao
             string path = FileUtils.GetPath() + ".txt";
             //string path = ConfigurationManager.AppSettings["ConfigPathTxt"].ToString();
 
-            this.SetStudentToTxt(student, path);
+            FileUtils.SetStudentToTxt(student, path);
 
-            return this.GetStudentFromTxtByGuid(student.Student_Guid, path);
+            return FileUtils.GetStudentFromTxtByGuid(student.Student_Guid, path);
         }
 
 

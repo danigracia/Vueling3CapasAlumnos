@@ -27,6 +27,54 @@ namespace Vueling.Common.Logic
 
 
         #region TxtFileUtils
+
+        public static void SetStudentToTxt(Student student, string path)
+        {
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " iniciado");
+            if (!File.Exists(path))
+            {
+                using (StreamWriter stwriter = File.CreateText(path))
+                {
+                    stwriter.WriteLine(student.ToString());
+                }
+            }
+            else
+            {
+                using (StreamWriter strw = File.AppendText(path))
+                {
+                    strw.WriteLine(student.ToString());
+                }
+            }
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+        }
+
+        public static Student GetStudentFromTxtByGuid(Guid studentguid, string path)
+        {
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " iniciado");
+            var alllines = File.ReadAllLines(path);
+            string findstudent = "";
+            foreach (string line in alllines)
+            {
+                if (line.Contains(studentguid.ToString()))
+                {
+                    findstudent = line;
+                }
+            }
+
+            var linesplit = findstudent.Split(',');
+            Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], Int32.Parse(linesplit[3]), linesplit[4], linesplit[5], linesplit[6]);
+
+
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+            log.Info("Datos del student leido del file txt:");
+            log.Info("datebirth:" + readstudent.FechaNacimiento.ToString());
+            return readstudent;
+        }
+
         public List<Student> ReadAllTxt()
         {
 
