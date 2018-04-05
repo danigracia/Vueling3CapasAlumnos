@@ -100,7 +100,7 @@ namespace Vueling.Presentation.WinSite
                 student.SavedFormat = ((Button)sender).Text.ToLower();
                 log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
             }
-            catch (ArgumentNullException e)
+            catch (FormatException e)
             {
                 MessageBox.Show(String.Format("Message error: " + e.Message));
             }

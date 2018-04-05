@@ -28,7 +28,6 @@ namespace Vueling.Business.Logic
             catch (ArgumentNullException e)
             {
                 log.Error("Fallo en metodo businessLogic" + e.Message);
-                throw;
             }
 
             //this.SendToDao(this.Complete(student));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -14,7 +15,6 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoXml : IStudentDao
     {
-        private List<Student> liststudents;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
@@ -22,40 +22,25 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            liststudents = new List<Student>();
 
             string path = FileUtils.GetPath() + ".xml";
-            //string path = ConfigurationManager.AppSettings["ConfigPathXml"].ToString();
 
-            XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
-
-            try
-            {
-                if (File.Exists(path))
-                {
-                    using (TextReader reader = new StreamReader(path))
-                    {
-                        String readtoend = reader.ReadToEnd();
-                        StringReader streader = new StringReader(readtoend);
-                        liststudents = (List<Student>)serializer.Deserialize(streader);
-                    }
-                }
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
-            }
-            catch (IOException e)
-            {
-                log.Error("Fallo en el metodo student Add XML" + e.Message);
-                throw;
-            }
-
-
+            FileUtils.SetStudentToXml(student, path);
+            #region logs
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-            return student;
+            Student studentread;
+            studentread = FileUtils.GetStudentFromXmlByGuid(student.Student_Guid, path);
+
+            foreach (PropertyInfo prop in typeof(Student).GetProperties())
+            {
+                log.Info("studentread." + prop.Name + ": " + prop.GetValue(studentread) + ", student." + prop.Name + ": " + prop.GetValue(student));
+                Console.WriteLine(prop.Name);
+            }
+            #endregion
+
+
+            return FileUtils.GetStudentFromXmlByGuid(student.Student_Guid, path);
         }
     }
 }
