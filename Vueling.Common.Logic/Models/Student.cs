@@ -33,8 +33,6 @@ namespace Vueling.Common.Logic.Models
         }
         public string Apellido { get; set; }
         public string Dni { get; set; }
-        [JsonIgnore]
-        [XmlIgnore]
         public DateTime FechaNacimiento { get; set; }
         public int Edad { get; set; }
         public DateTime HoraRegistro { get; set; }
@@ -62,11 +60,12 @@ namespace Vueling.Common.Logic.Models
         }
 
 
-        public Student(int id, string name, string surname, int edad, string dateregister, string dni, string st_guid)
+        public Student(int id, string name, string surname, string fechanacimiento, int edad, string dateregister, string dni, string st_guid)
         {
             this.idAlumno = id;
             this.Nombre = name;
             this.Apellido = surname;
+            this.FechaNacimiento = Convert.ToDateTime(fechanacimiento);
             this.Edad = edad;
             this.Dni = dni;
             this.HoraRegistro = Convert.ToDateTime(dateregister);
@@ -77,7 +76,9 @@ namespace Vueling.Common.Logic.Models
         #region ToFormat
         public override string ToString()
         {
-            string tostring = this.IdAlumno + "," + this.Nombre + "," + this.Apellido + "," + this.Edad + "," + this.HoraRegistro + "," + this.Dni + "," + this.Student_Guid;
+            string tostring = this.IdAlumno + "," + this.Nombre + "," + this.Apellido + ","
+                + this.FechaNacimiento + "," + this.Edad + "," 
+                + this.HoraRegistro + "," + this.Dni + "," + this.Student_Guid;
             return tostring;
         }
 
