@@ -7,19 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vueling.Business.Logic;
+using Vueling.Business.Logic.Interfaces;
+using Vueling.Business.Logic.Logics;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
-using Vueling.Common.Logic.Singletons;
 
 namespace Vueling.Presentation.WinSite
 {
     public partial class StudentListForm : Form
     {
-        List<Student> liststudent;
-        FileUtils fileutils = new FileUtils();
-        SingletonJson sinjson;
-        SingletonXml sinxml;
+        List<Student> liststudent = new List<Student>();
+        IFileBL filebl;
+    
         private Config formatconfig;
+
         public StudentListForm()
         {
             InitializeComponent();
@@ -27,15 +29,13 @@ namespace Vueling.Presentation.WinSite
 
         private void StudentListForm_Load(object sender, EventArgs e)
         {
-            // Cargar datos de fichero de texto en grid
-            #region DataGrid's
-            this.FillDataGridTxt();
-            #endregion
-
-            sinjson = SingletonJson.Instance();
-            sinxml = SingletonXml.Instance();
-
             formatconfig = Config.txt;
+            filebl = new FileBL();
+
+            this.FillDataGridTxt();
+            filebl.FillSingletons();
+
+
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -48,41 +48,42 @@ namespace Vueling.Presentation.WinSite
         #region Buttons Format
         private void buttonReadTxt_Click(object sender, EventArgs e)
         {
-            this.FillDataGridTxt();
             formatconfig = Config.txt;
+            this.FillDataGridTxt();
         }
 
         private void buttonReadJson_Click(object sender, EventArgs e)
         {
-            this.FillDataGridJson();
             formatconfig = Config.json;
+            this.FillDataGridJson();
         }
 
         private void buttonReadXml_Click(object sender, EventArgs e)
         {
-            this.FillDataGridXml();
             formatconfig = Config.xml;
+            this.FillDataGridXml();
         }
         #endregion
 
         #region Fill DataGrids
         private void FillDataGridTxt()
         {
-            liststudent = fileutils.ReadAllTxt();
+            liststudent = filebl.ReadFile(Config.txt);
+
             this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
 
         private void FillDataGridJson()
         {
-            liststudent = sinjson.LoadAll();
+            liststudent = filebl.ReadFile(Config.json);
             this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
 
         private void FillDataGridXml()
         {
-            liststudent = sinxml.LoadAll();
+            liststudent = filebl.ReadFile(Config.xml);
             this.dGVStudents.DataSource = liststudent;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
@@ -90,12 +91,10 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {
-            //string chosen = checkedListBoxProperties.SelectedItem.ToString();
+            IFileBL filebl = new FileBL();
 
-            //IEnumerable<Student> query = from st in liststudent
-            //                             where st.Nombre == this.textBoxBusquedaGeneral.Text
-            //                             orderby st
-            //                             select st;
+            filebl.Buscar();
+
         }
     }
 }

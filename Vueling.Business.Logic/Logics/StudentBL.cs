@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vueling.DataAccess.Dao;
 using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
+using Vueling.DataAccess.Dao.Singletons;
 
 namespace Vueling.Business.Logic
 {
@@ -22,8 +23,6 @@ namespace Vueling.Business.Logic
 
             AbsFac = new FormatFactory();
             (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
-
-            //this.SendToDao(this.Complete(student));
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -65,20 +64,6 @@ namespace Vueling.Business.Logic
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-        }
-
-        private void SendToDao(Student student)
-        {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
-
-            AbsFac = new FormatFactory();
-            (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(student);
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            // StudentDAO stdao
-            // stdao.DAOLogic(student);
         }
 
     }

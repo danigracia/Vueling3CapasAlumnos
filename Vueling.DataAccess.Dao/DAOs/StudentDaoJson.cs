@@ -25,18 +25,29 @@ namespace Vueling.DataAccess.Dao
 
             FileUtils.SetStudentToJson(student, path);
 
-            #region coments
-            //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
-
-            //var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(Filename));
-            //return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
-            #endregion
-
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
 
             return FileUtils.GetStudentFromJsonByGuid(student.Student_Guid, path);
 
+        }
+
+        public List<Student> ReadAll()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".json";
+            List<Student> liststudents = new List<Student>();
+
+            if (File.Exists(path))
+            {
+                liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+
+                log.Info("Datos del student leido del file json:");
+            }
+
+
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+            return liststudents;
         }
     }
 }

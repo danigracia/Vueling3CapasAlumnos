@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Models;
-using Vueling.Common.Logic.Singletons;
 
 
 namespace Vueling.Presentation.WinSite
@@ -30,15 +29,11 @@ namespace Vueling.Presentation.WinSite
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
-            StdCont = new StudentController();
         }
-
-        // Botones leen textBox y llama StudentController
 
         private void buttonTxt_Click(object sender, EventArgs e)
         {
             this.SaveStudentData(sender);
-
             studentBL.BusinessLogic(student);
 
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
@@ -56,7 +51,6 @@ namespace Vueling.Presentation.WinSite
         private void buttonXml_Click(object sender, EventArgs e)
         {
             this.SaveStudentData(sender);
-            //StdCont.SendToBusiness(student);
             studentBL.BusinessLogic(student);
 
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
@@ -77,9 +71,6 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
-            SingletonJson.Instance();
-            SingletonXml.Instance();
-
             this.Hide();
             StudentListForm studentlist = new StudentListForm();
             studentlist.ShowDialog();

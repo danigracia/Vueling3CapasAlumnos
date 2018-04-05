@@ -6,39 +6,41 @@ using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
 
-namespace Vueling.Common.Logic.Singletons
+namespace Vueling.DataAccess.Dao.Singletons
 {
-    public class SingletonXml
+    public sealed class SingletonJson
     {
-        private static SingletonXml instance = null;
+        private static SingletonJson instance = null;
         private static readonly object padlock = new object();
         readonly List<Student> liststudents;
         readonly FileUtils fu = new FileUtils();
 
-        protected SingletonXml()
+        SingletonJson()
         {
-            liststudents = fu.ReadAllXml();
+            liststudents = fu.ReadAllJson();
         }
 
-        public static SingletonXml Instance()
+        public static SingletonJson Instance
         {
-            if (instance == null)
+            get
             {
-                lock (padlock)
+                if (instance == null)
                 {
-                    if (instance == null)
+                    lock (padlock)
                     {
-                        instance = new SingletonXml();
+                        if (instance == null)
+                        {
+                            instance = new SingletonJson();
+                        }
                     }
                 }
+                return instance;
             }
-            return instance;
         }
 
         public List<Student> LoadAll()
         {
             return liststudents;
         }
-
     }
 }

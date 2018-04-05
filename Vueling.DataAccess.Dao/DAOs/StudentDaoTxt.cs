@@ -28,5 +28,26 @@ namespace Vueling.DataAccess.Dao
             return FileUtils.GetStudentFromTxtByGuid(student.Student_Guid, path);
         }
 
+
+        public List<Student> ReadAll()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
+            Student readstudent;
+            List<Student> liststudents = new List<Student>();
+            string[] linesplit;
+
+            if (File.Exists(path))
+            {
+                var alllines = File.ReadAllLines(path);
+                foreach (string line in alllines)
+                {
+                    linesplit = line.Split(',');
+                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+
+                    liststudents.Add(readstudent);
+                }
+            }
+            return liststudents;
+        }
     }
 }
