@@ -27,14 +27,7 @@ namespace Vueling.Presentation.WinSite
             fileutils = new FileUtils();
 
             #region DataGrid's
-            liststudent = fileutils.ReadAllTxt();
-            this.dGVStudents.DataSource = liststudent;
-
-            this.dGVStudents.Columns["FechaNacimiento"].Visible = false;
-            this.dGVStudents.Columns["SavedFormat"].Visible = false;
-
-            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
-
+            this.FillDataGridTxt();
             #endregion
         }
 
@@ -42,7 +35,44 @@ namespace Vueling.Presentation.WinSite
         {
             this.Hide();
             StudentForm studentform = new StudentForm();
-            studentform.Show();
+            studentform.ShowDialog();
         }
+
+        private void buttonReadTxt_Click(object sender, EventArgs e)
+        {
+            this.FillDataGridTxt();
+        }
+
+
+        private void buttonReadJson_Click(object sender, EventArgs e)
+        {
+            this.FillDataGridJson();
+        }
+
+        private void buttonReadXml_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void FillDataGridTxt()
+        {
+            liststudent = fileutils.ReadAllTxt();
+            this.dGVStudents.DataSource = liststudent;
+
+            this.dGVStudents.Columns["SavedFormat"].Visible = false;
+            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
+        }
+
+        private void FillDataGridJson()
+        {
+            liststudent = fileutils.ReadAllJson();
+            this.dGVStudents.DataSource = liststudent;
+
+            this.dGVStudents.Columns["SavedFormat"].Visible = false;
+            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
+        }
+
     }
 }

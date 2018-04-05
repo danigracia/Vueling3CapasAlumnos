@@ -74,6 +74,7 @@
             this.buttonReadTxt.TabIndex = 1;
             this.buttonReadTxt.Text = "Read From Txt File";
             this.buttonReadTxt.UseVisualStyleBackColor = true;
+            this.buttonReadTxt.Click += new System.EventHandler(this.buttonReadTxt_Click);
             // 
             // buttonReadJson
             // 
@@ -83,6 +84,7 @@
             this.buttonReadJson.TabIndex = 2;
             this.buttonReadJson.Text = "Read From Json File";
             this.buttonReadJson.UseVisualStyleBackColor = true;
+            this.buttonReadJson.Click += new System.EventHandler(this.buttonReadJson_Click);
             // 
             // buttonReadXml
             // 
@@ -92,6 +94,7 @@
             this.buttonReadXml.TabIndex = 3;
             this.buttonReadXml.Text = "Read From Json File";
             this.buttonReadXml.UseVisualStyleBackColor = true;
+            this.buttonReadXml.Click += new System.EventHandler(this.buttonReadXml_Click);
             // 
             // textBoxId
             // 

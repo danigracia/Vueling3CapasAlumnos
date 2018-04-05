@@ -150,6 +150,25 @@ namespace Vueling.Common.Logic
             return studentread;
         }
 
+
+        public List<Student> ReadAllJson()
+        {
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".json";
+            List<Student> liststudents = new List<Student>();
+
+            if (File.Exists(path))
+            {
+                liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+
+                log.Info("Datos del student leido del file json:");
+            }
+
+
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                " terminado");
+            return liststudents;
+        }
         #endregion
 
         #region XmlFilUtils
