@@ -10,7 +10,7 @@ namespace Vueling.Business.Logic.Interfaces
     public interface IFileBL
     {
         void FillSingletons();
-        void Buscar();
+        List<Student> Buscar(Config format, string textabuscar, string propertyabuscar);
         List<Student> ReadFile(Config con);
     }
 }

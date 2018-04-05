@@ -16,7 +16,7 @@ namespace Vueling.Business.Logic.Logics
         public List<Student> ReadFile(Config con)
         {
             AbstarctFactory formfact = new FormatFactory();
-            return (formfact.CreateStudentFormat(con.ToString())).ReadAll();
+            return (formfact.CreateStudentFormat(con)).ReadAll();
         }
 
         public void FillSingletons()
@@ -25,17 +25,13 @@ namespace Vueling.Business.Logic.Logics
             SingletonXml sinxml = SingletonXml.Instance;
         }
 
-        public void Buscar()
+        public List<Student> Buscar(Config format, string textabuscar, string propertyabuscar)
         {
-            /*
-            string chosen = checkedListBoxProperties.SelectedItem.ToString();
+            List<Student> liststudent;
+            AbstarctFactory formfact = new FormatFactory();
+            liststudent = (formfact.CreateStudentFormat(format)).Buscar(textabuscar, propertyabuscar);
 
-            IEnumerable<Student> query = from st in liststudent
-                                         where st.Nombre == this.textBoxBusquedaGeneral.Text
-                                         orderby st
-                                         select st;
-            return;
-            */
+            return liststudent;
         }
 
     }

@@ -18,7 +18,7 @@ namespace Vueling.DataAccess.Dao.Singletons
 
         protected SingletonXml()
         {
-            liststudents = liststudents = (abfac.CreateStudentFormat("xml")).ReadAll();
+            liststudents = liststudents = (abfac.CreateStudentFormat(Config.xml)).ReadAll();
         }
 
         public static SingletonXml Instance

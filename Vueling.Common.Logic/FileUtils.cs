@@ -18,12 +18,10 @@ namespace Vueling.Common.Logic
         //Deserializar
         //Crear fichero
 
-        #region Path
         public static string GetPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name;
         }
-        #endregion
 
 
         #region TxtFileUtils

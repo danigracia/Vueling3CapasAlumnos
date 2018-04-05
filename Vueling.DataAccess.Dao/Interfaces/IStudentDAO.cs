@@ -10,7 +10,7 @@ namespace Vueling.DataAccess.Dao
     public interface IStudentDao
     {
         Student Add(Student student);
-
+        List<Student> Buscar(string text, string property);
         List<Student> ReadAll();
     }
 }

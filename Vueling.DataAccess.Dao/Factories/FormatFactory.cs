@@ -14,19 +14,19 @@ namespace Vueling.DataAccess.Dao.Factories
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        public override IStudentDao CreateStudentFormat(string str)
+        public override IStudentDao CreateStudentFormat(Config typ)
         {
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            Config Typ = (Config)Enum.Parse(typeof(Config), str);
+            //Config Typ = (Config)Enum.Parse(typeof(Config), str);
 
-            switch (Typ)
+            switch (typ)
             {
                 case Config.txt: return new StudentDaoTxt();
                 case Config.json: return new StudentDaoJson();
                 case Config.xml: return new StudentDaoXml();
-                default: throw new ArgumentException("Invalid type", "str");
+                default: throw new ArgumentException("Invalid type", "typ");
             }
         }
     }

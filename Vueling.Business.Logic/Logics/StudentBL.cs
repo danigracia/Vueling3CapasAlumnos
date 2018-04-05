@@ -12,7 +12,7 @@ namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
-        AbstarctFactory AbsFac;
+        
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -20,9 +20,12 @@ namespace Vueling.Business.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                    " iniciado");
+            AbstarctFactory AbsFac;
+
+            Config config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
             AbsFac = new FormatFactory();
-            (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
+            (AbsFac.CreateStudentFormat(config)).Add(this.Complete(student));
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -35,7 +38,6 @@ namespace Vueling.Business.Logic
 
             this.GetAge(student);
             this.HoraRegistro(student);
-
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");

@@ -18,7 +18,7 @@ namespace Vueling.DataAccess.Dao.Singletons
 
         SingletonJson()
         {
-            liststudents = (abfac.CreateStudentFormat("json")).ReadAll();
+            liststudents = (abfac.CreateStudentFormat(Config.json)).ReadAll();
         }
 
         public static SingletonJson Instance

@@ -17,10 +17,9 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class StudentListForm : Form
     {
-        List<Student> liststudent = new List<Student>();
+        List<Student> liststudent;
         IFileBL filebl;
-    
-        private Config formatconfig;
+        Config format;
 
         public StudentListForm()
         {
@@ -29,10 +28,11 @@ namespace Vueling.Presentation.WinSite
 
         private void StudentListForm_Load(object sender, EventArgs e)
         {
-            formatconfig = Config.txt;
+            format = Config.txt;
             filebl = new FileBL();
+            liststudent = new List<Student>();
 
-            this.FillDataGrid(formatconfig);
+            this.FillDataGrid(Config.txt);
             filebl.FillSingletons();
         }
 
@@ -46,20 +46,20 @@ namespace Vueling.Presentation.WinSite
         #region Buttons Format
         private void buttonReadTxt_Click(object sender, EventArgs e)
         {
-            formatconfig = Config.txt;
-            this.FillDataGrid(formatconfig);
+            format = Config.txt;
+            this.FillDataGrid(Config.txt);
         }
 
         private void buttonReadJson_Click(object sender, EventArgs e)
         {
-            formatconfig = Config.json;
-            this.FillDataGrid(formatconfig);
+            format = Config.json;
+            this.FillDataGrid(Config.json);
         }
 
         private void buttonReadXml_Click(object sender, EventArgs e)
         {
-            formatconfig = Config.xml;
-            this.FillDataGrid(formatconfig);
+            format = Config.xml;
+            this.FillDataGrid(Config.xml);
         }
         #endregion
 
@@ -72,10 +72,21 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {
-            IFileBL filebl = new FileBL();
-
-            filebl.Buscar();
-
+            IFileBL filebusiness = new FileBL();
+            string selectedprop = "";
+            foreach (Control con in this.Controls)
+            {
+                if(con is RadioButton)
+                {
+                    if (((RadioButton)con).Checked)
+                    {
+                        selectedprop = ((RadioButton)con).Text;
+                    }
+                }
+            }
+            this.dGVStudents.DataSource = filebusiness.Buscar(format, this.textBoxBusquedaGeneral.Text, selectedprop);
+            //this.dGVStudents.DataSource = filebusiness.Buscar(format, this.textBoxBusquedaGeneral.Text, this.checkedListBoxProperties.SelectedItem.ToString());
+            this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
     }
 }
