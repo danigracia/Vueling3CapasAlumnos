@@ -100,8 +100,6 @@ namespace Vueling.DataAccess.Dao
             List<Student> liststudent = this.ReadAll();
             List<Student> liststudentfound = new List<Student>();
 
-            // where st.Nombre == text
-
             IEnumerable<Student> query = from st in liststudent
                                          where st.GetType().GetProperty(property).GetValue(st).ToString() == text
                                          select st;
