@@ -89,7 +89,7 @@ namespace Vueling.Common.Logic
                 foreach (string line in alllines)
                 {
                     linesplit = line.Split(',');
-                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], Int32.Parse(linesplit[3]), linesplit[4], linesplit[5], linesplit[6]);
+                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
 
                     liststudents.Add(readstudent);
                 }
