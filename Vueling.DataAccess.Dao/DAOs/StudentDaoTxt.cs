@@ -20,10 +20,8 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + 
                 " iniciado");
 
-            //FileUtils.SetStudentToTxt(student, path);
             this.SetStudent(student, path);
 
-            //return FileUtils.GetStudentFromTxtByGuid(student.Student_Guid, path);
             return this.GetStudentByGuid(student.Student_Guid, path);
         }
 
@@ -31,20 +29,29 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            if (!File.Exists(path))
+            try
             {
-                using (StreamWriter stwriter = File.CreateText(path))
+                    if (!File.Exists(path))
                 {
-                    stwriter.WriteLine(student.ToString());
+                    using (StreamWriter stwriter = File.CreateText(path))
+                    {
+                        stwriter.WriteLine(student.ToString());
+                    }
+                }
+                else
+                {
+                    using (StreamWriter strw = File.AppendText(path))
+                    {
+                        strw.WriteLine(student.ToString());
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (StreamWriter strw = File.AppendText(path))
-                {
-                    strw.WriteLine(student.ToString());
-                }
+                log.Error("Error en el metodo SetStudent()" + e.Message);
+                throw;
             }
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
@@ -53,19 +60,34 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            var alllines = File.ReadAllLines(path);
-            string findstudent = "";
-            foreach (string line in alllines)
+            Student readstudent;
+            try
             {
-                if (line.Contains(studentguid.ToString()))
+                
+                var alllines = File.ReadAllLines(path);
+                string findstudent = "";
+                foreach (string line in alllines)
                 {
-                    findstudent = line;
+                    if (line.Contains(studentguid.ToString()))
+                    {
+                        findstudent = line;
+                    }
                 }
-            }
 
-            var linesplit = findstudent.Split(',');
-            Student readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
-            readstudent.SavedFormat = "txt";
+                var linesplit = findstudent.Split(',');
+                readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+                readstudent.SavedFormat = "txt";
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentFromTxtByGuid()" + e.Message);
+                throw;
+            }
+            catch (FormatException e)
+            {
+                log.Error("Error de formato en el metodo GetStudentFromTxtByGuid()" + e.Message);
+                throw;
+            }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -81,32 +103,58 @@ namespace Vueling.DataAccess.Dao
             List<Student> liststudents = new List<Student>();
             string[] linesplit;
 
-            if (File.Exists(path))
+            try
             {
-                var alllines = File.ReadAllLines(path);
-                foreach (string line in alllines)
-                {
-                    linesplit = line.Split(',');
-                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
 
-                    liststudents.Add(readstudent);
+                if (File.Exists(path))
+                {
+                    var alllines = File.ReadAllLines(path);
+                    foreach (string line in alllines)
+                    {
+                        linesplit = line.Split(',');
+                        readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+
+                        liststudents.Add(readstudent);
+                    }
                 }
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            finally
+            {
+                //if ()
+                //{
+                    
+                //}
             }
             return liststudents;
         }
 
         public List<Student> Buscar(string text, string property)
         {
-            List<Student> liststudent = this.ReadAll();
-            List<Student> liststudentfound = new List<Student>();
-
-            IEnumerable<Student> query = from st in liststudent
-                                         where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                         select st;
-
-            foreach (Student student in query)
+            List<Student> liststudent;
+            List<Student> liststudentfound;
+            try
             {
-                liststudentfound.Add(student);
+                liststudent = this.ReadAll();
+                liststudentfound = new List<Student>();
+            
+                IEnumerable<Student> query = from st in liststudent
+                                             where st.GetType().GetProperty(property).GetValue(st).ToString() == text
+                                             select st;
+
+                foreach (Student student in query)
+                {
+                    liststudentfound.Add(student);
+                }
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo Buscar()" + e.Message);
+                throw;
             }
             return liststudentfound;
         }

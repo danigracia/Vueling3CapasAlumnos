@@ -24,14 +24,12 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
-            //FileUtils.SetStudentToXml(student, path);
             this.SetStudent(student, path);
 
             #region logs
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             Student studentread;
-            //studentread = FileUtils.GetStudentFromXmlByGuid(student.Student_Guid, path);
             studentread = this.GetStudentByGuid(student.Student_Guid, path);
 
             foreach (PropertyInfo prop in typeof(Student).GetProperties())
@@ -41,7 +39,6 @@ namespace Vueling.DataAccess.Dao
             }
             #endregion
 
-            //return FileUtils.GetStudentFromXmlByGuid(student.Student_Guid, path);
             return this.GetStudentByGuid(student.Student_Guid, path);
         }
 
@@ -51,29 +48,39 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
             List<Student> liststudents = new List<Student>();
 
-            XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
-
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+
+
+                XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
+
+                if (File.Exists(path))
                 {
-                    String readtoend = reader.ReadToEnd();
-                    StringReader streader = new StringReader(readtoend);
-                    liststudents = (List<Student>)serializer.Deserialize(streader);
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        String readtoend = reader.ReadToEnd();
+                        StringReader streader = new StringReader(readtoend);
+                        liststudents = (List<Student>)serializer.Deserialize(streader);
+                    }
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        serializer.Serialize(writer, liststudents);
+                    }
                 }
-                using (TextWriter writer = new StreamWriter(path))
+                else
                 {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        serializer.Serialize(writer, liststudents);
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
+                log.Error("Error en el metodo SetStudentToXml()" + e.Message);
+                throw;
             }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
@@ -88,20 +95,27 @@ namespace Vueling.DataAccess.Dao
             List<Student> alllines = new List<Student>();
             Student studentread = new Student();
 
-            XmlSerializer serializer = new XmlSerializer(alllines.GetType());
-
-            using (TextReader reader = new StreamReader(path))
+            try
             {
-                String readtoend = reader.ReadToEnd();
-                StringReader streader = new StringReader(readtoend);
-                alllines = (List<Student>)serializer.Deserialize(streader);
-            }
+                XmlSerializer serializer = new XmlSerializer(alllines.GetType());
 
-            foreach (Student st in alllines)
+                using (TextReader reader = new StreamReader(path))
+                {
+                    String readtoend = reader.ReadToEnd();
+                    StringReader streader = new StringReader(readtoend);
+                    alllines = (List<Student>)serializer.Deserialize(streader);
+                }
+
+                foreach (Student st in alllines)
+                {
+                    if (st.Student_Guid == studentguid) studentread = st;
+                }
+            }
+            catch (IOException e)
             {
-                if (st.Student_Guid == studentguid) studentread = st;
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
             }
-
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             log.Info("Datos del student leido del file xml:");
@@ -109,24 +123,30 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-
-
         public List<Student> ReadAll()
         {
-
             List<Student> liststudents = new List<Student>();
 
-            XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
-
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
+
+                if (File.Exists(path))
                 {
-                    String readtoend = reader.ReadToEnd();
-                    StringReader streader = new StringReader(readtoend);
-                    liststudents = (List<Student>)serializer.Deserialize(streader);
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        String readtoend = reader.ReadToEnd();
+                        StringReader streader = new StringReader(readtoend);
+                        liststudents = (List<Student>)serializer.Deserialize(streader);
+                    }
                 }
             }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+
             log.Info("Datos del student leido del file xml:");
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
@@ -136,19 +156,32 @@ namespace Vueling.DataAccess.Dao
 
         public List<Student> Buscar(string text, string property)
         {
-            List<Student> liststudent = this.ReadAll();
-            List<Student> liststudentfound = new List<Student>();
+            List<Student> liststudent;
+            List<Student> liststudentfound;
 
-            IEnumerable<Student> query = from st in liststudent
-                                         where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                         select st;
-
-            foreach (Student student in query)
+            try
             {
-                liststudentfound.Add(student);
+
+                liststudent = this.ReadAll();
+                liststudentfound = new List<Student>();
+
+                IEnumerable<Student> query = from st in liststudent
+                                             where st.GetType().GetProperty(property).GetValue(st).ToString() == text
+                                             select st;
+
+                foreach (Student student in query)
+                {
+                    liststudentfound.Add(student);
+                }
+
             }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+
             return liststudentfound;
-        }
         }
     }
 }
