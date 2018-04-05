@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -23,7 +24,9 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
             liststudents = new List<Student>();
 
-            string path = ConfigurationManager.AppSettings["ConfigPathXml"].ToString();
+            string path = FileUtils.GetPath() + ".xml";
+            //string path = ConfigurationManager.AppSettings["ConfigPathXml"].ToString();
+
             XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
 
             if (File.Exists(path))

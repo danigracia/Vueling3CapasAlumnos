@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -19,7 +20,7 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + 
                 " iniciado");
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
+            string path = FileUtils.GetPath() + ".txt";
             //string path = ConfigurationManager.AppSettings["ConfigPathTxt"].ToString();
 
             this.SetStudent(student, path);

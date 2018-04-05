@@ -19,7 +19,12 @@ namespace Vueling.Business.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                    " iniciado");
-            this.SendToDao(this.Complete(student));
+
+            AbsFac = new FormatFactory();
+            (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
+
+            //this.SendToDao(this.Complete(student));
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
@@ -31,6 +36,7 @@ namespace Vueling.Business.Logic
 
             this.GetAge(student);
             this.HoraRegistro(student);
+
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");

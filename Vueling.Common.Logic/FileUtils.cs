@@ -14,11 +14,17 @@ namespace Vueling.Common.Logic
         //Deserializar
         //Crear fichero
         
-        private readonly string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
 
-        public List<Student> ReadAllTxt()
+        public static string GetPath()
         {
-            Student readstudent;
+            return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name;
+        }
+
+    public List<Student> ReadAllTxt()
+        {
+
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name + ".txt";
+        Student readstudent;
             List<Student> liststudents = new List<Student>();
             string[] linesplit;
 

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -21,7 +22,9 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
             liststudents = new List<Student>();
-            string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
+
+            string path = FileUtils.GetPath() + ".json";
+            //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
 
             if (File.Exists(path))
             {
