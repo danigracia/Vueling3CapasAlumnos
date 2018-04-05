@@ -92,7 +92,7 @@
             this.buttonReadXml.Name = "buttonReadXml";
             this.buttonReadXml.Size = new System.Drawing.Size(73, 45);
             this.buttonReadXml.TabIndex = 3;
-            this.buttonReadXml.Text = "Read From Json File";
+            this.buttonReadXml.Text = "Read From Xml File";
             this.buttonReadXml.UseVisualStyleBackColor = true;
             this.buttonReadXml.Click += new System.EventHandler(this.buttonReadXml_Click);
             // 

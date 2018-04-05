@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Models;
+using Vueling.Common.Logic.Singletons;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -16,6 +17,8 @@ namespace Vueling.Presentation.WinSite
     {
         List<Student> liststudent;
         FileUtils fileutils;
+        SingletonJson sinjson;
+        SingletonXml sinxml;
         public StudentListForm()
         {
             InitializeComponent();
@@ -24,8 +27,6 @@ namespace Vueling.Presentation.WinSite
         private void StudentListForm_Load(object sender, EventArgs e)
         {
             // Cargar datos de fichero de texto en grid
-            fileutils = new FileUtils();
-
             #region DataGrid's
             this.FillDataGridTxt();
             #endregion
@@ -43,7 +44,6 @@ namespace Vueling.Presentation.WinSite
             this.FillDataGridTxt();
         }
 
-
         private void buttonReadJson_Click(object sender, EventArgs e)
         {
             this.FillDataGridJson();
@@ -51,28 +51,29 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonReadXml_Click(object sender, EventArgs e)
         {
-
+            this.FillDataGridXml();
         }
 
-
-
+        #region Fill DataGrids
         private void FillDataGridTxt()
         {
             liststudent = fileutils.ReadAllTxt();
             this.dGVStudents.DataSource = liststudent;
-
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
-            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
         }
 
         private void FillDataGridJson()
         {
-            liststudent = fileutils.ReadAllJson();
-            this.dGVStudents.DataSource = liststudent;
-
+            this.dGVStudents.DataSource = sinjson.LoadAll();
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
-            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
         }
+
+        private void FillDataGridXml()
+        {
+            this.dGVStudents.DataSource = sinxml.LoadAll();
+            this.dGVStudents.Columns["SavedFormat"].Visible = false;
+        }
+        #endregion
 
     }
 }

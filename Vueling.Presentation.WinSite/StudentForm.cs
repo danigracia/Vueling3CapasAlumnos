@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Models;
+using Vueling.Common.Logic.Singletons;
 
 
 namespace Vueling.Presentation.WinSite
@@ -76,6 +77,9 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
+            SingletonJson.Instance();
+            SingletonXml.Instance();
+
             this.Hide();           
             StudentListForm studentlist = new StudentListForm();
             studentlist.Show();
