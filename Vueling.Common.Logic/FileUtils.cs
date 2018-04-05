@@ -13,7 +13,7 @@ namespace Vueling.Common.Logic
         //Serializar
         //Deserializar
         //Crear fichero
-        
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static string GetPath()
         {
@@ -27,19 +27,26 @@ namespace Vueling.Common.Logic
         Student readstudent;
             List<Student> liststudents = new List<Student>();
             string[] linesplit;
+            try
+            {
+                if (File.Exists(path))
+                {                
+                    var alllines = File.ReadAllLines(path);
+                    foreach (string line in alllines)
+                    {
+                        linesplit = line.Split(',');
+                        readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], Int32.Parse(linesplit[3]), linesplit[4], linesplit[5], linesplit[6]);
 
-            if (File.Exists(path))
-            {                
-                var alllines = File.ReadAllLines(path);
-                foreach (string line in alllines)
-                {
-                    linesplit = line.Split(',');
-                    readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], Int32.Parse(linesplit[3]), linesplit[4], linesplit[5], linesplit[6]);
-
-                    liststudents.Add(readstudent);
+                        liststudents.Add(readstudent);
+                    }
                 }
+                return liststudents;
             }
-            return liststudents;
+            catch (IOException e)
+            {
+                log.Error("Metodo read all " + e.Message);
+                throw;
+            }
         }
     }
 }

@@ -21,12 +21,20 @@ namespace Vueling.Business.Logic
                    " iniciado");
 
             AbsFac = new FormatFactory();
-            (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
+            try
+            {
+                (AbsFac.CreateStudentFormat(student.SavedFormat)).Add(this.Complete(student));
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Fallo en metodo businessLogic" + e.Message);
+                throw;
+            }
 
             //this.SendToDao(this.Complete(student));
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+                        " terminado");
         }
 
         private Student Complete(Student student)

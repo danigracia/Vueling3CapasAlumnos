@@ -26,24 +26,32 @@ namespace Vueling.DataAccess.Dao
             string path = FileUtils.GetPath() + ".json";
             //string path = ConfigurationManager.AppSettings["ConfigPathJson"].ToString();
 
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    }
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        writer.Write(JsonConvert.SerializeObject(liststudents));
+                    }
                 }
-                using (TextWriter writer = new StreamWriter(path))
+                else
                 {
-                    liststudents.Add(student);
-                    writer.Write(JsonConvert.SerializeObject(liststudents));
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        writer.WriteLine(student.ToJson());
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    writer.WriteLine(student.ToJson());
-                }
+                log.Error("Fallo en el metodo student addJson" + e.Message);
+                throw;
             }
 
 

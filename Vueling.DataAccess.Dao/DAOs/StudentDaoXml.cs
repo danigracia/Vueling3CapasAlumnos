@@ -29,13 +29,16 @@ namespace Vueling.DataAccess.Dao
 
             XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
 
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    String readtoend = reader.ReadToEnd();
-                    StringReader streader = new StringReader(readtoend);
-                    liststudents = (List<Student>)serializer.Deserialize(streader);
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        String readtoend = reader.ReadToEnd();
+                        StringReader streader = new StringReader(readtoend);
+                        liststudents = (List<Student>)serializer.Deserialize(streader);
+                    }
                 }
                 using (TextWriter writer = new StreamWriter(path))
                 {
@@ -43,14 +46,12 @@ namespace Vueling.DataAccess.Dao
                     serializer.Serialize(writer, liststudents);
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    liststudents.Add(student);
-                    serializer.Serialize(writer, liststudents);
-                }
+                log.Error("Fallo en el metodo student Add XML" + e.Message);
+                throw;
             }
+
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
