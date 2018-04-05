@@ -32,12 +32,9 @@ namespace Vueling.Presentation.WinSite
 
             this.dGVStudents.Columns["FechaNacimiento"].Visible = false;
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
-            /*
-            this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
-            this.dGV.Columns["Fecha"].DisplayIndex = 1;
-            this.dGV.Columns["idTamagochi"].Visible = false;
-            this.dGV.Columns["idActividades"].Visible = false;
-            */
+
+            //this.dGV.Columns["NombreActividad"].DisplayIndex = 0;
+
             #endregion
         }
 

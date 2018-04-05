@@ -37,6 +37,7 @@ namespace Vueling.Presentation.WinSite
         private void buttonTxt_Click(object sender, EventArgs e)
         {
             this.SaveStudentData(sender);
+
             studentBL.BusinessLogic(student);
 
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
@@ -75,7 +76,7 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Hide();           
             StudentListForm studentlist = new StudentListForm();
             studentlist.Show();
         }
