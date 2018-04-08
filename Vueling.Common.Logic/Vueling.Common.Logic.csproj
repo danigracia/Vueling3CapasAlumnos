@@ -49,8 +49,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITargetAdapterForLogger.cs" />
     <Compile Include="Models\Config_enum.cs" />
     <Compile Include="FileUtils.cs" />
+    <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\VuelingModelObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

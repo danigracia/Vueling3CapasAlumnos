@@ -17,12 +17,21 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + 
-                " iniciado");
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            Student studentread;
+            try
+            {
+                this.SetStudent(student, path);
+                studentread = this.GetStudentByGuid(student.Student_Guid, path);
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo SetStudent()" + e.Message);
+                throw;
+            }
 
-            this.SetStudent(student, path);
-
-            return this.GetStudentByGuid(student.Student_Guid, path);
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+            return studentread;
         }
 
         private void SetStudent(Student student, string path)
@@ -62,8 +71,7 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
             Student readstudent;
             try
-            {
-                
+            {              
                 var alllines = File.ReadAllLines(path);
                 string findstudent = "";
                 foreach (string line in alllines)
@@ -93,6 +101,7 @@ namespace Vueling.DataAccess.Dao
                 " terminado");
             log.Info("Datos del student leido del file txt:");
             log.Info("datebirth:" + readstudent.FechaNacimiento.ToString());
+
             return readstudent;
         }
 
@@ -105,7 +114,6 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-
                 if (File.Exists(path))
                 {
                     var alllines = File.ReadAllLines(path);
@@ -126,9 +134,7 @@ namespace Vueling.DataAccess.Dao
             finally
             {
                 //if ()
-                //{
-                    
-                //}
+                //
             }
             return liststudents;
         }

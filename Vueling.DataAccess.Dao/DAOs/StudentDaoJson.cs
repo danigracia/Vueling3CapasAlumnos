@@ -18,15 +18,21 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            Student studentread;
+            try
+            {
+                this.SetStudent(student, path);
+                studentread = this.GetStudentByGuid(student.Student_Guid, path);
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo SetStudent()" + e.Message);
+                throw;
+            }
 
-            this.SetStudent(student, path);
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            return this.GetStudentByGuid(student.Student_Guid, path);
-
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+            return studentread;
         }
 
         private void SetStudent(Student student, string path)

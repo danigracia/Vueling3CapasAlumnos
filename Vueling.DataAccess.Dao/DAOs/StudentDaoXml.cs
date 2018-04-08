@@ -23,15 +23,21 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-
-            this.SetStudent(student, path);
+            Student studentread;
+            try
+            {
+                this.SetStudent(student, path);
+                studentread = this.GetStudentByGuid(student.Student_Guid, path);
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo SetStudent()" + e.Message);
+                throw;
+            }
 
             #region logs
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
-            Student studentread;
-            studentread = this.GetStudentByGuid(student.Student_Guid, path);
-
             foreach (PropertyInfo prop in typeof(Student).GetProperties())
             {
                 log.Info("studentread." + prop.Name + ": " + prop.GetValue(studentread) + ", student." + prop.Name + ": " + prop.GetValue(student));
@@ -39,7 +45,7 @@ namespace Vueling.DataAccess.Dao
             }
             #endregion
 
-            return this.GetStudentByGuid(student.Student_Guid, path);
+            return studentread;
         }
 
         private void SetStudent(Student student, string path)
@@ -50,8 +56,6 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-
-
                 XmlSerializer serializer = new XmlSerializer(liststudents.GetType());
 
                 if (File.Exists(path))
@@ -82,6 +86,7 @@ namespace Vueling.DataAccess.Dao
                 log.Error("Error en el metodo SetStudentToXml()" + e.Message);
                 throw;
             }
+
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -116,6 +121,7 @@ namespace Vueling.DataAccess.Dao
                 log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
                 throw;
             }
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             log.Info("Datos del student leido del file xml:");
@@ -161,7 +167,6 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-
                 liststudent = this.ReadAll();
                 liststudentfound = new List<Student>();
 
