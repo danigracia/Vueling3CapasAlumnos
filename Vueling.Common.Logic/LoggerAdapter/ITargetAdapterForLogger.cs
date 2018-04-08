@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic.Models;
 
-namespace Vueling.Common.Logic
+namespace Vueling.Common.Logic.LoggerAdapter
 {
     public interface ITargetAdapterForLogger
     {

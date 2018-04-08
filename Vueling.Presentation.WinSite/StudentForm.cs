@@ -13,7 +13,7 @@ using Vueling.Business.Logic;
 using Vueling.Common.Logic.Models;
 using System.Reflection;
 using Vueling.Common.Logic;
-
+using Vueling.Common.Logic.LoggerAdapter;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -46,6 +46,7 @@ namespace Vueling.Presentation.WinSite
                 MessageBox.Show("Fallo al tratar el archivo");
             }
 
+            logger.Error("Missatge Error de prova");
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
 
         }

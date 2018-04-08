@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vueling.Common.Logic.Models
+namespace Vueling.Common.Logic.LoggerAdapter
 {
     public class Logger : ITargetAdapterForLogger
     {
@@ -58,7 +58,8 @@ namespace Vueling.Common.Logic.Models
         }
         public void Error(string message)
         {
-            throw new NotImplementedException();
+            if (isErrorEnabled)
+                log.Error(message);
         }
         public void Error(string format, params object[] args)
         {
