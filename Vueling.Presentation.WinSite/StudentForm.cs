@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Models;
-
+using System.Reflection;
+using Vueling.Common.Logic;
+using Vueling.Common.Logic.LoggerAdapter;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -22,12 +24,13 @@ namespace Vueling.Presentation.WinSite
         private IStudentBL studentBL;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private static ITargetAdapterForLogger logger;
         public StudentForm()
         {
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
+            logger = new Logger();
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)
@@ -43,6 +46,7 @@ namespace Vueling.Presentation.WinSite
                 MessageBox.Show("Fallo al tratar el archivo");
             }
 
+            logger.Error("Missatge Error de prova");
             MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
 
         }
@@ -84,7 +88,7 @@ namespace Vueling.Presentation.WinSite
         {
             try
             {
-                log.Info("Metodo SaveStudentData iniciado");
+                logger.Info("Metodo SaveStudentData iniciado");
                 student.Nombre = this.textBoxNombre.Text;
                 student.IdAlumno = Convert.ToInt32(this.textBoxId.Text);
                 student.Apellido = this.textBoxApellidos.Text;
@@ -98,14 +102,29 @@ namespace Vueling.Presentation.WinSite
             {
                 MessageBox.Show(String.Format("Message error: " + e.Message));
             }
-            
+            catch (TargetException e)
+            {
+                MessageBox.Show(String.Format("Message error: " + e.Message));
+            }
+            catch (OverflowException e)
+            {
+                MessageBox.Show(String.Format("Message error: " + e.Message));
+            }
         }
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            StudentListForm studentlist = new StudentListForm();
-            studentlist.ShowDialog();
+            try
+            {
+                this.Hide();
+                StudentListForm studentlist = new StudentListForm();
+                studentlist.ShowDialog();
+
+            }
+            catch (InvalidOperationException inv)
+            {
+                MessageBox.Show(String.Format("Message error: " + inv.Message));
+            }
         }
     }
 }
