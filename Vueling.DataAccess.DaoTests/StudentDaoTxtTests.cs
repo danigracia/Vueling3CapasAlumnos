@@ -8,15 +8,20 @@ using System.Threading.Tasks;
 using System.IO;
 using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
+using Vueling.Common.Logic.LoggerAdapter;
+using NMock;
 
 namespace Vueling.DataAccess.Dao.Tests
 {
     [TestClass()]
-    public class StudentDaoTests
+    public class StudentDaoTxtTests
     {
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private Logger logger = new Logger();
+        private MockFactory _factory = new MockFactory();
 
+        #region Configure, Initialize, CleanUp
         [AssemblyInitialize]
         public static void Configure(TestContext tc)
         {
@@ -38,7 +43,6 @@ namespace Vueling.DataAccess.Dao.Tests
 
         }
 
-        /*
         [TestCleanup]
         public void Cleanup()
         {
@@ -47,14 +51,19 @@ namespace Vueling.DataAccess.Dao.Tests
             {
                 File.Delete(s);
             }
+            _factory.VerifyAllExpectationsHaveBeenMet();
+            _factory.ClearExpectations();
         }
-        */
+        #endregion
 
+        #region test Test
         [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
         [TestMethod()]
         public void ConstructorTest(int id, string name, string surname, int edad, string dni, string datebirth)
         {
             log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+
+            //var mock = _factory.CreateMock<ITest>();
 
             Student student = new Student(id, name, surname, edad, dni, datebirth);
             Student student2 = new Student();
@@ -71,8 +80,9 @@ namespace Vueling.DataAccess.Dao.Tests
             log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
 
         }
+        #endregion
 
-
+        #region Add Test
         [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
         [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982")]
         [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012")]
@@ -150,11 +160,76 @@ namespace Vueling.DataAccess.Dao.Tests
 
             log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
         }
+        #endregion
 
-        [TestMethod()]
-        public void GetStudentByGuidTest()
+        #region ReadAll Test
+        [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
+        [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982")]
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012")]
+        [DataTestMethod()]
+        public void ReadAllTxt(int id, string name, string surname, int edad, string dni, string datebirth)
         {
+            Student student = new Student(id, name, surname, edad, dni, datebirth);
+            List<Student> liststudent = new List<Student>();
+            liststudent.Add(student);
+
+            List<Student> listtest;
+           
+            AbstarctFactory formatfactory = new FormatFactory();
+            IStudentDao daotxt = formatfactory.CreateStudentFormat(Config.txt);
+
+            foreach (Student st in liststudent)
+            {
+               daotxt.Add(st);
+            }
+
+            listtest = daotxt.ReadAll();
+
+            foreach (Student st in listtest)
+            {
+                Assert.IsTrue(st.Equals(student));
+            }
 
         }
+        #endregion
+
+        #region Buscar Test
+        [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992", "Nombre")]
+        [DataRow(2, "I", "I", 23, "98765434-L", "15-09-1982", "Apellido")]
+        [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982", "Apellido")]
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012", "Edad")]
+        [DataTestMethod()]
+        public void BuscarNombreTxtTest(int id, string name, string surname, int edad, string dni, string datebirth, string prop)
+        {
+            log.Info("Metodo Test Buscar iniciado");
+
+
+            Student student = new Student(id, name, surname, edad, dni, datebirth);
+            List<Student> test;
+            AbstarctFactory formatfactory = new FormatFactory();
+            IStudentDao daotxt = formatfactory.CreateStudentFormat(Config.txt);
+            daotxt.Add(student);
+            test = daotxt.Buscar(name, prop);
+
+            log.Info("name: " + name);
+            log.Info("prop: " + prop);
+            if (test.Capacity > 0)
+            {
+                foreach (Student st in test)
+                {
+                    Assert.IsTrue(st.Equals(student));
+                    logger.Info(st);
+                    logger.Info(student);
+                }
+            }
+            else
+            {
+                Assert.IsTrue(false);
+            }
+
+            log.Info("Metodo Test Buscar finalizado");
+
+        }
+        #endregion
     }
 }
