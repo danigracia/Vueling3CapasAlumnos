@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.IO;
 using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
-using Vueling.Presentation.WinSite;
 
 namespace Vueling.DataAccess.Dao.Tests
 {
@@ -67,8 +66,6 @@ namespace Vueling.DataAccess.Dao.Tests
             student2.Dni = dni;
             student2.FechaNacimiento = Convert.ToDateTime(datebirth);
 
-            // log.Info("student2: "+ student2.FechaNacimiento + ", stuednt:" + student.FechaNacimiento);
-
             Assert.IsTrue(student2.Equals(student));
 
             log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
@@ -76,9 +73,10 @@ namespace Vueling.DataAccess.Dao.Tests
         }
 
 
-
         [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
-        [TestMethod()]
+        [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982")]
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012")]
+        [DataTestMethod()]
         public void TxtAddTest(int id, string name, string surname, int edad, string dni, string datebirth)
         {
             log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
@@ -86,14 +84,13 @@ namespace Vueling.DataAccess.Dao.Tests
             Student student = new Student(id, name, surname, edad, dni, datebirth);
 
             AbstarctFactory formatfactory = new FormatFactory();
-            IStudentDao stddao = formatfactory.CreateStudentFormat("txt");
+            IStudentDao stddao = formatfactory.CreateStudentFormat(Config.txt);
 
             Student studenttest = stddao.Add(student);
 
-            studenttest.FechaNacimiento = student.FechaNacimiento;
+            studenttest.SavedFormat = student.SavedFormat;
 
             log.Info("studenttest G: " + studenttest.Student_Guid + ", stuednt G:" + student.Student_Guid);
-
             log.Info("studenttest: " + studenttest.FechaNacimiento + ", stuednt:" + student.FechaNacimiento);
             log.Info("studenttest: " + studenttest.Nombre + ", stuednt:" + student.Nombre);
             log.Info("studenttest: " + studenttest.Edad + ", stuednt:" + student.Edad);
@@ -109,7 +106,50 @@ namespace Vueling.DataAccess.Dao.Tests
 
         }
 
+        [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
+        [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982")]
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012")]
+        [DataTestMethod()]
+        public void JsonAddTest(int id, string name, string surname, int edad, string dni, string datebirth)
+        {
+            log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
 
+            Student student = new Student(id, name, surname, edad, dni, datebirth);
+
+            AbstarctFactory formatfactory = new FormatFactory();
+            IStudentDao stddao = formatfactory.CreateStudentFormat(Config.json);
+
+            Student studenttest = stddao.Add(student);
+
+            studenttest.SavedFormat = student.SavedFormat;
+            log.Info("studenttest: " + studenttest.SavedFormat + ", stuednt:" + student.SavedFormat);
+
+            Assert.IsTrue(student.Equals(studenttest));
+
+            log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+        }
+
+        [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
+        [DataRow(2, "I", "F", 23, "98765434-L", "15-09-1982")]
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012")]
+        [DataTestMethod()]
+        public void XmlAddTest(int id, string name, string surname, int edad, string dni, string datebirth)
+        {
+            log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+
+            Student student = new Student(id, name, surname, edad, dni, datebirth);
+
+            AbstarctFactory formatfactory = new FormatFactory();
+            IStudentDao stddao = formatfactory.CreateStudentFormat(Config.xml);
+
+            Student studenttest = stddao.Add(student);
+
+            studenttest.SavedFormat = student.SavedFormat;
+
+            Assert.IsTrue(student.Equals(studenttest));
+
+            log.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+        }
 
         [TestMethod()]
         public void GetStudentByGuidTest()
