@@ -59,11 +59,9 @@
     <Compile Include="LoggerAdapter\Logger.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\VuelingModelObject.cs" />
-    <Compile Include="NMock3\NMockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
