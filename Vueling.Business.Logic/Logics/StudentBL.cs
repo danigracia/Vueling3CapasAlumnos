@@ -12,23 +12,23 @@ namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
-        
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        readonly AbstarctFactory FormFac;
 
+
+        public StudentBL()
+        {
+            FormFac = new FormatFactory();
+        }
         public void BusinessLogic(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                   " iniciado");
-            AbstarctFactory AbsFac;
-            
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
 
             Config config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
-            AbsFac = new FormatFactory();
             try
             {
-                (AbsFac.CreateStudentFormat(config)).Add(this.Complete(student));
+                (FormFac.CreateStudentFormat(config)).Add(this.Complete(student));
             }
             catch (ArgumentNullException e)
             {
@@ -56,10 +56,27 @@ namespace Vueling.Business.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
+            try
+            {
+                int year = Convert.ToInt32(DateTime.Now.ToString("yyyy")) - Convert.ToInt32(student.FechaNacimiento.ToString("yyyy"));
+                if (student.FechaNacimiento.DayOfYear > DateTime.Now.DayOfYear) year--;
+                student.Edad = year;
+            }
+            catch (FormatException e)
+            {
+                log.Error("Fallo al tratar el archivo:"+ e.Message);
 
-            int year = Convert.ToInt32(DateTime.Now.ToString("yyyy")) - Convert.ToInt32(student.FechaNacimiento.ToString("yyyy"));
-            if (student.FechaNacimiento.DayOfYear > DateTime.Now.DayOfYear) year--;
-            student.Edad = year;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Fallo al tratar el archivo" + e.Message);
+
+            }
+            catch (OverflowException e)
+            {
+                log.Error("Fallo al tratar el archivo" + e.Message);
+
+            }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");

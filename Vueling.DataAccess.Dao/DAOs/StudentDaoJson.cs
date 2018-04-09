@@ -18,18 +18,21 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            Student studentread;
+            try
+            {
+                this.SetStudent(student, path);
+                studentread = this.GetStudentByGuid(student.Student_Guid, path);
+            }
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo SetStudent()" + e.Message);
+                throw;
+            }
 
-            //FileUtils.SetStudentToJson(student, path);
-            this.SetStudent(student, path);
-
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-
-            //return FileUtils.GetStudentFromJsonByGuid(student.Student_Guid, path);
-            return this.GetStudentByGuid(student.Student_Guid, path);
-
+            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+            return studentread;
         }
 
         private void SetStudent(Student student, string path)
@@ -38,24 +41,32 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
             List<Student> liststudents;
 
-            if (File.Exists(path))
+            try
             {
-                using (TextReader reader = new StreamReader(path))
+                if (File.Exists(path))
                 {
-                    liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    using (TextReader reader = new StreamReader(path))
+                    {
+                        liststudents = JsonConvert.DeserializeObject<List<Student>>(reader.ReadToEnd());
+                    }
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        liststudents.Add(student);
+                        writer.Write(JsonConvert.SerializeObject(liststudents));
+                    }
                 }
-                using (TextWriter writer = new StreamWriter(path))
+                else
                 {
-                    liststudents.Add(student);
-                    writer.Write(JsonConvert.SerializeObject(liststudents));
+                    using (TextWriter writer = new StreamWriter(path))
+                    {
+                        writer.WriteLine(student.ToJson());
+                    }
                 }
             }
-            else
+            catch (IOException e)
             {
-                using (TextWriter writer = new StreamWriter(path))
-                {
-                    writer.WriteLine(student.ToJson());
-                }
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
             }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
@@ -68,12 +79,19 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
 
             Student studentread = new Student();
-            var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
-            foreach (Student st in alllines)
+            try
             {
-                if (st.Student_Guid == studentguid) studentread = st;
+                var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+                foreach (Student st in alllines)
+                {
+                    if (st.Student_Guid == studentguid) studentread = st;
+                }
             }
-
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             log.Info("Datos del student leido del file json:");
@@ -86,13 +104,22 @@ namespace Vueling.DataAccess.Dao
         {
             List<Student> liststudents = new List<Student>();
 
-            if (File.Exists(path))
+            try
             {
-                liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
+   
+                if (File.Exists(path))
+                {
+                    liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
 
-                log.Info("Datos del student leido del file json:");
+                    log.Info("Datos del student leido del file json:");
+                }
+
             }
-
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo ReadAll()" + e.Message);
+                throw;
+            }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
@@ -101,16 +128,26 @@ namespace Vueling.DataAccess.Dao
 
         public List<Student> Buscar(string text, string property)
         {
-            List<Student> liststudent = this.ReadAll();
-            List<Student> liststudentfound = new List<Student>();
+            List<Student> liststudent;
+            List<Student> liststudentfound;
+            try
+            {
+                liststudent = this.ReadAll();
+                liststudentfound = new List<Student>();
 
-            IEnumerable<Student> query = from st in liststudent
+                IEnumerable<Student> query = from st in liststudent
                                          where st.GetType().GetProperty(property).GetValue(st).ToString() == text
                                          select st;
 
-            foreach (Student student in query)
+                foreach (Student student in query)
+                {
+                    liststudentfound.Add(student);
+                }
+            }
+            catch (IOException e)
             {
-                liststudentfound.Add(student);
+                log.Error("Error en el metodo Buscar()" + e.Message);
+                throw;
             }
             return liststudentfound;
         }

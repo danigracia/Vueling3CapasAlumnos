@@ -19,7 +19,6 @@ namespace Vueling.DataAccess.Dao.Factories
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            //Config Typ = (Config)Enum.Parse(typeof(Config), str);
 
             switch (typ)
             {
