@@ -31,29 +31,83 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            if (!File.Exists(path))
+            try
             {
-                using (StreamWriter stwriter = File.CreateText(path))
+                if (!File.Exists(path))
                 {
-                    stwriter.WriteLine(student.ToString());
+                    using (StreamWriter stwriter = File.CreateText(path))
+                    {
+                        stwriter.WriteLine(student.ToString());
+                    }
                 }
+                else
+                {
+                    using (StreamWriter strw = File.AppendText(path))
+                    {
+                        strw.WriteLine(student.ToString());
+                    }
+                }
+                log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+                    " terminado");
             }
-            else
+            catch (ObjectDisposedException e)
             {
-                using (StreamWriter strw = File.AppendText(path))
-                {
-                    strw.WriteLine(student.ToString());
-                }
+                log.Error(e.Message);
+                throw;
             }
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+            catch (IOException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+
         }
 
         private Student GetStudentByGuid(Guid studentguid, string path)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            var alllines = File.ReadAllLines(path);
+            string[] alllines;
+            try
+            {
+
+                alllines = File.ReadAllLines(path);
+            }
+            catch (IOException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error(e.Message);
+                throw;
+            }
             string findstudent = "";
             foreach (string line in alllines)
             {
@@ -83,7 +137,32 @@ namespace Vueling.DataAccess.Dao
 
             if (File.Exists(path))
             {
-                var alllines = File.ReadAllLines(path);
+                string[] alllines;
+                try
+                {
+
+                    alllines = File.ReadAllLines(path);
+                }
+                catch (IOException e)
+                {
+                    log.Error(e.Message);
+                    throw;
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    log.Error(e.Message);
+                    throw;
+                }
+                catch (ArgumentException e)
+                {
+                    log.Error(e.Message);
+                    throw;
+                }
+                catch (NotSupportedException e)
+                {
+                    log.Error(e.Message);
+                    throw;
+                }
                 foreach (string line in alllines)
                 {
                     linesplit = line.Split(',');
