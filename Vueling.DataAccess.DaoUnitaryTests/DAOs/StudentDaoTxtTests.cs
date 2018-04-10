@@ -39,7 +39,7 @@ namespace Vueling.DataAccess.DaoUnitaryTests.DAOs
 
             Student student = new Student(id, name, surname, edad, dni, datebirth);
 
-            Istudentmock.Expects.One.Method(s => s.Add(student)).WillReturn(student);
+            Istudentmock.Expects.One.MethodWith(s => s.Add(student)).WillReturn(student);
 
             Student sttest = Istudentmock.MockObject.Add(student);
 
@@ -56,7 +56,7 @@ namespace Vueling.DataAccess.DaoUnitaryTests.DAOs
 
             List<Student> listst = new List<Student>();
 
-            Istudentmock.Expects.One.Method(s => s.ReadAll()).WillReturn(listst);
+            Istudentmock.Expects.One.MethodWith(s => s.ReadAll()).WillReturn(listst);
 
             //List<Student> listtest = studenttxt.ReadAll();
 

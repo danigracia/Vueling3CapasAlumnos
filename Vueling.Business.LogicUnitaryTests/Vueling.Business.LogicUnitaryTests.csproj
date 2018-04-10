@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}</ProjectGuid>
+    <ProjectGuid>{35A98669-BC97-4593-9182-F900BAA91486}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vueling.DataAccess.DaoUnitaryTests</RootNamespace>
-    <AssemblyName>Vueling.DataAccess.DaoUnitaryTests</AssemblyName>
+    <RootNamespace>Vueling.Business.LogicUnitaryTests</RootNamespace>
+    <AssemblyName>Vueling.Business.LogicUnitaryTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -59,25 +59,25 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="DAOs\StudentDaoJsonTests.cs" />
-    <Compile Include="DAOs\StudentDaoTxtTests.cs" />
+    <Compile Include="Logics\StudentBLTests.cs" />
     <Compile Include="NMock3\NMockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="log4netUTestDao.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vueling.Business.Logic\Vueling.Business.Logic.csproj">
+      <Project>{B06D9E00-D0A5-460A-A65F-93E6C5DCFE03}</Project>
+      <Name>Vueling.Business.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vueling.Common.Logic\Vueling.Common.Logic.csproj">
       <Project>{94a04e76-28bd-46c3-a3c3-a77d9ecfdf3b}</Project>
       <Name>Vueling.Common.Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vueling.DataAccess.Dao\Vueling.DataAccess.Dao.csproj">
-      <Project>{7E995ECE-9791-4B34-86C4-ED7823172594}</Project>
+      <Project>{7e995ece-9791-4b34-86c4-ed7823172594}</Project>
       <Name>Vueling.DataAccess.Dao</Name>
     </ProjectReference>
   </ItemGroup>

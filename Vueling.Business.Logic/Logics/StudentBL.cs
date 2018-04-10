@@ -39,7 +39,7 @@ namespace Vueling.Business.Logic
                         " terminado");
         }
 
-        private Student Complete(Student student)
+        public Student Complete(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
