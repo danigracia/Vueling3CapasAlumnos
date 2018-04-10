@@ -65,6 +65,7 @@ namespace NMockTests
 			Assert.IsNull(controller.Status);
 			invoker.Invoke();
 			Assert.AreEqual("Event Fired!", controller.Status);
+
 		}
 
 		public interface ITest
