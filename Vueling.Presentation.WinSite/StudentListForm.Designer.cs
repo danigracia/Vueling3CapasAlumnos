@@ -52,7 +52,6 @@
             this.labelDni = new System.Windows.Forms.Label();
             this.labelGuid = new System.Windows.Forms.Label();
             this.labelBuscartext = new System.Windows.Forms.Label();
-            this.checkedListBoxProperties = new System.Windows.Forms.CheckedListBox();
             this.buttonBusquedaGeneral = new System.Windows.Forms.Button();
             this.textBoxBusquedaGeneral = new System.Windows.Forms.TextBox();
             this.radioButtonId = new System.Windows.Forms.RadioButton();
@@ -61,6 +60,7 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.checkedListBoxProperties = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGVStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -272,21 +272,6 @@
             this.labelBuscartext.TabIndex = 23;
             this.labelBuscartext.Text = "Buscar por:";
             // 
-            // checkedListBoxProperties
-            // 
-            this.checkedListBoxProperties.FormattingEnabled = true;
-            this.checkedListBoxProperties.Items.AddRange(new object[] {
-            "Id",
-            "Nombre",
-            "Apellidos",
-            "Edad",
-            "Dni",
-            "Guid"});
-            this.checkedListBoxProperties.Location = new System.Drawing.Point(623, 175);
-            this.checkedListBoxProperties.Name = "checkedListBoxProperties";
-            this.checkedListBoxProperties.Size = new System.Drawing.Size(83, 109);
-            this.checkedListBoxProperties.TabIndex = 24;
-            // 
             // buttonBusquedaGeneral
             // 
             this.buttonBusquedaGeneral.Location = new System.Drawing.Point(554, 39);
@@ -370,6 +355,21 @@
             this.radioButton6.Text = "Student_Guid";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
+            // checkedListBoxProperties
+            // 
+            this.checkedListBoxProperties.FormattingEnabled = true;
+            this.checkedListBoxProperties.Items.AddRange(new object[] {
+            "Id",
+            "Nombre",
+            "Apellidos",
+            "Edad",
+            "Dni",
+            "Guid"});
+            this.checkedListBoxProperties.Location = new System.Drawing.Point(623, 175);
+            this.checkedListBoxProperties.Name = "checkedListBoxProperties";
+            this.checkedListBoxProperties.Size = new System.Drawing.Size(83, 109);
+            this.checkedListBoxProperties.TabIndex = 24;
+            // 
             // StudentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,7 +443,6 @@
         private System.Windows.Forms.Label labelDni;
         private System.Windows.Forms.Label labelGuid;
         private System.Windows.Forms.Label labelBuscartext;
-        private System.Windows.Forms.CheckedListBox checkedListBoxProperties;
         private System.Windows.Forms.Button buttonBusquedaGeneral;
         private System.Windows.Forms.TextBox textBoxBusquedaGeneral;
         private System.Windows.Forms.RadioButton radioButton6;
@@ -452,5 +451,6 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButtonId;
+        private System.Windows.Forms.CheckedListBox checkedListBoxProperties;
     }
 }

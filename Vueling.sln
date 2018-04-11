@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vue
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoTests", "Vueling.DataAccess.DaoTests\Vueling.DataAccess.DaoTests.csproj", "{F73D6BBB-4496-46C7-B485-E50F25CA2C11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoUnitaryTests", "Vueling.DataAccess.DaoUnitaryTests\Vueling.DataAccess.DaoUnitaryTests.csproj", "{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.LogicUnitaryTests", "Vueling.Business.LogicUnitaryTests\Vueling.Business.LogicUnitaryTests.csproj", "{35A98669-BC97-4593-9182-F900BAA91486}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{F73D6BBB-4496-46C7-B485-E50F25CA2C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F73D6BBB-4496-46C7-B485-E50F25CA2C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F73D6BBB-4496-46C7-B485-E50F25CA2C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5CB533-D07A-461C-AAEE-CE1FAF50DFFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A98669-BC97-4593-9182-F900BAA91486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A98669-BC97-4593-9182-F900BAA91486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A98669-BC97-4593-9182-F900BAA91486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A98669-BC97-4593-9182-F900BAA91486}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@ namespace Vueling.Business.Logic
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         readonly AbstarctFactory FormFac;
-
+        private Config config;
 
         public StudentBL()
         {
@@ -24,7 +24,7 @@ namespace Vueling.Business.Logic
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
 
-            Config config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
+            config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
             try
             {
@@ -39,7 +39,7 @@ namespace Vueling.Business.Logic
                         " terminado");
         }
 
-        private Student Complete(Student student)
+        public Student Complete(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
@@ -92,6 +92,5 @@ namespace Vueling.Business.Logic
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
-
     }
 }

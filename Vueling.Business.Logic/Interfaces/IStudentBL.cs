@@ -10,5 +10,6 @@ namespace Vueling.Business.Logic
     public interface IStudentBL
     {
         void BusinessLogic(Student student);
+        Student Complete(Student student);
     }
 }
