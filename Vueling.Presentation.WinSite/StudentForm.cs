@@ -14,6 +14,9 @@ using Vueling.Common.Logic.Models;
 using System.Reflection;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.LoggerAdapter;
+using Vueling.Presentation.WinSite.Resources;
+using System.Globalization;
+using System.Threading;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -30,6 +33,7 @@ namespace Vueling.Presentation.WinSite
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
+            AplicarIdioma();
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)
@@ -124,6 +128,22 @@ namespace Vueling.Presentation.WinSite
             {
                 MessageBox.Show(String.Format("Message error: " + inv.Message));
             }
+        }
+
+        public void AplicarIdioma()
+        {
+            labelId.Text = StringResources.labelId;
+            labelNombre.Text = StringResources.labelNombre;
+            labelApellido.Text = StringResources.labelApellido;
+            labelDni.Text = StringResources.labelDni;
+            labelFechaNacimiento.Text = StringResources.labelFechaNacimiento;
+            this.Text = StringResources.FormName;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedText);
+            AplicarIdioma();
         }
     }
 }

@@ -65,6 +65,36 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo ReadAllTxt()" + e.Message);
