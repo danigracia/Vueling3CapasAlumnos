@@ -41,7 +41,7 @@ namespace Vueling.DataAccess.Dao.Tests
 
         }
 
-        /*
+
         [TestCleanup]
         public void Cleanup()
         {
@@ -51,7 +51,7 @@ namespace Vueling.DataAccess.Dao.Tests
                 File.Delete(s);
             }
         }
-        */
+
 
         #region test Test
         [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992")]
@@ -188,6 +188,7 @@ namespace Vueling.DataAccess.Dao.Tests
         }
         #endregion
 
+        /*
         #region Buscar
         [DataRow(1, "H", "J", 12, "1123-A", "12-05-1992", "Nombre")]
         [DataRow(2, "I", "I", 23, "98765434-L", "15-09-1982", "Apellido")]
@@ -225,6 +226,7 @@ namespace Vueling.DataAccess.Dao.Tests
             log.Info("Metodo Test Buscar finalizado");
 
         }
-        #endregion
+        #endregion 
+        */
     }
 }

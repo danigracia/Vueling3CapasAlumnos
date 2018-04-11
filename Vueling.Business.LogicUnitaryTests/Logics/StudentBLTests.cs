@@ -42,17 +42,36 @@ namespace Vueling.Business.Logic.Tests
 
             Mock<AbstarctFactory> Afactorymock = mock_factory.CreateMock<AbstarctFactory>(); //Createmock con la interfaç
             Mock<IStudentDao> Istudentmock = mock_factory.CreateMock<IStudentDao>();
-            IStudentBL stbl = new StudentBL();
+            Mock<IStudentBL> Istudentblmock = mock_factory.CreateMock<IStudentBL>();
 
             Student student = new Student();
+            Student studenttest;
+            Student studentcomplete;
             Config format = new Config();
-            Afactorymock.Expects.One.MethodWith(s => s.CreateStudentFormat(format)).WillReturn(Istudentmock.MockObject);
+
+            Afactorymock.
+                Expects.
+                One.
+                MethodWith(s => s.CreateStudentFormat(format)).
+                WillReturn(Istudentmock.MockObject);
             
             IStudentDao isttest = Afactorymock.MockObject.CreateStudentFormat(format);
 
-            Istudentmock.Expects.One.MethodWith(s => s.Add(student)).WillReturn(stbl.Complete(student));
+            Istudentblmock.
+                Expects.
+                One.
+                MethodWith(s => s.Complete(student)).
+                WillReturn(student);
 
-            Student studenttest = Istudentmock.MockObject.Add(student);
+            studentcomplete = Istudentblmock.MockObject.Complete(student);
+
+            Istudentmock.
+                Expects.
+                One.
+                MethodWith(s => s.Add(student)).
+                WillReturn(studentcomplete);
+
+            studenttest = Istudentmock.MockObject.Add(studentcomplete);
 
             Assert.IsNotNull(isttest);
             Assert.IsTrue(student.Equals(studenttest));

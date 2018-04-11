@@ -92,6 +92,5 @@ namespace Vueling.Business.Logic
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
-
     }
 }
