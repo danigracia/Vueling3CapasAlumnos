@@ -20,7 +20,6 @@ namespace Vueling.DataAccess.Dao
 
         private Student studentread;
         private List<Student> liststudents;
-        private List<Student> liststudentfound;
         private List<Student> alllines;
 
         public Student Add(Student student)
@@ -163,34 +162,5 @@ namespace Vueling.DataAccess.Dao
                 " terminado");
             return liststudents;
         }
-
-        /*
-        public List<Student> Buscar(string text, string property)
-        {
-
-            try
-            {
-                liststudents = this.ReadAll();
-                liststudentfound = new List<Student>();
-
-                IEnumerable<Student> query = from st in liststudents
-                                             where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                             select st;
-
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
-
-            }
-            catch (IOException e)
-            {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
-                throw;
-            }
-
-            return liststudentfound;
-        }
-        */
     }
 }

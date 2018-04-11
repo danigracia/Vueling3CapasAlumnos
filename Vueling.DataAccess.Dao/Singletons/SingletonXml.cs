@@ -9,7 +9,7 @@ using Vueling.DataAccess.Dao.Factories;
 
 namespace Vueling.DataAccess.Dao.Singletons
 {
-    public class SingletonXml
+    public sealed class SingletonXml
     {
         private static SingletonXml instance = null;
         private static readonly object padlock = new object();
@@ -18,14 +18,13 @@ namespace Vueling.DataAccess.Dao.Singletons
 
         protected SingletonXml()
         {
-            liststudents = liststudents = (abfac.CreateStudentFormat(Config.xml)).ReadAll();
+            liststudents = (abfac.CreateStudentFormat(Config.xml)).ReadAll();
         }
 
         public static SingletonXml Instance
         {
             get
             {
-
                 if (instance == null)
                 {
                     lock (padlock)
@@ -44,6 +43,5 @@ namespace Vueling.DataAccess.Dao.Singletons
         {
             return liststudents;
         }
-
     }
 }

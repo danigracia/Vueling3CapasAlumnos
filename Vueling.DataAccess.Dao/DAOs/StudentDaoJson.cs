@@ -16,6 +16,9 @@ namespace Vueling.DataAccess.Dao
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string path = FileUtils.GetPath() + ".json";
 
+        List<Student> liststudents;
+        Student studentread;
+
         public Student Add(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
@@ -39,7 +42,6 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            List<Student> liststudents;
 
             try
             {
@@ -78,7 +80,7 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
-            Student studentread = new Student();
+            studentread = new Student();
             try
             {
                 var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
@@ -102,7 +104,7 @@ namespace Vueling.DataAccess.Dao
 
         public List<Student> ReadAll()
         {
-            List<Student> liststudents = new List<Student>();
+            liststudents = new List<Student>();
 
             try
             {
@@ -125,33 +127,5 @@ namespace Vueling.DataAccess.Dao
                 " terminado");
             return liststudents;
         }
-
-        /*
-        public List<Student> Buscar(string text, string property)
-        {
-            List<Student> liststudent;
-            List<Student> liststudentfound;
-            try
-            {
-                liststudent = this.ReadAll();
-                liststudentfound = new List<Student>();
-
-                IEnumerable<Student> query = from st in liststudent
-                                         where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                         select st;
-
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
-            }
-            catch (IOException e)
-            {
-                log.Error("Error en el metodo Buscar()" + e.Message);
-                throw;
-            }
-            return liststudentfound;
-        }
-        */
     }
 }
