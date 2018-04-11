@@ -57,18 +57,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\StringResources.Català.Designer.cs">
-      <DependentUpon>StringResources.Català.resx</DependentUpon>
+    <Compile Include="Resources\StringResources.ca-ES.Designer.cs">
+      <DependentUpon>StringResources.ca-ES.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\StringResources.English.Designer.cs">
-      <DependentUpon>StringResources.English.resx</DependentUpon>
+    <Compile Include="Resources\StringResources.en-GB.Designer.cs">
+      <DependentUpon>StringResources.en-GB.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\StringResources.Castellano.Designer.cs">
-      <DependentUpon>StringResources.Castellano.resx</DependentUpon>
+    <Compile Include="Resources\StringResources.es-ES.Designer.cs">
+      <DependentUpon>StringResources.es-ES.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -101,17 +101,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Resources\StringResources.Català.resx">
+    <EmbeddedResource Include="Resources\StringResources.ca-ES.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.Català.Designer.cs</LastGenOutput>
+      <LastGenOutput>StringResources.ca-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\StringResources.English.resx">
+    <EmbeddedResource Include="Resources\StringResources.en-GB.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.English.Designer.cs</LastGenOutput>
+      <LastGenOutput>StringResources.en-GB.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\StringResources.Castellano.resx">
+    <EmbeddedResource Include="Resources\StringResources.es-ES.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.Castellano.Designer.cs</LastGenOutput>
+      <LastGenOutput>StringResources.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\StringResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

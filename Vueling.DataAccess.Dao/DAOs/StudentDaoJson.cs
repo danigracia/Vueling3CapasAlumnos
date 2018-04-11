@@ -119,11 +119,52 @@ namespace Vueling.DataAccess.Dao
                     if (st.Student_Guid == studentguid) studentread = st;
                 }
             }
+            catch (System.Security.SecurityException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             log.Info("Datos del student leido del file json:");
@@ -131,25 +172,62 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-
         public List<Student> ReadAll()
         {
             liststudents = new List<Student>();
 
             try
-            {
-   
+            {   
                 if (File.Exists(path))
                 {
                     liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
 
                     log.Info("Datos del student leido del file json:");
                 }
-
+            }
+            catch (System.Security.SecurityException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo ReadAll()" + e.Message);
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
 

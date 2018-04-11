@@ -34,6 +34,7 @@ namespace Vueling.Presentation.WinSite
             student = new Student();
             studentBL = new StudentBL();
             AplicarIdioma();
+
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)
@@ -137,12 +138,13 @@ namespace Vueling.Presentation.WinSite
             labelApellido.Text = StringResources.labelApellido;
             labelDni.Text = StringResources.labelDni;
             labelFechaNacimiento.Text = StringResources.labelFechaNacimiento;
+            buttonToList.Text = StringResources.labelListaForm;
             this.Text = StringResources.FormName;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedText);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedItem.ToString());
             AplicarIdioma();
         }
     }

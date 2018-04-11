@@ -84,9 +84,44 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
-                log.Error("Error en el metodo SetStudentToXml()" + e.Message);
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
                 throw;
             }
 
@@ -119,6 +154,41 @@ namespace Vueling.DataAccess.Dao
                     if (st.Student_Guid == studentguid) studentread = st;
                 }
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
@@ -149,6 +219,41 @@ namespace Vueling.DataAccess.Dao
                         liststudents = (List<Student>)serializer.Deserialize(streader);
                     }
                 }
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
             }
             catch (IOException e)
             {
