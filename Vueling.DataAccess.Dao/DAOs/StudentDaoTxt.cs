@@ -148,10 +148,11 @@ namespace Vueling.DataAccess.Dao
             {
                 liststudent = this.ReadAll();
                 liststudentfound = new List<Student>();
-            
+
                 IEnumerable<Student> query = from st in liststudent
                                              where st.GetType().GetProperty(property).GetValue(st).ToString() == text
                                              select st;
+                
 
                 foreach (Student student in query)
                 {

@@ -44,8 +44,8 @@ namespace Vueling.DataAccess.Dao.Tests
             {
                 File.Delete(s);
             }
-            _factory.VerifyAllExpectationsHaveBeenMet();
-            _factory.ClearExpectations();
+            mock_factory.VerifyAllExpectationsHaveBeenMet();
+            mock_factory.ClearExpectations();
         }
         #endregion
 

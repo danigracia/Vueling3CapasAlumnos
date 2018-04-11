@@ -10,6 +10,7 @@ using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.DataAccess.Dao;
 using Vueling.Common.Logic.Models;
 using Vueling.DataAccess.Dao.Factories;
+using System.IO;
 
 namespace Vueling.Business.Logic.Tests
 {
@@ -18,12 +19,20 @@ namespace Vueling.Business.Logic.Tests
     {
 
         private readonly Logger logger = new Logger();
-        private MockFactory mock_factory;
+        private MockFactory mock_factory = new MockFactory();
 
         [TestInitialize()]
         public void Initialize()
         {
-            mock_factory = new MockFactory();
+            logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            mock_factory.VerifyAllExpectationsHaveBeenMet();
+            mock_factory.ClearExpectations();
         }
 
         [TestMethod()]
