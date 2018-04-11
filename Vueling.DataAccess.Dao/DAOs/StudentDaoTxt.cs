@@ -15,10 +15,16 @@ namespace Vueling.DataAccess.Dao
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string path = FileUtils.GetPath() + ".txt";
 
+        private Student readstudent;
+        private Student studentread;
+        private List<Student> liststudents;
+        private List<Student> liststudentfound;
+        private string[] linesplit;
+
         public Student Add(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
-            Student studentread;
+
             try
             {
                 this.SetStudent(student, path);
@@ -34,7 +40,7 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-        private void SetStudent(Student student, string path)
+        private void SetStudent(Student student, string path)   
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
@@ -69,7 +75,7 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            Student readstudent;
+
             try
             {              
                 var alllines = File.ReadAllLines(path);
@@ -82,8 +88,8 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
 
-                var linesplit = findstudent.Split(',');
-                readstudent = new Student(Int32.Parse(linesplit[0]), linesplit[1], linesplit[2], linesplit[3], Int32.Parse(linesplit[4]), linesplit[5], linesplit[6], linesplit[7]);
+                var lineSplit = findstudent.Split(',');
+                readstudent = new Student(Int32.Parse(lineSplit[0]), lineSplit[1], lineSplit[2], lineSplit[3], Int32.Parse(lineSplit[4]), lineSplit[5], lineSplit[6], lineSplit[7]);
                 readstudent.SavedFormat = "txt";
             }
             catch (IOException e)
@@ -108,10 +114,7 @@ namespace Vueling.DataAccess.Dao
 
         public List<Student> ReadAll()
         {
-            Student readstudent;
-            List<Student> liststudents = new List<Student>();
-            string[] linesplit;
-
+            liststudents = new List<Student>();
 
             try
             {
@@ -140,10 +143,11 @@ namespace Vueling.DataAccess.Dao
             return liststudents;
         }
 
+        /*
         public List<Student> Buscar(string text, string property)
         {
             List<Student> liststudent;
-            List<Student> liststudentfound;
+
             try
             {
                 liststudent = this.ReadAll();
@@ -166,5 +170,6 @@ namespace Vueling.DataAccess.Dao
             }
             return liststudentfound;
         }
+        */
     }
 }

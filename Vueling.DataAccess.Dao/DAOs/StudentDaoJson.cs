@@ -126,6 +126,7 @@ namespace Vueling.DataAccess.Dao
             return liststudents;
         }
 
+        /*
         public List<Student> Buscar(string text, string property)
         {
             List<Student> liststudent;
@@ -151,5 +152,6 @@ namespace Vueling.DataAccess.Dao
             }
             return liststudentfound;
         }
+        */
     }
 }

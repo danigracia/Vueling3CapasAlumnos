@@ -20,6 +20,7 @@ namespace Vueling.Presentation.WinSite
         List<Student> liststudent;
         IFileBL filebl;
         Config format;
+        IFileBL filebusiness;
 
         public StudentListForm()
         {
@@ -72,7 +73,7 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {
-            IFileBL filebusiness = new FileBL();
+            filebusiness = new FileBL();
             string selectedprop = "";
             foreach (Control con in this.Controls)
             {
@@ -85,7 +86,6 @@ namespace Vueling.Presentation.WinSite
                 }
             }
             this.dGVStudents.DataSource = filebusiness.Buscar(format, this.textBoxBusquedaGeneral.Text, selectedprop);
-            //this.dGVStudents.DataSource = filebusiness.Buscar(format, this.textBoxBusquedaGeneral.Text, this.checkedListBoxProperties.SelectedItem.ToString());
             this.dGVStudents.Columns["SavedFormat"].Visible = false;
         }
     }

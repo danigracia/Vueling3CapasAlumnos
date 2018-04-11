@@ -24,13 +24,12 @@ namespace Vueling.Presentation.WinSite
         private IStudentBL studentBL;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static ITargetAdapterForLogger logger;
+        private static ITargetAdapterForLogger logger = new Logger();
         public StudentForm()
         {
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
-            logger = new Logger();
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)
