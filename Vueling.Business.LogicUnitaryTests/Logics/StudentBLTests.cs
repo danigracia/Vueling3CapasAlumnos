@@ -21,6 +21,14 @@ namespace Vueling.Business.Logic.Tests
         private readonly Logger logger = new Logger();
         private MockFactory mock_factory = new MockFactory();
 
+        Mock<AbstarctFactory> Afactorymock; //Createmock con la interfaç
+        Mock<IStudentDao> Istudentdaomock;
+        Mock<IStudentBL> Istudentblmock;
+
+        Student student;
+        Student studenttest;
+        Config format;
+
         [TestInitialize()]
         public void Initialize()
         {
@@ -28,7 +36,7 @@ namespace Vueling.Business.Logic.Tests
             logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
         }
 
-        [TestCleanup]
+        [TestCleanup()]
         public void Cleanup()
         {
             mock_factory.VerifyAllExpectationsHaveBeenMet();
@@ -40,38 +48,36 @@ namespace Vueling.Business.Logic.Tests
         {
             logger.Info("Inici CompleteTest.");
 
-            Mock<AbstarctFactory> Afactorymock = mock_factory.CreateMock<AbstarctFactory>(); //Createmock con la interfaç
-            Mock<IStudentDao> Istudentmock = mock_factory.CreateMock<IStudentDao>();
-            Mock<IStudentBL> Istudentblmock = mock_factory.CreateMock<IStudentBL>();
+            student = new Student();
+            format = new Config();
 
-            Student student = new Student();
-            Student studenttest;
-            Student studentcomplete;
-            Config format = new Config();
+            Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
+            Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
+            Istudentblmock = mock_factory.CreateMock<IStudentBL>();
 
             Afactorymock.
                 Expects.
                 One.
                 MethodWith(s => s.CreateStudentFormat(format)).
-                WillReturn(Istudentmock.MockObject);
-            
-            IStudentDao isttest = Afactorymock.MockObject.CreateStudentFormat(format);
+                WillReturn(Istudentdaomock.MockObject);
 
             Istudentblmock.
                 Expects.
                 One.
                 MethodWith(s => s.Complete(student)).
                 WillReturn(student);
+       
+            IStudentDao isttest = Afactorymock.MockObject.CreateStudentFormat(format);
 
-            studentcomplete = Istudentblmock.MockObject.Complete(student);
+            Student studentcomplete = Istudentblmock.MockObject.Complete(student);
 
-            Istudentmock.
+            Istudentdaomock.
                 Expects.
                 One.
                 MethodWith(s => s.Add(student)).
                 WillReturn(studentcomplete);
 
-            studenttest = Istudentmock.MockObject.Add(studentcomplete);
+            studenttest = Istudentdaomock.MockObject.Add(studentcomplete);
 
             Assert.IsNotNull(isttest);
             Assert.IsTrue(student.Equals(studenttest));

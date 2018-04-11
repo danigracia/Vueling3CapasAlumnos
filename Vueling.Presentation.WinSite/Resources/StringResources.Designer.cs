@@ -79,7 +79,16 @@ namespace Vueling.Presentation.WinSite.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Surname:.
+        ///   Busca una cadena traducida similar a Age.
+        /// </summary>
+        internal static string labelAge {
+            get {
+                return ResourceManager.GetString("labelAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Surname.
         /// </summary>
         internal static string labelApellido {
             get {
@@ -88,7 +97,7 @@ namespace Vueling.Presentation.WinSite.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a DNI:.
+        ///   Busca una cadena traducida similar a DNI.
         /// </summary>
         internal static string labelDni {
             get {
@@ -97,7 +106,7 @@ namespace Vueling.Presentation.WinSite.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Birth Date:.
+        ///   Busca una cadena traducida similar a Birth Date.
         /// </summary>
         internal static string labelFechaNacimiento {
             get {
@@ -106,7 +115,16 @@ namespace Vueling.Presentation.WinSite.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Id:.
+        ///   Busca una cadena traducida similar a Guid.
+        /// </summary>
+        internal static string labelGuid {
+            get {
+                return ResourceManager.GetString("labelGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Id.
         /// </summary>
         internal static string labelId {
             get {
@@ -115,11 +133,56 @@ namespace Vueling.Presentation.WinSite.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Name:.
+        ///   Busca una cadena traducida similar a Show a list of all students.
+        /// </summary>
+        internal static string labelListaForm {
+            get {
+                return ResourceManager.GetString("labelListaForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Name.
         /// </summary>
         internal static string labelNombre {
             get {
                 return ResourceManager.GetString("labelNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Read From Json File.
+        /// </summary>
+        internal static string labelReadjson {
+            get {
+                return ResourceManager.GetString("labelReadjson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Read From Txt File.
+        /// </summary>
+        internal static string labelReadtxt {
+            get {
+                return ResourceManager.GetString("labelReadtxt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Read From Xml File.
+        /// </summary>
+        internal static string labelReadxml {
+            get {
+                return ResourceManager.GetString("labelReadxml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search.
+        /// </summary>
+        internal static string labelSearch {
+            get {
+                return ResourceManager.GetString("labelSearch", resourceCulture);
             }
         }
     }

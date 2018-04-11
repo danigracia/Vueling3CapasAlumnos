@@ -120,19 +120,40 @@
   <data name="FormName" xml:space="preserve">
     <value>Academia</value>
   </data>
+  <data name="labelAge" xml:space="preserve">
+    <value>Edad</value>
+  </data>
   <data name="labelApellido" xml:space="preserve">
-    <value>Apellido:</value>
+    <value>Apellido</value>
   </data>
   <data name="labelDni" xml:space="preserve">
-    <value>DNI:</value>
+    <value>DNI</value>
   </data>
   <data name="labelFechaNacimiento" xml:space="preserve">
-    <value>Fecha de Nacimiento:</value>
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="labelGuid" xml:space="preserve">
+    <value>Guid</value>
   </data>
   <data name="labelId" xml:space="preserve">
-    <value>Id:</value>
+    <value>Id</value>
+  </data>
+  <data name="labelListaForm" xml:space="preserve">
+    <value>Muestra una lista de todos los alumnos</value>
   </data>
   <data name="labelNombre" xml:space="preserve">
-    <value>Nombre:</value>
+    <value>Nombre</value>
+  </data>
+  <data name="labelReadjson" xml:space="preserve">
+    <value>Leer del archivo Json</value>
+  </data>
+  <data name="labelReadtxt" xml:space="preserve">
+    <value>Leer del archivo Txt</value>
+  </data>
+  <data name="labelReadxml" xml:space="preserve">
+    <value>Leer del archivo Xml</value>
+  </data>
+  <data name="labelSearch" xml:space="preserve">
+    <value>Buscar</value>
   </data>
 </root>

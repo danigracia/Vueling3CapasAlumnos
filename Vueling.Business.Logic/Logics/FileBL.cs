@@ -8,16 +8,19 @@ using Vueling.Common.Logic.Models;
 using Vueling.DataAccess.Dao.Singletons;
 using Vueling.DataAccess.Dao.Factories;
 using System.IO;
+using Vueling.Common.Logic.LoggerAdapter;
 
 namespace Vueling.Business.Logic.Logics
 {
     public class FileBL : IFileBL
     {
-        AbstarctFactory formfact;
-        SingletonJson sinjson;
-        SingletonXml sinxml;
-        List<Student> liststudent;
+        private AbstarctFactory formfact;
+        private SingletonJson sinjson;
+        private SingletonXml sinxml;
+        private List<Student> liststudent;
         private List<Student> liststudentfound;
+
+        private readonly Logger logger = new Logger();
 
         public List<Student> ReadFile(Config con)
         {
@@ -33,9 +36,7 @@ namespace Vueling.Business.Logic.Logics
 
         public List<Student> Buscar(Config format, string textabuscar, string propertyabuscar)
         {
-
             formfact = new FormatFactory();
-            //liststudent = (formfact.CreateStudentFormat(format)).Buscar(textabuscar, propertyabuscar);
 
             try
             {
@@ -46,23 +47,22 @@ namespace Vueling.Business.Logic.Logics
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
                                              select st;
 
-
                 foreach (Student student in query)
                 {
                     liststudentfound.Add(student);
                 }
             }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
-                //logger.Error("Error en el metodo Buscar()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             return liststudentfound;
-
-
-
-            return liststudent;
         }
-
     }
 }

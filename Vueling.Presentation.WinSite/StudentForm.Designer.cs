@@ -159,7 +159,7 @@
             // 
             this.buttonToList.Location = new System.Drawing.Point(13, 13);
             this.buttonToList.Name = "buttonToList";
-            this.buttonToList.Size = new System.Drawing.Size(76, 38);
+            this.buttonToList.Size = new System.Drawing.Size(93, 53);
             this.buttonToList.TabIndex = 13;
             this.buttonToList.Text = "mostra tots els alumnes";
             this.buttonToList.UseVisualStyleBackColor = true;
@@ -170,9 +170,9 @@
             this.cbLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLanguages.FormattingEnabled = true;
             this.cbLanguages.Items.AddRange(new object[] {
-            "English",
-            "Castellano",
-            "Català"});
+            "en-GB",
+            "ca-ES",
+            "es-ES"});
             this.cbLanguages.Location = new System.Drawing.Point(238, 30);
             this.cbLanguages.Name = "cbLanguages";
             this.cbLanguages.Size = new System.Drawing.Size(97, 21);
