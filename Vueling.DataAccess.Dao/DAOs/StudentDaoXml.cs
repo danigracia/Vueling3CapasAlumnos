@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -17,6 +18,7 @@ namespace Vueling.DataAccess.Dao
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string path = FileUtils.GetPath() + ".xml";
+        private readonly Logger logger = new Logger();
 
         private Student studentread;
         private List<Student> liststudents;
@@ -24,7 +26,7 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
             
             try
@@ -34,7 +36,7 @@ namespace Vueling.DataAccess.Dao
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo SetStudent()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
@@ -86,42 +88,42 @@ namespace Vueling.DataAccess.Dao
             }
             catch (ArgumentOutOfRangeException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (OutOfMemoryException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ObjectDisposedException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (DirectoryNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (FileNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
@@ -156,42 +158,42 @@ namespace Vueling.DataAccess.Dao
             }
             catch (ArgumentOutOfRangeException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (OutOfMemoryException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ObjectDisposedException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (DirectoryNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (FileNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
@@ -222,42 +224,42 @@ namespace Vueling.DataAccess.Dao
             }
             catch (ArgumentOutOfRangeException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (OutOfMemoryException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ObjectDisposedException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (DirectoryNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (FileNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
