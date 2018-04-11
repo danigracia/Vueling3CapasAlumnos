@@ -159,7 +159,7 @@
             // 
             this.buttonToList.Location = new System.Drawing.Point(13, 13);
             this.buttonToList.Name = "buttonToList";
-            this.buttonToList.Size = new System.Drawing.Size(76, 38);
+            this.buttonToList.Size = new System.Drawing.Size(93, 53);
             this.buttonToList.TabIndex = 13;
             this.buttonToList.Text = "mostra tots els alumnes";
             this.buttonToList.UseVisualStyleBackColor = true;

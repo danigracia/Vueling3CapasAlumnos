@@ -45,14 +45,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-            logger.Error("Missatge Error de prova");
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
-
         }
 
         private void buttonJson_Click(object sender, EventArgs e)
@@ -63,13 +59,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
         }
 
         private void buttonXml_Click(object sender, EventArgs e)
@@ -80,12 +73,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
         }
 
         private void SaveStudentData(object sender)
@@ -104,15 +95,15 @@ namespace Vueling.Presentation.WinSite
             }
             catch (FormatException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
             catch (TargetException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
             catch (OverflowException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
         }
 
@@ -127,7 +118,7 @@ namespace Vueling.Presentation.WinSite
             }
             catch (InvalidOperationException inv)
             {
-                MessageBox.Show(String.Format("Message error: " + inv.Message));
+                MessageBox.Show(String.Format(inv.StackTrace + inv.Message));
             }
         }
 

@@ -22,7 +22,7 @@ namespace Vueling.Business.Logic
         }
         public void BusinessLogic(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            log.Info("Método " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
 
             config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
@@ -64,7 +64,7 @@ namespace Vueling.Business.Logic
             }
             catch (FormatException e)
             {
-                log.Error("Fallo al tratar el archivo:"+ e.Message);
+                log.Error(e.StackTrace + e.Message);
 
             }
             catch (ArgumentOutOfRangeException e)

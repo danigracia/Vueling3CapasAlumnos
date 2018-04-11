@@ -47,15 +47,19 @@ namespace Vueling.Business.Logic.Logics
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
                                              select st;
 
-
                 foreach (Student student in query)
                 {
                     liststudentfound.Add(student);
                 }
             }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
-                logger.Error("Error en el metodo Buscar()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             return liststudentfound;
