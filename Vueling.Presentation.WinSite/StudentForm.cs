@@ -35,6 +35,9 @@ namespace Vueling.Presentation.WinSite
             studentBL = new StudentBL();
             AplicarIdioma();
 
+            logger.Warn("Warning de proba");
+            log.Warn("Error de proba");
+
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)

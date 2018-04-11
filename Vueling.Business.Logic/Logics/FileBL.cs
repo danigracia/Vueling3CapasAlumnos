@@ -40,7 +40,7 @@ namespace Vueling.Business.Logic.Logics
 
             try
             {
-                liststudent = (formfact.CreateStudentFormat(format)).ReadAll();
+                liststudent = this.ReadFile(format);
                 liststudentfound = new List<Student>();
 
                 IEnumerable<Student> query = from st in liststudent

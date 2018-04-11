@@ -11,6 +11,5 @@ namespace Vueling.DataAccess.Dao
     {
         Student Add(Student student);
         List<Student> ReadAll();
-        //List<Student> Buscar(string text, string property);
     }
 }
