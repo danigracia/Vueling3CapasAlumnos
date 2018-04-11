@@ -27,7 +27,6 @@ namespace Vueling.Business.Logic.Tests
         Mock<IFileBL> Ifileblmock;
 
         Student student;
-        Student studenttest;
         Config format;
         List<Student> studentlist;
 
@@ -70,9 +69,9 @@ namespace Vueling.Business.Logic.Tests
             Assert.IsTrue(studenttestlist.Equals(studentlist));
         }
 
-
-        [TestMethod()]
-        public void ReadFileTest()
+        [DataRow(Config.txt)]
+        [DataTestMethod()]
+        public void ReadFileTest(Config form)
         {
             Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
             Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
@@ -80,10 +79,10 @@ namespace Vueling.Business.Logic.Tests
             Afactorymock.
                 Expects.
                 One.
-                MethodWith(s => s.CreateStudentFormat(format)).
+                MethodWith(s => s.CreateStudentFormat(form)).
                 WillReturn(Istudentdaomock.MockObject);
 
-            IStudentDao isttest = Afactorymock.MockObject.CreateStudentFormat(format);
+            IStudentDao isttest = Afactorymock.MockObject.CreateStudentFormat(form);
             Assert.IsNotNull(isttest);
         }
     }
