@@ -7,32 +7,62 @@ using Vueling.Business.Logic.Interfaces;
 using Vueling.Common.Logic.Models;
 using Vueling.DataAccess.Dao.Singletons;
 using Vueling.DataAccess.Dao.Factories;
+using System.IO;
+using Vueling.Common.Logic.LoggerAdapter;
 
 namespace Vueling.Business.Logic.Logics
 {
     public class FileBL : IFileBL
     {
+        private AbstarctFactory formfact;
+        private SingletonJson sinjson;
+        private SingletonXml sinxml;
+        private List<Student> liststudent;
+        private List<Student> liststudentfound;
+
+        private readonly Logger logger = new Logger();
 
         public List<Student> ReadFile(Config con)
         {
-            AbstarctFactory formfact = new FormatFactory();
+            formfact = new FormatFactory();
             return (formfact.CreateStudentFormat(con)).ReadAll();
         }
 
         public void FillSingletons()
         {
-            SingletonJson sinjson = SingletonJson.Instance;
-            SingletonXml sinxml = SingletonXml.Instance;
+            sinjson = SingletonJson.Instance;
+            sinxml = SingletonXml.Instance;
         }
 
         public List<Student> Buscar(Config format, string textabuscar, string propertyabuscar)
         {
-            List<Student> liststudent;
-            AbstarctFactory formfact = new FormatFactory();
-            liststudent = (formfact.CreateStudentFormat(format)).Buscar(textabuscar, propertyabuscar);
+            formfact = new FormatFactory();
 
-            return liststudent;
+            try
+            {
+                liststudent = (formfact.CreateStudentFormat(format)).ReadAll();
+                liststudentfound = new List<Student>();
+
+                IEnumerable<Student> query = from st in liststudent
+                                             where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
+                                             select st;
+
+                foreach (Student student in query)
+                {
+                    liststudentfound.Add(student);
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (IOException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            return liststudentfound;
         }
-
     }
 }

@@ -16,14 +16,17 @@ namespace Vueling.DataAccess.Dao
     public class StudentDaoXml : IStudentDao
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly string path = FileUtils.GetPath() + ".xml";
+
+        private Student studentread;
+        private List<Student> liststudents;
+        private List<Student> alllines;
 
         public Student Add(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            Student studentread;
+            
             try
             {
                 this.SetStudent(student, path);
@@ -52,7 +55,7 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            List<Student> liststudents = new List<Student>();
+            liststudents = new List<Student>();
 
             try
             {
@@ -81,9 +84,44 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
-                log.Error("Error en el metodo SetStudentToXml()" + e.Message);
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
                 throw;
             }
 
@@ -97,8 +135,8 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
-            List<Student> alllines = new List<Student>();
-            Student studentread = new Student();
+            alllines = new List<Student>();
+            studentread = new Student();
 
             try
             {
@@ -116,6 +154,41 @@ namespace Vueling.DataAccess.Dao
                     if (st.Student_Guid == studentguid) studentread = st;
                 }
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
@@ -131,7 +204,7 @@ namespace Vueling.DataAccess.Dao
 
         public List<Student> ReadAll()
         {
-            List<Student> liststudents = new List<Student>();
+            liststudents = new List<Student>();
 
             try
             {
@@ -147,6 +220,41 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (ArgumentOutOfRangeException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (OutOfMemoryException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ObjectDisposedException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
@@ -158,35 +266,6 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             return liststudents;
-        }
-
-        public List<Student> Buscar(string text, string property)
-        {
-            List<Student> liststudent;
-            List<Student> liststudentfound;
-
-            try
-            {
-                liststudent = this.ReadAll();
-                liststudentfound = new List<Student>();
-
-                IEnumerable<Student> query = from st in liststudent
-                                             where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                             select st;
-
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
-
-            }
-            catch (IOException e)
-            {
-                log.Error("Error en el metodo GetStudentByGuid()" + e.Message);
-                throw;
-            }
-
-            return liststudentfound;
         }
     }
 }

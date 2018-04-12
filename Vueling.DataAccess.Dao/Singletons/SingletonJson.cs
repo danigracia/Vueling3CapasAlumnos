@@ -16,7 +16,7 @@ namespace Vueling.DataAccess.Dao.Singletons
         readonly List<Student> liststudents;
         readonly AbstarctFactory abfac = new FormatFactory();
 
-        SingletonJson()
+        protected SingletonJson()
         {
             liststudents = (abfac.CreateStudentFormat(Config.json)).ReadAll();
         }

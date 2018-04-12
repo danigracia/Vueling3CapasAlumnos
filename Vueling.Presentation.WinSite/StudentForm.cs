@@ -14,6 +14,9 @@ using Vueling.Common.Logic.Models;
 using System.Reflection;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.LoggerAdapter;
+using Vueling.Presentation.WinSite.Resources;
+using System.Globalization;
+using System.Threading;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -24,13 +27,14 @@ namespace Vueling.Presentation.WinSite
         private IStudentBL studentBL;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static ITargetAdapterForLogger logger;
+        private static ITargetAdapterForLogger logger = new Logger();
         public StudentForm()
         {
             InitializeComponent();
             student = new Student();
             studentBL = new StudentBL();
-            logger = new Logger();
+            AplicarIdioma();
+
         }
 
         private void buttonTxt_Click(object sender, EventArgs e)
@@ -41,14 +45,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-            logger.Error("Missatge Error de prova");
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
-
         }
 
         private void buttonJson_Click(object sender, EventArgs e)
@@ -59,13 +59,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
         }
 
         private void buttonXml_Click(object sender, EventArgs e)
@@ -76,12 +73,10 @@ namespace Vueling.Presentation.WinSite
             {
                 studentBL.BusinessLogic(student);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo al tratar el archivo");
+                MessageBox.Show(ex.StackTrace + ex.Message);
             }
-
-            MessageBox.Show(String.Format("You have saved an student in {0} format", ((Button)sender).Text));
         }
 
         private void SaveStudentData(object sender)
@@ -100,15 +95,15 @@ namespace Vueling.Presentation.WinSite
             }
             catch (FormatException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
             catch (TargetException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
             catch (OverflowException e)
             {
-                MessageBox.Show(String.Format("Message error: " + e.Message));
+                MessageBox.Show(String.Format(e.StackTrace + e.Message));
             }
         }
 
@@ -123,8 +118,25 @@ namespace Vueling.Presentation.WinSite
             }
             catch (InvalidOperationException inv)
             {
-                MessageBox.Show(String.Format("Message error: " + inv.Message));
+                MessageBox.Show(String.Format(inv.StackTrace + inv.Message));
             }
+        }
+
+        public void AplicarIdioma()
+        {
+            labelId.Text = StringResources.labelId;
+            labelNombre.Text = StringResources.labelNombre;
+            labelApellido.Text = StringResources.labelApellido;
+            labelDni.Text = StringResources.labelDni;
+            labelFechaNacimiento.Text = StringResources.labelFechaNacimiento;
+            buttonToList.Text = StringResources.labelListaForm;
+            this.Text = StringResources.FormName;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedItem.ToString());
+            AplicarIdioma();
         }
     }
 }

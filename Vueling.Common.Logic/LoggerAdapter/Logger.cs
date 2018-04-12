@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic.Models;
 
 namespace Vueling.Common.Logic.LoggerAdapter
 {
@@ -35,6 +37,16 @@ namespace Vueling.Common.Logic.LoggerAdapter
         {
             if (isInfoEnabled)
                 log.Info(message);            
+        }
+        public void Info(Student st)
+        {
+            if (isInfoEnabled)
+            {
+                foreach (PropertyInfo prop in typeof(Student).GetProperties())
+                {
+                    log.Info("student." + prop.Name + ": " + prop.GetValue(st));
+                }
+            }
         }
         public void Info(string format, params object[] args)
         {

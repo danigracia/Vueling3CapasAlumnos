@@ -16,6 +16,9 @@ namespace Vueling.DataAccess.Dao
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string path = FileUtils.GetPath() + ".json";
 
+        List<Student> liststudents;
+        Student studentread;
+
         public Student Add(Student student)
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
@@ -39,7 +42,6 @@ namespace Vueling.DataAccess.Dao
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
-            List<Student> liststudents;
 
             try
             {
@@ -63,6 +65,36 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo ReadAllTxt()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo ReadAllTxt()" + e.Message);
@@ -78,7 +110,7 @@ namespace Vueling.DataAccess.Dao
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
-            Student studentread = new Student();
+            studentread = new Student();
             try
             {
                 var alllines = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
@@ -87,11 +119,52 @@ namespace Vueling.DataAccess.Dao
                     if (st.Student_Guid == studentguid) studentread = st;
                 }
             }
+            catch (System.Security.SecurityException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
+
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             log.Info("Datos del student leido del file json:");
@@ -99,57 +172,68 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-
         public List<Student> ReadAll()
         {
-            List<Student> liststudents = new List<Student>();
+            liststudents = new List<Student>();
 
             try
-            {
-   
+            {   
                 if (File.Exists(path))
                 {
                     liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
 
                     log.Info("Datos del student leido del file json:");
                 }
-
+            }
+            catch (System.Security.SecurityException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo ReadAll()" + e.Message);
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
 
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             return liststudents;
-        }
-
-        public List<Student> Buscar(string text, string property)
-        {
-            List<Student> liststudent;
-            List<Student> liststudentfound;
-            try
-            {
-                liststudent = this.ReadAll();
-                liststudentfound = new List<Student>();
-
-                IEnumerable<Student> query = from st in liststudent
-                                         where st.GetType().GetProperty(property).GetValue(st).ToString() == text
-                                         select st;
-
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
-            }
-            catch (IOException e)
-            {
-                log.Error("Error en el metodo Buscar()" + e.Message);
-                throw;
-            }
-            return liststudentfound;
         }
     }
 }

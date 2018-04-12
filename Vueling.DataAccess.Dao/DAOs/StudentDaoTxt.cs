@@ -39,7 +39,7 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-        private void SetStudent(Student student, string path)
+        private void SetStudent(Student student, string path)   
         {
             log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
@@ -112,10 +112,33 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
             catch (DirectoryNotFoundException e)
+<<<<<<< HEAD
             {
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
+            catch (PathTooLongException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+=======
+>>>>>>> 56813e0e43058ccbf9830324cfdee714e0ab3996
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                throw;
+            }
+<<<<<<< HEAD
+            catch (IOException e)
+            {
+                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+=======
             catch (PathTooLongException e)
             {
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
@@ -134,6 +157,7 @@ namespace Vueling.DataAccess.Dao
             catch (IOException e)
             {
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+>>>>>>> 56813e0e43058ccbf9830324cfdee714e0ab3996
                 throw;
             }
 

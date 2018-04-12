@@ -42,6 +42,7 @@
             this.buttonJson = new System.Windows.Forms.Button();
             this.buttonXml = new System.Windows.Forms.Button();
             this.buttonToList = new System.Windows.Forms.Button();
+            this.cbLanguages = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonTxt
@@ -56,28 +57,28 @@
             // 
             // textBoxId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(179, 31);
+            this.textBoxId.Location = new System.Drawing.Point(154, 69);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(100, 20);
             this.textBoxId.TabIndex = 1;
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(179, 57);
+            this.textBoxNombre.Location = new System.Drawing.Point(154, 95);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(100, 20);
             this.textBoxNombre.TabIndex = 2;
             // 
             // textBoxApellidos
             // 
-            this.textBoxApellidos.Location = new System.Drawing.Point(179, 83);
+            this.textBoxApellidos.Location = new System.Drawing.Point(154, 121);
             this.textBoxApellidos.Name = "textBoxApellidos";
             this.textBoxApellidos.Size = new System.Drawing.Size(100, 20);
             this.textBoxApellidos.TabIndex = 3;
             // 
             // textBoxDni
             // 
-            this.textBoxDni.Location = new System.Drawing.Point(179, 109);
+            this.textBoxDni.Location = new System.Drawing.Point(154, 147);
             this.textBoxDni.Name = "textBoxDni";
             this.textBoxDni.Size = new System.Drawing.Size(100, 20);
             this.textBoxDni.TabIndex = 4;
@@ -85,7 +86,7 @@
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(154, 34);
+            this.labelId.Location = new System.Drawing.Point(129, 72);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(19, 13);
             this.labelId.TabIndex = 5;
@@ -94,7 +95,7 @@
             // labelNombre
             // 
             this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(126, 60);
+            this.labelNombre.Location = new System.Drawing.Point(101, 98);
             this.labelNombre.Name = "labelNombre";
             this.labelNombre.Size = new System.Drawing.Size(47, 13);
             this.labelNombre.TabIndex = 6;
@@ -103,7 +104,7 @@
             // labelApellido
             // 
             this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(121, 86);
+            this.labelApellido.Location = new System.Drawing.Point(96, 124);
             this.labelApellido.Name = "labelApellido";
             this.labelApellido.Size = new System.Drawing.Size(52, 13);
             this.labelApellido.TabIndex = 7;
@@ -112,7 +113,7 @@
             // labelDni
             // 
             this.labelDni.AutoSize = true;
-            this.labelDni.Location = new System.Drawing.Point(144, 112);
+            this.labelDni.Location = new System.Drawing.Point(119, 150);
             this.labelDni.Name = "labelDni";
             this.labelDni.Size = new System.Drawing.Size(29, 13);
             this.labelDni.TabIndex = 8;
@@ -121,7 +122,7 @@
             // labelFechaNacimiento
             // 
             this.labelFechaNacimiento.AutoSize = true;
-            this.labelFechaNacimiento.Location = new System.Drawing.Point(62, 138);
+            this.labelFechaNacimiento.Location = new System.Drawing.Point(37, 176);
             this.labelFechaNacimiento.Name = "labelFechaNacimiento";
             this.labelFechaNacimiento.Size = new System.Drawing.Size(111, 13);
             this.labelFechaNacimiento.TabIndex = 9;
@@ -129,7 +130,7 @@
             // 
             // textBoxFechaNacimiento
             // 
-            this.textBoxFechaNacimiento.Location = new System.Drawing.Point(179, 135);
+            this.textBoxFechaNacimiento.Location = new System.Drawing.Point(154, 173);
             this.textBoxFechaNacimiento.Name = "textBoxFechaNacimiento";
             this.textBoxFechaNacimiento.Size = new System.Drawing.Size(100, 20);
             this.textBoxFechaNacimiento.TabIndex = 10;
@@ -158,17 +159,32 @@
             // 
             this.buttonToList.Location = new System.Drawing.Point(13, 13);
             this.buttonToList.Name = "buttonToList";
-            this.buttonToList.Size = new System.Drawing.Size(76, 38);
+            this.buttonToList.Size = new System.Drawing.Size(93, 53);
             this.buttonToList.TabIndex = 13;
             this.buttonToList.Text = "mostra tots els alumnes";
             this.buttonToList.UseVisualStyleBackColor = true;
             this.buttonToList.Click += new System.EventHandler(this.buttonToList_Click);
+            // 
+            // cbLanguages
+            // 
+            this.cbLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLanguages.FormattingEnabled = true;
+            this.cbLanguages.Items.AddRange(new object[] {
+            "en-GB",
+            "ca-ES",
+            "es-ES"});
+            this.cbLanguages.Location = new System.Drawing.Point(238, 30);
+            this.cbLanguages.Name = "cbLanguages";
+            this.cbLanguages.Size = new System.Drawing.Size(97, 21);
+            this.cbLanguages.TabIndex = 14;
+            this.cbLanguages.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 295);
+            this.Controls.Add(this.cbLanguages);
             this.Controls.Add(this.buttonToList);
             this.Controls.Add(this.buttonXml);
             this.Controls.Add(this.buttonJson);
@@ -206,6 +222,7 @@
         private System.Windows.Forms.Button buttonJson;
         private System.Windows.Forms.Button buttonXml;
         private System.Windows.Forms.Button buttonToList;
+        private System.Windows.Forms.ComboBox cbLanguages;
     }
 }
 
