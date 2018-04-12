@@ -44,7 +44,7 @@ namespace Vueling.Common.Logic.LoggerAdapter
             {
                 foreach (PropertyInfo prop in typeof(Student).GetProperties())
                 {
-                    log.Info("student." + prop.Name + ": " + prop.GetValue(st));
+                    log.Info(st.GetType().ToString() + prop.Name + ": " + prop.GetValue(st));
                 }
             }
         }
@@ -54,7 +54,8 @@ namespace Vueling.Common.Logic.LoggerAdapter
         }
         public void Debug(string message)
         {
-            throw new NotImplementedException();
+            if (isDebugEnabled)
+                log.Debug(message);
         }
         public void Debug(string format, params object[] args)
         {
@@ -62,7 +63,8 @@ namespace Vueling.Common.Logic.LoggerAdapter
         }
         public void Warn(string message)
         {
-            throw new NotImplementedException();
+            if (isWarnEnabled)
+                log.Warn(message);
         }
         public void Warn(string format, params object[] args)
         {
@@ -79,7 +81,8 @@ namespace Vueling.Common.Logic.LoggerAdapter
         }
         public void Fatal(string message)
         {
-            throw new NotImplementedException();
+            if (isFatalEnabled)
+                log.Fatal(message);
         }
         public void Fatal(string format, params object[] args)
         {

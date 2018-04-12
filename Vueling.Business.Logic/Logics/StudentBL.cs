@@ -7,12 +7,14 @@ using Vueling.DataAccess.Dao;
 using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
 using Vueling.DataAccess.Dao.Singletons;
+using Vueling.Common.Logic.LoggerAdapter;
 
 namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Logger logger = new Logger();
         readonly AbstarctFactory FormFac;
         private Config config;
 
@@ -22,7 +24,7 @@ namespace Vueling.Business.Logic
         }
         public void BusinessLogic(Student student)
         {
-            log.Info("Método " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            logger.Info("Método " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
 
             config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
@@ -32,29 +34,35 @@ namespace Vueling.Business.Logic
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Fallo en metodo businessLogic" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                         " terminado");
         }
 
         public Student Complete(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
             this.GetAge(student);
             this.HoraRegistro(student);
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
             return student;
         }
 
         private void GetAge(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
             try
             {
@@ -64,32 +72,32 @@ namespace Vueling.Business.Logic
             }
             catch (FormatException e)
             {
-                log.Error(e.StackTrace + e.Message);
-
+                logger.Error(e.StackTrace + e.Message);
+                throw;
             }
             catch (ArgumentOutOfRangeException e)
             {
-                log.Error("Fallo al tratar el archivo" + e.Message);
-
+                logger.Error(e.StackTrace + e.Message);
+                throw;
             }
             catch (OverflowException e)
             {
-                log.Error("Fallo al tratar el archivo" + e.Message);
-
+                logger.Error(e.StackTrace + e.Message);
+                throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
 
         private void HoraRegistro(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " iniciado");
 
             student.HoraRegistro = DateTime.Now;
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
+            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
                 " terminado");
         }
     }
