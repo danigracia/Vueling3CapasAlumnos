@@ -39,6 +39,11 @@ namespace Vueling.Business.Logic.Tests
         {
             logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
             mock_factory = new MockFactory();
+
+            Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
+            Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
+            Istudentblmock = mock_factory.CreateMock<IStudentBL>();
+
             logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
         }
 
@@ -58,10 +63,6 @@ namespace Vueling.Business.Logic.Tests
             Student student = new Student(id, name, surname, edad, dni, datebirth);
 
             format = new Config();
-
-            Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
-            Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
-            Istudentblmock = mock_factory.CreateMock<IStudentBL>();
 
             Afactorymock.
                 Expects.
