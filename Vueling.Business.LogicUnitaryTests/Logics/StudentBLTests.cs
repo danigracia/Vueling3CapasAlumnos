@@ -19,20 +19,31 @@ namespace Vueling.Business.Logic.Tests
     {
 
         private readonly Logger logger = new Logger();
-        private MockFactory mock_factory = new MockFactory();
+        private MockFactory mock_factory;
 
         Mock<AbstarctFactory> Afactorymock; //Createmock con la interfaç
         Mock<IStudentDao> Istudentdaomock;
         Mock<IStudentBL> Istudentblmock;
 
-        Student student;
         Student studenttest;
         Config format;
+
+        [AssemblyInitialize]
+        public static void Configure(TestContext tc)
+        {
+            log4net.Config.XmlConfigurator.Configure();
+        }
 
         [TestInitialize()]
         public void Initialize()
         {
             logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            mock_factory = new MockFactory();
+
+            Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
+            Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
+            Istudentblmock = mock_factory.CreateMock<IStudentBL>();
+
             logger.Info(System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
         }
 
@@ -43,17 +54,15 @@ namespace Vueling.Business.Logic.Tests
             mock_factory.ClearExpectations();
         }
 
-        [TestMethod()]
-        public void BusinessLogicTest()
+        [DataRow(3, "G", "B", 11, "11111111-Z", "1-10-2012", "Edad")]
+        [DataTestMethod()]
+        public void BusinessLogicTest(int id, string name, string surname, int edad, string dni, string datebirth, string prop)
         {
             logger.Info("Inici CompleteTest.");
 
-            student = new Student();
-            format = new Config();
+            Student student = new Student(id, name, surname, edad, dni, datebirth);
 
-            Afactorymock = mock_factory.CreateMock<AbstarctFactory>();
-            Istudentdaomock = mock_factory.CreateMock<IStudentDao>();
-            Istudentblmock = mock_factory.CreateMock<IStudentBL>();
+            format = new Config();
 
             Afactorymock.
                 Expects.

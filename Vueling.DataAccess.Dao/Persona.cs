@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
 {
-    public interface IStudentDao
+    public class Persona
     {
-        Student Add(Student student);
-        List<Student> ReadAll();
     }
 }

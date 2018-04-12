@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic.Models;
 
-namespace Vueling.DataAccess.Dao
+namespace Vueling.Common.Logic
 {
-    public interface IStudentDao
+    public interface IFichero
     {
-        Student Add(Student student);
-        List<Student> ReadAll();
+        string Nombre { get; set; }
+        string Ruta { get; set; }
+
+        void Guardar(Alumno alumno);
     }
 }

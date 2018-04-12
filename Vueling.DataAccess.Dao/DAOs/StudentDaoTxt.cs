@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -13,6 +14,7 @@ namespace Vueling.DataAccess.Dao
     public class StudentDaoTxt : IStudentDao
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".txt";
 
         private Student readstudent;
@@ -29,9 +31,9 @@ namespace Vueling.DataAccess.Dao
                 this.SetStudent(student, path);
                 studentread = this.GetStudentByGuid(student.Student_Guid, path);
             }
-            catch (IOException e)
+            catch (Exception e)
             {
-                log.Error("Error en el metodo SetStudent()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
@@ -45,7 +47,7 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
             try
             {
-                if (!File.Exists(path))
+                    if (!File.Exists(path))
                 {
                     using (StreamWriter stwriter = File.CreateText(path))
                     {
@@ -60,9 +62,49 @@ namespace Vueling.DataAccess.Dao
                     }
                 }
             }
+            catch (System.Security.SecurityException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (NotSupportedException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (PathTooLongException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
+            }
             catch (IOException e)
             {
-                log.Error("Error en el metodo SetStudent()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
@@ -76,7 +118,7 @@ namespace Vueling.DataAccess.Dao
                 " iniciado");
 
             try
-            {
+            {              
                 var alllines = File.ReadAllLines(path);
                 string findstudent = "";
                 foreach (string line in alllines)
@@ -93,71 +135,47 @@ namespace Vueling.DataAccess.Dao
             }
             catch (System.Security.SecurityException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (NotSupportedException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (FileNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (UnauthorizedAccessException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (DirectoryNotFoundException e)
-<<<<<<< HEAD
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (PathTooLongException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
-                throw;
-            }
-            catch (ArgumentException e)
-=======
->>>>>>> 56813e0e43058ccbf9830324cfdee714e0ab3996
-            {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
-                throw;
-            }
-<<<<<<< HEAD
-            catch (IOException e)
-            {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
-=======
-            catch (PathTooLongException e)
-            {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
-                throw;
-            }
-            catch (ArgumentNullException e)
-            {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (ArgumentException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
->>>>>>> 56813e0e43058ccbf9830324cfdee714e0ab3996
+                logger.Error(e.StackTrace + e.Message);
                 throw;
             }
 
