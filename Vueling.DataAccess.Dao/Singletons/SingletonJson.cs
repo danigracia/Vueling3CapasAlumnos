@@ -13,7 +13,7 @@ namespace Vueling.DataAccess.Dao.Singletons
     {
         private static SingletonJson instance = null;
         private static readonly object padlock = new object();
-        readonly List<Student> liststudents;
+        private static List<Student> liststudents;
         readonly AbstarctFactory abfac = new FormatFactory();
 
         protected SingletonJson()

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             this.buttonTxt = new System.Windows.Forms.Button();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
@@ -47,143 +48,98 @@
             // 
             // buttonTxt
             // 
-            this.buttonTxt.Location = new System.Drawing.Point(48, 214);
+            resources.ApplyResources(this.buttonTxt, "buttonTxt");
             this.buttonTxt.Name = "buttonTxt";
-            this.buttonTxt.Size = new System.Drawing.Size(75, 23);
-            this.buttonTxt.TabIndex = 0;
-            this.buttonTxt.Text = "TXT";
             this.buttonTxt.UseVisualStyleBackColor = true;
             this.buttonTxt.Click += new System.EventHandler(this.buttonTxt_Click);
             // 
             // textBoxId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(154, 69);
+            resources.ApplyResources(this.textBoxId, "textBoxId");
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(100, 20);
-            this.textBoxId.TabIndex = 1;
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(154, 95);
+            resources.ApplyResources(this.textBoxNombre, "textBoxNombre");
             this.textBoxNombre.Name = "textBoxNombre";
-            this.textBoxNombre.Size = new System.Drawing.Size(100, 20);
-            this.textBoxNombre.TabIndex = 2;
             // 
             // textBoxApellidos
             // 
-            this.textBoxApellidos.Location = new System.Drawing.Point(154, 121);
+            resources.ApplyResources(this.textBoxApellidos, "textBoxApellidos");
             this.textBoxApellidos.Name = "textBoxApellidos";
-            this.textBoxApellidos.Size = new System.Drawing.Size(100, 20);
-            this.textBoxApellidos.TabIndex = 3;
             // 
             // textBoxDni
             // 
-            this.textBoxDni.Location = new System.Drawing.Point(154, 147);
+            resources.ApplyResources(this.textBoxDni, "textBoxDni");
             this.textBoxDni.Name = "textBoxDni";
-            this.textBoxDni.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDni.TabIndex = 4;
             // 
             // labelId
             // 
-            this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(129, 72);
+            resources.ApplyResources(this.labelId, "labelId");
             this.labelId.Name = "labelId";
-            this.labelId.Size = new System.Drawing.Size(19, 13);
-            this.labelId.TabIndex = 5;
-            this.labelId.Text = "Id:";
             // 
             // labelNombre
             // 
-            this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(101, 98);
+            resources.ApplyResources(this.labelNombre, "labelNombre");
             this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(47, 13);
-            this.labelNombre.TabIndex = 6;
-            this.labelNombre.Text = "Nombre:";
             // 
             // labelApellido
             // 
-            this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(96, 124);
+            resources.ApplyResources(this.labelApellido, "labelApellido");
             this.labelApellido.Name = "labelApellido";
-            this.labelApellido.Size = new System.Drawing.Size(52, 13);
-            this.labelApellido.TabIndex = 7;
-            this.labelApellido.Text = "Apellidos:";
             // 
             // labelDni
             // 
-            this.labelDni.AutoSize = true;
-            this.labelDni.Location = new System.Drawing.Point(119, 150);
+            resources.ApplyResources(this.labelDni, "labelDni");
             this.labelDni.Name = "labelDni";
-            this.labelDni.Size = new System.Drawing.Size(29, 13);
-            this.labelDni.TabIndex = 8;
-            this.labelDni.Text = "DNI:";
             // 
             // labelFechaNacimiento
             // 
-            this.labelFechaNacimiento.AutoSize = true;
-            this.labelFechaNacimiento.Location = new System.Drawing.Point(37, 176);
+            resources.ApplyResources(this.labelFechaNacimiento, "labelFechaNacimiento");
             this.labelFechaNacimiento.Name = "labelFechaNacimiento";
-            this.labelFechaNacimiento.Size = new System.Drawing.Size(111, 13);
-            this.labelFechaNacimiento.TabIndex = 9;
-            this.labelFechaNacimiento.Text = "Fecha de Nacimiento:";
             // 
             // textBoxFechaNacimiento
             // 
-            this.textBoxFechaNacimiento.Location = new System.Drawing.Point(154, 173);
+            resources.ApplyResources(this.textBoxFechaNacimiento, "textBoxFechaNacimiento");
             this.textBoxFechaNacimiento.Name = "textBoxFechaNacimiento";
-            this.textBoxFechaNacimiento.Size = new System.Drawing.Size(100, 20);
-            this.textBoxFechaNacimiento.TabIndex = 10;
             // 
             // buttonJson
             // 
-            this.buttonJson.Location = new System.Drawing.Point(154, 214);
+            resources.ApplyResources(this.buttonJson, "buttonJson");
             this.buttonJson.Name = "buttonJson";
-            this.buttonJson.Size = new System.Drawing.Size(75, 23);
-            this.buttonJson.TabIndex = 11;
-            this.buttonJson.Text = "JSON";
             this.buttonJson.UseVisualStyleBackColor = true;
             this.buttonJson.Click += new System.EventHandler(this.buttonJson_Click);
             // 
             // buttonXml
             // 
-            this.buttonXml.Location = new System.Drawing.Point(260, 214);
+            resources.ApplyResources(this.buttonXml, "buttonXml");
             this.buttonXml.Name = "buttonXml";
-            this.buttonXml.Size = new System.Drawing.Size(75, 23);
-            this.buttonXml.TabIndex = 12;
-            this.buttonXml.Text = "XML";
             this.buttonXml.UseVisualStyleBackColor = true;
             this.buttonXml.Click += new System.EventHandler(this.buttonXml_Click);
             // 
             // buttonToList
             // 
-            this.buttonToList.Location = new System.Drawing.Point(13, 13);
+            resources.ApplyResources(this.buttonToList, "buttonToList");
             this.buttonToList.Name = "buttonToList";
-            this.buttonToList.Size = new System.Drawing.Size(93, 53);
-            this.buttonToList.TabIndex = 13;
-            this.buttonToList.Text = "mostra tots els alumnes";
             this.buttonToList.UseVisualStyleBackColor = true;
             this.buttonToList.Click += new System.EventHandler(this.buttonToList_Click);
             // 
             // cbLanguages
             // 
+            resources.ApplyResources(this.cbLanguages, "cbLanguages");
             this.cbLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLanguages.FormattingEnabled = true;
             this.cbLanguages.Items.AddRange(new object[] {
-            "en-GB",
-            "ca-ES",
-            "es-ES"});
-            this.cbLanguages.Location = new System.Drawing.Point(238, 30);
+            resources.GetString("cbLanguages.Items"),
+            resources.GetString("cbLanguages.Items1"),
+            resources.GetString("cbLanguages.Items2")});
             this.cbLanguages.Name = "cbLanguages";
-            this.cbLanguages.Size = new System.Drawing.Size(97, 21);
-            this.cbLanguages.TabIndex = 14;
             this.cbLanguages.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // StudentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 295);
             this.Controls.Add(this.cbLanguages);
             this.Controls.Add(this.buttonToList);
             this.Controls.Add(this.buttonXml);
@@ -200,7 +156,6 @@
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.buttonTxt);
             this.Name = "StudentForm";
-            this.Text = "Academy";
             this.ResumeLayout(false);
             this.PerformLayout();
 

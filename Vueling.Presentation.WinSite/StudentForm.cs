@@ -50,7 +50,7 @@ namespace Vueling.Presentation.WinSite
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace + ex.Message);
+                MessageBox.Show(new StringBuilder(ex.StackTrace).Append(ex.Message).ToString());
             }
         }
 

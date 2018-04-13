@@ -41,16 +41,11 @@ namespace Vueling.Business.Logic.Logics
             try
             {
                 liststudent = this.ReadFile(format);
-                liststudentfound = new List<Student>();
 
-                IEnumerable<Student> query = from st in liststudent
+                IEnumerable<Student> liststudentfound = from st in liststudent
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
                                              select st;
 
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
             }
             catch (ArgumentNullException e)
             {
@@ -62,7 +57,7 @@ namespace Vueling.Business.Logic.Logics
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
-            return liststudentfound;
+            return liststudentfound.ToList<Student>();
         }
     }
 }

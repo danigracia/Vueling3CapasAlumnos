@@ -64,6 +64,8 @@ namespace Vueling.Business.Logic.Tests
 
             format = new Config();
 
+            //MethodWith para metodos que necesiten pasarle unos paramertos
+            //Method para metodos que no reciben paràmetros
             Afactorymock.
                 Expects.
                 One.

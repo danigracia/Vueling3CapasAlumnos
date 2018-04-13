@@ -48,45 +48,29 @@ namespace Vueling.Common.Logic.LoggerAdapter
                 }
             }
         }
-        public void Info(string format, params object[] args)
+        /*public void Info(string format, params object[] args)
         {
             throw new NotImplementedException();
-        }
+        }*/
         public void Debug(string message)
         {
             if (isDebugEnabled)
                 log.Debug(message);
-        }
-        public void Debug(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
         public void Warn(string message)
         {
             if (isWarnEnabled)
                 log.Warn(message);
         }
-        public void Warn(string format, params object[] args)
-        {
-            throw new NotImplementedException();
-        }
         public void Error(string message)
         {
             if (isErrorEnabled)
                 log.Error(message);
         }
-        public void Error(string format, params object[] args)
-        {
-            throw new NotImplementedException();
-        }
         public void Fatal(string message)
         {
             if (isFatalEnabled)
                 log.Fatal(message);
-        }
-        public void Fatal(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
         
         #endregion
