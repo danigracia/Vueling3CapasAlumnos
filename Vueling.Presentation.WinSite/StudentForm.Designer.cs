@@ -126,13 +126,13 @@
             // 
             // cbLanguages
             // 
-            resources.ApplyResources(this.cbLanguages, "cbLanguages");
             this.cbLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLanguages.FormattingEnabled = true;
             this.cbLanguages.Items.AddRange(new object[] {
             resources.GetString("cbLanguages.Items"),
             resources.GetString("cbLanguages.Items1"),
             resources.GetString("cbLanguages.Items2")});
+            resources.ApplyResources(this.cbLanguages, "cbLanguages");
             this.cbLanguages.Name = "cbLanguages";
             this.cbLanguages.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 

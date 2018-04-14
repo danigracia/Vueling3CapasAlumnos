@@ -13,6 +13,7 @@ using Vueling.Business.Logic;
 using Vueling.Business.Logic.Interfaces;
 using Vueling.Business.Logic.Logics;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 using Vueling.Presentation.WinSite.Resources;
 
@@ -20,15 +21,19 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class StudentListForm : Form
     {
+        private readonly Logger logger = new Logger();
+
         List<Student> liststudent;
         IFileBL filebl;
         Config format;
-        IFileBL filebusiness;
 
         public StudentListForm()
         {
             InitializeComponent();
             AplicarIdioma();
+
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
         }
 
 
@@ -38,8 +43,16 @@ namespace Vueling.Presentation.WinSite
             filebl = new FileBL();
             liststudent = new List<Student>();
 
-            this.FillDataGrid(Config.txt);
-            filebl.FillSingletons();
+            try
+            {
+                this.FillDataGrid(Config.txt);
+                filebl.FillSingletons();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.StackTrace + ex.Message);
+                throw;
+            }
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -71,27 +84,43 @@ namespace Vueling.Presentation.WinSite
 
         private void FillDataGrid(Config format)
         {
-            liststudent = filebl.ReadFile(format);
-            this.dGVStudents.DataSource = liststudent;
-            this.dGVStudents.Columns["SavedFormat"].Visible = false;
+            try
+            {
+                liststudent = filebl.ReadFile(format);
+                this.dGVStudents.DataSource = liststudent;
+                this.dGVStudents.Columns["SavedFormat"].Visible = false;
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex.StackTrace + ex.Message);
+                throw;
+            }
         }
 
         private void buttonBusquedaGeneral_Click(object sender, EventArgs e)
         {
-            filebusiness = new FileBL();
             string selectedprop = "";
-            foreach (Control con in this.Controls)
+            try
             {
-                if(con is RadioButton)
+                    foreach (Control con in this.Controls)
                 {
-                    if (((RadioButton)con).Checked)
+                    if(con is RadioButton)
                     {
-                        selectedprop = ((RadioButton)con).Tag.ToString();
+                        if (((RadioButton)con).Checked)
+                        {
+                            selectedprop = ((RadioButton)con).Tag.ToString();
+                        }
                     }
                 }
+
+                this.dGVStudents.DataSource = filebl.Buscar(format, this.textBoxBusquedaGeneral.Text, selectedprop);
+                this.dGVStudents.Columns["SavedFormat"].Visible = false;
             }
-            this.dGVStudents.DataSource = filebusiness.Buscar(format, this.textBoxBusquedaGeneral.Text, selectedprop);
-            this.dGVStudents.Columns["SavedFormat"].Visible = false;
+            catch(Exception ex)
+            {
+                logger.Error(ex.StackTrace + ex.Message);
+                throw;
+            }
         }
 
         public void AplicarIdioma()

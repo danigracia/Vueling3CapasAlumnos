@@ -35,6 +35,8 @@ namespace Vueling.Presentation.WinSite
             studentBL = new StudentBL();
             AplicarIdioma();
 
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
             logger.Warn("Warning de proba");
             log.Warn("Error de proba");
 
@@ -112,17 +114,7 @@ namespace Vueling.Presentation.WinSite
 
         private void buttonToList_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.Hide();
-                StudentListForm studentlist = new StudentListForm();
-                studentlist.ShowDialog();
 
-            }
-            catch (InvalidOperationException inv)
-            {
-                MessageBox.Show(String.Format(inv.StackTrace + inv.Message));
-            }
         }
 
         public void AplicarIdioma()
@@ -140,6 +132,20 @@ namespace Vueling.Presentation.WinSite
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedItem.ToString());
             AplicarIdioma();
+        }
+
+        private void llistaDAlumnesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Hide();
+                StudentListForm studentlist = new StudentListForm();
+                studentlist.ShowDialog(this);
+            }
+            catch (InvalidOperationException inv)
+            {
+                MessageBox.Show(String.Format(inv.StackTrace + inv.Message));
+            }
         }
     }
 }
