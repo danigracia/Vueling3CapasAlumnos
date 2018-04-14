@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartingForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iniciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.llistaDAlumnesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,11 +51,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.iniciToolStripMenuItem,
             this.configuracióToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(724, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // iniciToolStripMenuItem
             // 
@@ -62,21 +60,18 @@
             this.llistaDAlumnesToolStripMenuItem,
             this.registrarNouAlumneToolStripMenuItem});
             this.iniciToolStripMenuItem.Name = "iniciToolStripMenuItem";
-            this.iniciToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.iniciToolStripMenuItem.Text = "Inici";
+            resources.ApplyResources(this.iniciToolStripMenuItem, "iniciToolStripMenuItem");
             // 
             // llistaDAlumnesToolStripMenuItem
             // 
             this.llistaDAlumnesToolStripMenuItem.Name = "llistaDAlumnesToolStripMenuItem";
-            this.llistaDAlumnesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.llistaDAlumnesToolStripMenuItem.Text = "Llista d\'Alumnes";
+            resources.ApplyResources(this.llistaDAlumnesToolStripMenuItem, "llistaDAlumnesToolStripMenuItem");
             this.llistaDAlumnesToolStripMenuItem.Click += new System.EventHandler(this.llistaDAlumnesToolStripMenuItem_Click);
             // 
             // registrarNouAlumneToolStripMenuItem
             // 
             this.registrarNouAlumneToolStripMenuItem.Name = "registrarNouAlumneToolStripMenuItem";
-            this.registrarNouAlumneToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.registrarNouAlumneToolStripMenuItem.Text = "Registrar nou Alumne";
+            resources.ApplyResources(this.registrarNouAlumneToolStripMenuItem, "registrarNouAlumneToolStripMenuItem");
             this.registrarNouAlumneToolStripMenuItem.Click += new System.EventHandler(this.registrarNouAlumneToolStripMenuItem_Click);
             // 
             // configuracióToolStripMenuItem
@@ -85,8 +80,7 @@
             this.formatDeLarxiuToolStripMenuItem,
             this.idiomaToolStripMenuItem1});
             this.configuracióToolStripMenuItem.Name = "configuracióToolStripMenuItem";
-            this.configuracióToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-            this.configuracióToolStripMenuItem.Text = "Configuració";
+            resources.ApplyResources(this.configuracióToolStripMenuItem, "configuracióToolStripMenuItem");
             // 
             // formatDeLarxiuToolStripMenuItem
             // 
@@ -96,36 +90,34 @@
             this.xmlToolStripMenuItem1,
             this.sqlToolStripMenuItem1});
             this.formatDeLarxiuToolStripMenuItem.Name = "formatDeLarxiuToolStripMenuItem";
-            this.formatDeLarxiuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.formatDeLarxiuToolStripMenuItem.Text = "Format de l\'arxiu";
+            resources.ApplyResources(this.formatDeLarxiuToolStripMenuItem, "formatDeLarxiuToolStripMenuItem");
             // 
             // txtToolStripMenuItem1
             // 
             this.txtToolStripMenuItem1.Name = "txtToolStripMenuItem1";
-            this.txtToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            resources.ApplyResources(this.txtToolStripMenuItem1, "txtToolStripMenuItem1");
             this.txtToolStripMenuItem1.Tag = "txt";
-            this.txtToolStripMenuItem1.Text = "Txt";
+            this.txtToolStripMenuItem1.Click += new System.EventHandler(this.txtToolStripMenuItem1_Click);
             // 
             // jsonToolStripMenuItem1
             // 
             this.jsonToolStripMenuItem1.Name = "jsonToolStripMenuItem1";
-            this.jsonToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            resources.ApplyResources(this.jsonToolStripMenuItem1, "jsonToolStripMenuItem1");
             this.jsonToolStripMenuItem1.Tag = "json";
-            this.jsonToolStripMenuItem1.Text = "Json";
+            this.jsonToolStripMenuItem1.Click += new System.EventHandler(this.jsonToolStripMenuItem1_Click);
             // 
             // xmlToolStripMenuItem1
             // 
             this.xmlToolStripMenuItem1.Name = "xmlToolStripMenuItem1";
-            this.xmlToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            resources.ApplyResources(this.xmlToolStripMenuItem1, "xmlToolStripMenuItem1");
             this.xmlToolStripMenuItem1.Tag = "xml";
-            this.xmlToolStripMenuItem1.Text = "Xml";
+            this.xmlToolStripMenuItem1.Click += new System.EventHandler(this.xmlToolStripMenuItem1_Click);
             // 
             // sqlToolStripMenuItem1
             // 
             this.sqlToolStripMenuItem1.Name = "sqlToolStripMenuItem1";
-            this.sqlToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            resources.ApplyResources(this.sqlToolStripMenuItem1, "sqlToolStripMenuItem1");
             this.sqlToolStripMenuItem1.Tag = "sql";
-            this.sqlToolStripMenuItem1.Text = "Sql";
             // 
             // idiomaToolStripMenuItem1
             // 
@@ -134,37 +126,34 @@
             this.anglèsToolStripMenuItem1,
             this.castellàToolStripMenuItem1});
             this.idiomaToolStripMenuItem1.Name = "idiomaToolStripMenuItem1";
-            this.idiomaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.idiomaToolStripMenuItem1.Text = "Idioma";
+            resources.ApplyResources(this.idiomaToolStripMenuItem1, "idiomaToolStripMenuItem1");
             // 
             // catalàToolStripMenuItem1
             // 
             this.catalàToolStripMenuItem1.Name = "catalàToolStripMenuItem1";
-            this.catalàToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
-            this.catalàToolStripMenuItem1.Text = "Català";
+            resources.ApplyResources(this.catalàToolStripMenuItem1, "catalàToolStripMenuItem1");
+            this.catalàToolStripMenuItem1.Click += new System.EventHandler(this.catalàToolStripMenuItem1_Click);
             // 
             // anglèsToolStripMenuItem1
             // 
             this.anglèsToolStripMenuItem1.Name = "anglèsToolStripMenuItem1";
-            this.anglèsToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
-            this.anglèsToolStripMenuItem1.Text = "Anglés";
+            resources.ApplyResources(this.anglèsToolStripMenuItem1, "anglèsToolStripMenuItem1");
+            this.anglèsToolStripMenuItem1.Click += new System.EventHandler(this.anglèsToolStripMenuItem1_Click);
             // 
             // castellàToolStripMenuItem1
             // 
             this.castellàToolStripMenuItem1.Name = "castellàToolStripMenuItem1";
-            this.castellàToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
-            this.castellàToolStripMenuItem1.Text = "Castellà";
+            resources.ApplyResources(this.castellàToolStripMenuItem1, "castellàToolStripMenuItem1");
+            this.castellàToolStripMenuItem1.Click += new System.EventHandler(this.castellàToolStripMenuItem1_Click);
             // 
             // StartingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 287);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StartingForm";
-            this.Text = "Acadèmia";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

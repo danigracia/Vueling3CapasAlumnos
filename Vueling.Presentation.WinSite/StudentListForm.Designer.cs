@@ -59,7 +59,7 @@
             this.buttonReadTxt.Name = "buttonReadTxt";
             this.buttonReadTxt.Size = new System.Drawing.Size(73, 45);
             this.buttonReadTxt.TabIndex = 1;
-            this.buttonReadTxt.Text = "Read From Txt File";
+            this.buttonReadTxt.Text = "Llegir del fitxer Txt";
             this.buttonReadTxt.UseVisualStyleBackColor = true;
             this.buttonReadTxt.Click += new System.EventHandler(this.buttonReadTxt_Click);
             // 
@@ -69,7 +69,7 @@
             this.buttonReadJson.Name = "buttonReadJson";
             this.buttonReadJson.Size = new System.Drawing.Size(73, 45);
             this.buttonReadJson.TabIndex = 2;
-            this.buttonReadJson.Text = "Read From Json File";
+            this.buttonReadJson.Text = "Llegir del fitxer Json";
             this.buttonReadJson.UseVisualStyleBackColor = true;
             this.buttonReadJson.Click += new System.EventHandler(this.buttonReadJson_Click);
             // 
@@ -79,7 +79,7 @@
             this.buttonReadXml.Name = "buttonReadXml";
             this.buttonReadXml.Size = new System.Drawing.Size(73, 45);
             this.buttonReadXml.TabIndex = 3;
-            this.buttonReadXml.Text = "Read From Xml File";
+            this.buttonReadXml.Text = "Llegir del fitxer Xml";
             this.buttonReadXml.UseVisualStyleBackColor = true;
             this.buttonReadXml.Click += new System.EventHandler(this.buttonReadXml_Click);
             // 
@@ -91,7 +91,7 @@
             this.labelBuscartext.Name = "labelBuscartext";
             this.labelBuscartext.Size = new System.Drawing.Size(72, 13);
             this.labelBuscartext.TabIndex = 23;
-            this.labelBuscartext.Text = "Buscar por:";
+            this.labelBuscartext.Text = "Buscar per:";
             // 
             // buttonBusquedaGeneral
             // 
@@ -99,7 +99,7 @@
             this.buttonBusquedaGeneral.Name = "buttonBusquedaGeneral";
             this.buttonBusquedaGeneral.Size = new System.Drawing.Size(100, 23);
             this.buttonBusquedaGeneral.TabIndex = 25;
-            this.buttonBusquedaGeneral.Text = "Search";
+            this.buttonBusquedaGeneral.Text = "Buscar";
             this.buttonBusquedaGeneral.UseVisualStyleBackColor = true;
             this.buttonBusquedaGeneral.Click += new System.EventHandler(this.buttonBusquedaGeneral_Click);
             // 
@@ -186,7 +186,7 @@
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(687, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(512, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -194,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 297);
+            this.ClientSize = new System.Drawing.Size(512, 281);
             this.Controls.Add(this.radioButtonApellido);
             this.Controls.Add(this.radioButtonEdad);
             this.Controls.Add(this.radioButtonNombre);

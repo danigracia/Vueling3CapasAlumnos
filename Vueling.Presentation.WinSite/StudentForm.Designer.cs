@@ -42,8 +42,10 @@
             this.textBoxFechaNacimiento = new System.Windows.Forms.TextBox();
             this.buttonJson = new System.Windows.Forms.Button();
             this.buttonXml = new System.Windows.Forms.Button();
-            this.buttonToList = new System.Windows.Forms.Button();
             this.cbLanguages = new System.Windows.Forms.ComboBox();
+            this.buttonGuardar = new System.Windows.Forms.Button();
+            this.labelFormatAGuardar = new System.Windows.Forms.Label();
+            this.labelFormat = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonTxt
@@ -117,13 +119,6 @@
             this.buttonXml.UseVisualStyleBackColor = true;
             this.buttonXml.Click += new System.EventHandler(this.buttonXml_Click);
             // 
-            // buttonToList
-            // 
-            resources.ApplyResources(this.buttonToList, "buttonToList");
-            this.buttonToList.Name = "buttonToList";
-            this.buttonToList.UseVisualStyleBackColor = true;
-            this.buttonToList.Click += new System.EventHandler(this.buttonToList_Click);
-            // 
             // cbLanguages
             // 
             this.cbLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -136,12 +131,31 @@
             this.cbLanguages.Name = "cbLanguages";
             this.cbLanguages.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // buttonGuardar
+            // 
+            resources.ApplyResources(this.buttonGuardar, "buttonGuardar");
+            this.buttonGuardar.Name = "buttonGuardar";
+            this.buttonGuardar.UseVisualStyleBackColor = true;
+            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
+            // 
+            // labelFormatAGuardar
+            // 
+            resources.ApplyResources(this.labelFormatAGuardar, "labelFormatAGuardar");
+            this.labelFormatAGuardar.Name = "labelFormatAGuardar";
+            // 
+            // labelFormat
+            // 
+            resources.ApplyResources(this.labelFormat, "labelFormat");
+            this.labelFormat.Name = "labelFormat";
+            // 
             // StudentForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelFormat);
+            this.Controls.Add(this.labelFormatAGuardar);
+            this.Controls.Add(this.buttonGuardar);
             this.Controls.Add(this.cbLanguages);
-            this.Controls.Add(this.buttonToList);
             this.Controls.Add(this.buttonXml);
             this.Controls.Add(this.buttonJson);
             this.Controls.Add(this.textBoxFechaNacimiento);
@@ -176,8 +190,10 @@
         private System.Windows.Forms.TextBox textBoxFechaNacimiento;
         private System.Windows.Forms.Button buttonJson;
         private System.Windows.Forms.Button buttonXml;
-        private System.Windows.Forms.Button buttonToList;
         private System.Windows.Forms.ComboBox cbLanguages;
+        private System.Windows.Forms.Button buttonGuardar;
+        private System.Windows.Forms.Label labelFormatAGuardar;
+        private System.Windows.Forms.Label labelFormat;
     }
 }
 
