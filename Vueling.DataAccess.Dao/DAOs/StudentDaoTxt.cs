@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.CommonResources;
 using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 
@@ -14,7 +15,7 @@ namespace Vueling.DataAccess.Dao
     public class StudentDaoTxt : IStudentDao
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private Logger logger = new Logger();
+        private readonly Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".txt";
 
         private Student readstudent;
@@ -24,7 +25,7 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             try
             {
@@ -37,14 +38,14 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
             return studentread;
         }
 
         private void SetStudent(Student student, string path)   
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             try
             {
                     if (!File.Exists(path))
@@ -107,15 +108,14 @@ namespace Vueling.DataAccess.Dao
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
         }
 
         private Student GetStudentByGuid(Guid studentguid, string path)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
 
             try
             {              
@@ -179,16 +179,16 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file txt:");
-            log.Info("datebirth:" + readstudent.FechaNacimiento.ToString());
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
 
             return readstudent;
         }
 
         public List<Student> ReadAll()
         {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             liststudents = new List<Student>();
 
             try
@@ -207,7 +207,7 @@ namespace Vueling.DataAccess.Dao
             }
             catch (System.Security.SecurityException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logerg.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (NotSupportedException e)
@@ -250,11 +250,9 @@ namespace Vueling.DataAccess.Dao
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
-            finally
-            {
-                //if ()
-                //
-            }
+
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             return liststudents;
         }
     }

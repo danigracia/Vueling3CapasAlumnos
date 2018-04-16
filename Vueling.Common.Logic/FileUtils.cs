@@ -40,6 +40,7 @@ namespace Vueling.Common.Logic
 
         public static void SetFormat(Config con)
         {
+            string st = CommonResources.ResourceLogger.StartMethod;
             try
             {
                 Environment.SetEnvironmentVariable("Save_Format", con.ToString(), EnvironmentVariableTarget.User);

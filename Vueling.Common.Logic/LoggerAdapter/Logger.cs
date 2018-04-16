@@ -57,6 +57,16 @@ namespace Vueling.Common.Logic.LoggerAdapter
             if (isDebugEnabled)
                 log.Debug(message);
         }
+        public void Debug(Student st)
+        {
+            if (isInfoEnabled)
+            {
+                foreach (PropertyInfo prop in typeof(Student).GetProperties())
+                {
+                    log.Info(st.GetType().ToString() + prop.Name + ": " + prop.GetValue(st));
+                }
+            }
+        }
         public void Warn(string message)
         {
             if (isWarnEnabled)

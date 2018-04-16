@@ -8,6 +8,7 @@ using Vueling.DataAccess.Dao.Factories;
 using Vueling.Common.Logic.Models;
 using Vueling.DataAccess.Dao.Singletons;
 using Vueling.Common.Logic.LoggerAdapter;
+using Vueling.Common.Logic.CommonResources;
 
 namespace Vueling.Business.Logic
 {
@@ -15,22 +16,22 @@ namespace Vueling.Business.Logic
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Logger logger = new Logger();
-        readonly AbstarctFactory FormFac;
+        readonly AbstarctFactory FormatFacory;
         private Config config;
 
         public StudentBL()
         {
-            FormFac = new FormatFactory();
+            FormatFacory = new FormatFactory();
         }
         public void BusinessLogic(Student student)
         {
-            logger.Info("Método " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             config = (Config)Enum.Parse(typeof(Config), student.SavedFormat);
 
             try
             {
-                (FormFac.CreateStudentFormat(config)).Add(this.Complete(student));
+                (FormatFacory.CreateStudentFormat(config)).Add(this.Complete(student));
             }
             catch (ArgumentNullException e)
             {
@@ -42,28 +43,26 @@ namespace Vueling.Business.Logic
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                        " terminado");
         }
 
         public Student Complete(Student student)
         {
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             this.GetAge(student);
             this.HoraRegistro(student);
 
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             return student;
         }
 
         private void GetAge(Student student)
         {
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             try
             {
                 int year = Convert.ToInt32(DateTime.Now.ToString("yyyy")) - Convert.ToInt32(student.FechaNacimiento.ToString("yyyy"));
@@ -86,19 +85,19 @@ namespace Vueling.Business.Logic
                 throw;
             }
 
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
         }
 
         private void HoraRegistro(Student student)
         {
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
 
             student.HoraRegistro = DateTime.Now;
 
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
         }
     }
 }

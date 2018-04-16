@@ -10,6 +10,7 @@ using Vueling.DataAccess.Dao.Factories;
 using System.IO;
 using Vueling.Common.Logic.LoggerAdapter;
 using System.Collections.ObjectModel;
+using Vueling.Common.Logic.CommonResources;
 
 namespace Vueling.Business.Logic.Logics
 {
@@ -29,6 +30,8 @@ namespace Vueling.Business.Logic.Logics
 
         public List<Student> ReadFile(Config con)
         {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             switch (con)
             {
                 case Config.txt:
@@ -40,6 +43,9 @@ namespace Vueling.Business.Logic.Logics
                 default:
                     return (formfact.CreateStudentFormat(con)).ReadAll();
             }
+
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
         }
 
         public void FillSingletons()
@@ -50,6 +56,8 @@ namespace Vueling.Business.Logic.Logics
 
         public List<Student> Buscar(Config format, string textabuscar, string propertyabuscar)
         {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             try
             {
                 switch (format)
@@ -71,6 +79,8 @@ namespace Vueling.Business.Logic.Logics
                 IEnumerable<Student> liststudentfound = from st in liststudent
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
                                              select st;
+
+                logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 return liststudentfound.ToList<Student>();
             }

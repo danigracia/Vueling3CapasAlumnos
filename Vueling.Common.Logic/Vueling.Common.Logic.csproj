@@ -64,6 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonResources\ResourceLogger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceLogger.resx</DependentUpon>
+    </Compile>
     <Compile Include="LanguageUtils.cs" />
     <Compile Include="LoggerAdapter\ITargetAdapterForLogger.cs" />
     <Compile Include="Models\Config_enum.cs" />
@@ -75,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonResources\ResourceLogger.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceLogger.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

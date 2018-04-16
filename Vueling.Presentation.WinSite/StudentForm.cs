@@ -17,6 +17,7 @@ using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Presentation.WinSite.Resources;
 using System.Globalization;
 using System.Threading;
+using Vueling.Common.Logic.CommonResources;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -105,7 +106,7 @@ namespace Vueling.Presentation.WinSite
         {
             try
             {
-                logger.Debug("Metodo SaveStudentData iniciado");
+                logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 student.Nombre = this.textBoxNombre.Text;
                 student.IdAlumno = Convert.ToInt32(this.textBoxId.Text);
@@ -113,10 +114,9 @@ namespace Vueling.Presentation.WinSite
                 student.FechaNacimiento = Convert.ToDateTime(this.textBoxFechaNacimiento.Text);
                 student.Dni = this.textBoxDni.Text;
                 student.Student_Guid = Guid.NewGuid();
-                //student.SavedFormat = ((Button)sender).Text.ToLower();
                 student.SavedFormat = Environment.GetEnvironmentVariable("Save_Format", EnvironmentVariableTarget.User);
 
-                logger.Debug("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+                logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             catch (FormatException e)
             {
@@ -150,7 +150,22 @@ namespace Vueling.Presentation.WinSite
         
         public void ChangeFormatLabel()
         {
-            labelFormat.Text = Environment.GetEnvironmentVariable("Save_Format", EnvironmentVariableTarget.User).ToString();
+            try
+            {
+                labelFormat.Text = Environment.GetEnvironmentVariable("Save_Format", EnvironmentVariableTarget.User).ToString();
+            }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
+            catch (System.Security.SecurityException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
         }
     }
 }

@@ -66,7 +66,7 @@
   <ItemGroup>
     <Build Include="Storage\FLyWayDB_FG1.sql" />
     <Build Include="Storage\FileStreamGroup1.sql" />
-    <Build Include="Migrations\V1__Init_FlyWay_DB.sql" />
-    <Build Include="Migrations\V2__Inserts_Initial_Values.sql" />
+    <None Include="Migrations\V1__Init_FlyWay_DB.sql" />
+    <None Include="Migrations\V2__Inserts_Initial_Values.sql" />
   </ItemGroup>
 </Project>
