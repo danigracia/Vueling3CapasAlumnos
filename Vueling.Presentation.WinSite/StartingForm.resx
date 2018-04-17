@@ -121,6 +121,18 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="llistaDAlumnesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="llistaDAlumnesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Llista d'Alumnes</value>
+  </data>
+  <data name="registrarNouAlumneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="registrarNouAlumneToolStripMenuItem.Text" xml:space="preserve">
+    <value>Registrar nou Alumne</value>
+  </data>
   <data name="iniciToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
   </data>
@@ -156,6 +168,24 @@
   </data>
   <data name="formatDeLarxiuToolStripMenuItem.Text" xml:space="preserve">
     <value>Format de l'arxiu</value>
+  </data>
+  <data name="catalàToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 22</value>
+  </data>
+  <data name="catalàToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Català</value>
+  </data>
+  <data name="anglèsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 22</value>
+  </data>
+  <data name="anglèsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Anglés</value>
+  </data>
+  <data name="castellàToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 22</value>
+  </data>
+  <data name="castellàToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Castellà</value>
   </data>
   <data name="idiomaToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -193,36 +223,6 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="llistaDAlumnesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="llistaDAlumnesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Llista d'Alumnes</value>
-  </data>
-  <data name="registrarNouAlumneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="registrarNouAlumneToolStripMenuItem.Text" xml:space="preserve">
-    <value>Registrar nou Alumne</value>
-  </data>
-  <data name="catalàToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 22</value>
-  </data>
-  <data name="catalàToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Català</value>
-  </data>
-  <data name="anglèsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 22</value>
-  </data>
-  <data name="anglèsToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Anglés</value>
-  </data>
-  <data name="castellàToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 22</value>
-  </data>
-  <data name="castellàToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Castellà</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

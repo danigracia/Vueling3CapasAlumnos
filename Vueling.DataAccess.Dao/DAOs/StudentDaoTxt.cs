@@ -14,6 +14,12 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoTxt : IStudentDao
     {
+        // Eliminar literals
+
+        //Afegim al fitxer (SETSTUDENT)
+        //Llegim del fitxer (GETSTUDENTBYGUID)
+        //Llegim una llista del fitxer (READALL)
+
         private readonly Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".txt";
 

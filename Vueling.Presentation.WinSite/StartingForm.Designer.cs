@@ -118,6 +118,7 @@
             this.sqlToolStripMenuItem1.Name = "sqlToolStripMenuItem1";
             resources.ApplyResources(this.sqlToolStripMenuItem1, "sqlToolStripMenuItem1");
             this.sqlToolStripMenuItem1.Tag = "sql";
+            this.sqlToolStripMenuItem1.Click += new System.EventHandler(this.sqlToolStripMenuItem1_Click);
             // 
             // idiomaToolStripMenuItem1
             // 

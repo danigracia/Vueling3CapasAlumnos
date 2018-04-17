@@ -12,10 +12,11 @@ using Vueling.Common.Logic.Models;
 using System.Data.SqlClient;
 using System.Data;
 using Vueling.DataAccess.Dao.Interfaces;
+using Microsoft.SqlServer.Server;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class StudentDaoSql : IStudentDao, IDelete
+    public class StudentDaoClr : IStudentDao, IDelete
     {
         private readonly Logger logger = new Logger();
 
@@ -35,6 +36,7 @@ namespace Vueling.DataAccess.Dao
 
             string sql = "INSERT INTO dbo.Students (Nombre, Apellidos, Dni, Edad, FechaNacimiento, HoraRegistro, Student_Guid)" +
                 " VALUES (@Nombre, @Apellidos, @Dni, @Edad, @FechaNacimiento, @HoraRegistro, @Guid)";
+
             try
             {
                 using (conn = new SqlConnection(conectionstring))
@@ -72,7 +74,7 @@ namespace Vueling.DataAccess.Dao
             return studentread;
         }
 
-        private Student SelectStudentForAddMethod(SqlConnection conn,  Guid studentguid)
+        private Student SelectStudentForAddMethod(SqlConnection conn, Guid studentguid)
         {
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -112,9 +114,12 @@ namespace Vueling.DataAccess.Dao
             return st;
         }
 
-        public List<Student> ReadAll()
+        [SqlProcedure()]
+        public void ReadAll(out List<Student> liststudents)
         {
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            // public static void PriceSum(out SqlInt32 value)
 
             liststudents = new List<Student>();
             string sql = "SELECT * FROM dbo.Students";
@@ -142,7 +147,6 @@ namespace Vueling.DataAccess.Dao
 
                                 liststudents.Add(st);
                             }
-
                         }
                     }
                 }
@@ -154,8 +158,6 @@ namespace Vueling.DataAccess.Dao
             }
 
             logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-            return liststudents;
         }
 
         public int DeleteById(int id)

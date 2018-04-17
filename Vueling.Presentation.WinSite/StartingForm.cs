@@ -16,6 +16,9 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class StartingForm : Form
     {
+
+
+
         Form childform;
 
         public StartingForm()
@@ -79,7 +82,6 @@ namespace Vueling.Presentation.WinSite
             FileUtils.SetFormat(Config.txt);
             this.ChangeFormatLabelStudentForm();
         }
-
         private void jsonToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FileUtils.SetFormat(Config.json);
@@ -91,6 +93,11 @@ namespace Vueling.Presentation.WinSite
             FileUtils.SetFormat(Config.xml);
             this.ChangeFormatLabelStudentForm();
         }
+        private void sqlToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FileUtils.SetFormat(Config.sql);
+            this.ChangeFormatLabelStudentForm();
+        }
         #endregion
 
         private void ChangeFormatLabelStudentForm()
@@ -98,5 +105,7 @@ namespace Vueling.Presentation.WinSite
             //Millor amb events personalitzats pero no se fer-ho :P
             if (childform != null && childform.GetType() == typeof(StudentForm)) ((StudentForm)childform).ChangeFormatLabel();
         }
+
+
     }
 }

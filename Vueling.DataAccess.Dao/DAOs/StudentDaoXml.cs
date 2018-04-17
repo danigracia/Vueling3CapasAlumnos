@@ -17,6 +17,7 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoXml : IStudentDao
     {
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string path = FileUtils.GetPath() + ".xml";
         private readonly Logger logger = new Logger();

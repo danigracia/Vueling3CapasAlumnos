@@ -80,6 +80,11 @@ namespace Vueling.Presentation.WinSite
             format = Config.xml;
             this.FillDataGrid(Config.xml);
         }
+        private void buttonReadSql_Click(object sender, EventArgs e)
+        {
+            format = Config.sql;
+            this.FillDataGrid(Config.sql);
+        }
         #endregion
 
         private void FillDataGrid(Config format)
@@ -137,5 +142,7 @@ namespace Vueling.Presentation.WinSite
             buttonReadXml.Text = StringResources.labelReadxml;
             this.Text = StringResources.FormName;
         }
+
+
     }
 }
