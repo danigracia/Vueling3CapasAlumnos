@@ -14,7 +14,6 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoTxt : IStudentDao
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".txt";
 
@@ -207,47 +206,47 @@ namespace Vueling.DataAccess.Dao
             }
             catch (System.Security.SecurityException e)
             {
-                logerg.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (NotSupportedException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (FileNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (UnauthorizedAccessException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (DirectoryNotFoundException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (PathTooLongException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (ArgumentNullException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (ArgumentException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
             catch (IOException e)
             {
-                log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
+                logger.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
 

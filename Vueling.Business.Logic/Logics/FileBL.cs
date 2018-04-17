@@ -43,9 +43,6 @@ namespace Vueling.Business.Logic.Logics
                 default:
                     return (formfact.CreateStudentFormat(con)).ReadAll();
             }
-
-            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
         }
 
         public void FillSingletons()
@@ -69,7 +66,7 @@ namespace Vueling.Business.Logic.Logics
                         liststudent = sinjson.LoadAll();
                         break;
                     case Config.xml:
-                        liststudent = sinjson.LoadAll();
+                        liststudent = sinxml.LoadAll();
                         break;
                     default:
                         liststudent = this.ReadFile(format);

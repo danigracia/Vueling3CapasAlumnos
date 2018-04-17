@@ -19,6 +19,7 @@ namespace Vueling.Common.Logic
         {
             try
             {
+                //return Environment.GetEnvironmentVariable("FolderToSave", EnvironmentVariableTarget.User) + @"\" + typeof(Student).Name;
                 return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + typeof(Student).Name;
             }
             catch (AccessViolationException)

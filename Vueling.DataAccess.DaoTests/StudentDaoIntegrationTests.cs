@@ -26,7 +26,6 @@ namespace Vueling.DataAccess.Dao.Tests
             log4net.Config.XmlConfigurator.Configure();
         }
 
-
         [TestInitialize]
         public void Initialize()
         {
