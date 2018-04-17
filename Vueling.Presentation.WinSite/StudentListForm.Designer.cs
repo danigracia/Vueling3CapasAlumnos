@@ -42,6 +42,7 @@
             this.radioButtonDni = new System.Windows.Forms.RadioButton();
             this.radioButtonGuid = new System.Windows.Forms.RadioButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.buttonReadSql = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,11 +191,22 @@
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // buttonReadSql
+            // 
+            this.buttonReadSql.Location = new System.Drawing.Point(432, 78);
+            this.buttonReadSql.Name = "buttonReadSql";
+            this.buttonReadSql.Size = new System.Drawing.Size(73, 45);
+            this.buttonReadSql.TabIndex = 28;
+            this.buttonReadSql.Text = "Llegir de la Base de Dades";
+            this.buttonReadSql.UseVisualStyleBackColor = true;
+            this.buttonReadSql.Click += new System.EventHandler(this.buttonReadSql_Click);
+            // 
             // StudentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 281);
+            this.Controls.Add(this.buttonReadSql);
             this.Controls.Add(this.radioButtonApellido);
             this.Controls.Add(this.radioButtonEdad);
             this.Controls.Add(this.radioButtonNombre);
@@ -235,5 +247,6 @@
         private System.Windows.Forms.RadioButton radioButtonNombre;
         private System.Windows.Forms.RadioButton radioButtonId;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Button buttonReadSql;
     }
 }

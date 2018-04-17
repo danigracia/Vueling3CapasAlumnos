@@ -48,6 +48,8 @@ namespace Vueling.Business.Logic.Logics
                     return sinjson.LoadAll();
                 case Config.xml:
                     return sinxml.LoadAll();
+                case Config.sql:
+                    return (formfact.CreateStudentFormat(con)).ReadAll();
                 default:
                     return (formfact.CreateStudentFormat(con)).ReadAll();
             }

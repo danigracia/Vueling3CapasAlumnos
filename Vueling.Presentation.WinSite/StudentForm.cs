@@ -109,7 +109,7 @@ namespace Vueling.Presentation.WinSite
                 logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 student.Nombre = this.textBoxNombre.Text;
-                student.IdAlumno = Convert.ToInt32(this.textBoxId.Text);
+                if(textBoxId.Text != "") student.IdAlumno = Convert.ToInt32(this.textBoxId.Text);
                 student.Apellido = this.textBoxApellidos.Text;
                 student.FechaNacimiento = Convert.ToDateTime(this.textBoxFechaNacimiento.Text);
                 student.Dni = this.textBoxDni.Text;

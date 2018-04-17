@@ -10,6 +10,7 @@ using Vueling.Common.Logic.CommonResources;
 using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Vueling.DataAccess.Dao
 {
@@ -31,8 +32,10 @@ namespace Vueling.DataAccess.Dao
         {
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            string sql = "INSERT INTO dbo.StudentDB (Nombre, Apellidos, Dni, Edad, FechaNacimiento, HoraRegistro, Student_Guid)" +
+            string sql = "INSERT INTO dbo.Students (Nombre, Apellidos, Dni, Edad, FechaNacimiento, HoraRegistro, Student_Guid)" +
                 " VALUES (@Nombre, @Apellidos, @Dni, @Edad, @FechaNacimiento, @HoraRegistro, @Guid)";
+
+            int numfiles;
             try
             {
                 using (conn = new SqlConnection(conectionstring))
@@ -49,12 +52,13 @@ namespace Vueling.DataAccess.Dao
                         cmd.Parameters.AddWithValue("@FechaNacimiento", student.FechaNacimiento);
                         cmd.Parameters.AddWithValue("@HoraRegistro", student.HoraRegistro);
 
-                        cmd.ExecuteNonQuery();
+                        //cmd.Prepare();
+
+                        numfiles = cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
                         cmd.CommandText = "SELECT @@IDENTITY";
 
                         //studentread = SelectStudentByGuid(student.Student_Guid);
-                        conn.Close();
                     }
                 }
             }
@@ -93,7 +97,7 @@ namespace Vueling.DataAccess.Dao
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             liststudents = new List<Student>();
-            string sql = "SELECT * FROM Students";
+            string sql = "SELECT * FROM dbo.Students";
 
             try
             {
@@ -101,6 +105,7 @@ namespace Vueling.DataAccess.Dao
                 {
                     using (cmd = new SqlCommand(sql, conn))
                     {
+                        conn.Open();
                         using (SqlDataReader rdr = cmd.ExecuteReader())
                         {
                             while (rdr.Read())
@@ -113,7 +118,7 @@ namespace Vueling.DataAccess.Dao
                                 st.Dni = rdr["Dni"].ToString();
                                 st.FechaNacimiento = Convert.ToDateTime(rdr["FechaNacimiento"]);
                                 st.HoraRegistro = Convert.ToDateTime(rdr["HoraRegistro"]);
-                                st.Student_Guid = (Guid)rdr["Student_Guid"];
+                                st.Student_Guid = rdr.GetGuid(rdr.GetOrdinal("Student_Guid"));
 
                                 liststudents.Add(st);
                             }

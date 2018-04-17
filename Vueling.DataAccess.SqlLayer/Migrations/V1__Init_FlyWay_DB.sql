@@ -2,9 +2,9 @@ USE StudentDB
 -- Crear nueva Tabla llamada 'Customers' con Chema 'dbo'
 -- La tabla si existe la borramos
 
---IF OBJECT_ID('dbo.Students', 'U') IS NOT NULL
---DROP TABLE dbo.Students
---GO
+IF OBJECT_ID('dbo.Students', 'U') IS NOT NULL
+DROP TABLE dbo.Students
+GO
 
 -- Creamos la Tabla
 CREATE TABLE dbo.Students
@@ -14,8 +14,8 @@ CREATE TABLE dbo.Students
    Apellidos       [NVARCHAR](50)  NOT NULL,
    Dni       [NVARCHAR](50)  NOT NULL,
    Edad			[INT] NOT NULL,
-   FechaNacimiento		[DATE] NOT NULL,
+   FechaNacimiento		[DATETIME] NOT NULL,
    HoraRegistro		[DATETIME] NOT NULL,
-   Student_Guid				[NVARCHAR](50) NOT NULL
+   Student_Guid				[UNIQUEIDENTIFIER] NOT NULL
 );
 GO
