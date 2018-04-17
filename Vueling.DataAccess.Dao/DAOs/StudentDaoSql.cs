@@ -16,25 +16,26 @@ namespace Vueling.DataAccess.Dao
     public class StudentDaoSql : IStudentDao
     {
         private readonly Logger logger = new Logger();
-        private readonly string path = "s"; //sql connexion
+
+        //private readonly string conectionstring = "s"; //sql connexion string llegir de variable d'entorn codificada
+        private readonly string conectionstring = "Data Source = AM-BCN-POR-378; Initial Catalog = StudentDB;" +
+            "Trusted_Connection=yes; Integrated Security = SSPI";
+
         private SqlCommand cmd;
         private SqlConnection conn;
 
-        private Student readstudent;
         private Student studentread;
         private List<Student> liststudents;
-        private string[] linesplit;
 
         public Student Add(Student student)
         {
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            string sql = "INSERT INTO databse";
-            Student studentread;
-
+            string sql = "INSERT INTO dbo.StudentDB (Nombre, Apellidos, Dni, Edad, FechaNacimiento, HoraRegistro, Student_Guid)" +
+                " VALUES (@Nombre, @Apellidos, @Dni, @Edad, @FechaNacimiento, @HoraRegistro, @Guid)";
             try
             {
-                using (conn = new SqlConnection("conectionstring con una variable de entorno encriptada"))
+                using (conn = new SqlConnection(conectionstring))
                 {
                     using (cmd = new SqlCommand(sql, conn))
                     {
@@ -52,7 +53,7 @@ namespace Vueling.DataAccess.Dao
                         cmd.Parameters.Clear();
                         cmd.CommandText = "SELECT @@IDENTITY";
 
-                        studentread = SelectStudentByGuid(student.Student_Guid);
+                        //studentread = SelectStudentByGuid(student.Student_Guid);
                         conn.Close();
                     }
                 }
@@ -63,8 +64,9 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            return studentread;
             logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            return studentread;
         }
 
         private Student SelectStudentByGuid(Guid studentguid)
@@ -80,14 +82,10 @@ namespace Vueling.DataAccess.Dao
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
-            finally
-            {
-                //Close connexion
-            }
 
             logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            return readstudent;
+            return studentread;
         }
 
         public List<Student> ReadAll()
@@ -99,7 +97,7 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-                using (conn = new SqlConnection("conectionstring con una variable de entorno encriptada"))
+                using (conn = new SqlConnection(conectionstring))
                 {
                     using (cmd = new SqlCommand(sql, conn))
                     {

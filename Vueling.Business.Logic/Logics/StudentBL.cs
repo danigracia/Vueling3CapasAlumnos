@@ -21,7 +21,6 @@ namespace Vueling.Business.Logic
             // Crear objecte StudentDao__ en funció del format (CREATEDTUDENTFORMAT)
             // Afegim l'alumne utilitzant el mètode Add "sobreescrit" per a cada format (ADD)
         
-
         private readonly Logger logger = new Logger();
         readonly AbstarctFactory FormatFacory;
         private Config config;

@@ -65,23 +65,6 @@ namespace Vueling.Business.Logic.Logics
 
             try
             {
-                // Aplicar SOLID eliminar switch
-                //switch (format)
-                //{
-                //    case Config.txt:
-                //        liststudent = this.ReadFile(format);
-                //        break;
-                //    case Config.json:
-                //        liststudent = sinjson.LoadAll();
-                //        break;
-                //    case Config.xml:
-                //        liststudent = sinxml.LoadAll();
-                //        break;
-                //    default:
-                //        liststudent = this.ReadFile(format);
-                //        break;
-                //}
-
                 liststudent = this.ReadFile(format);
 
                 IEnumerable<Student> liststudentfound = from st in liststudent

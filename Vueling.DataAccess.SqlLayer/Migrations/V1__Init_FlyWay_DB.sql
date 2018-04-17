@@ -1,4 +1,4 @@
-USE StudentBD 
+USE StudentDB
 -- Crear nueva Tabla llamada 'Customers' con Chema 'dbo'
 -- La tabla si existe la borramos
 
