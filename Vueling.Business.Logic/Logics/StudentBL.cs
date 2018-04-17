@@ -14,7 +14,14 @@ namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // Canviar els config per enumFormat
+
+        // Fem la logica de Buisness principal
+            // Completem l'alumne (COMPLETE) calculant edat (GETAGE) i horaregitre (HORAREGISTRE)
+            // Crear objecte StudentDao__ en funció del format (CREATEDTUDENTFORMAT)
+            // Afegim l'alumne utilitzant el mètode Add "sobreescrit" per a cada format (ADD)
+        
+
         private readonly Logger logger = new Logger();
         readonly AbstarctFactory FormatFacory;
         private Config config;

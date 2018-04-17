@@ -13,6 +13,13 @@ namespace Vueling.Common.Logic
 {
     public class FileUtils
     {
+
+        //Mirar lo del Path amb variables d'entorn (potser posar només el nom del fitxer en una variable d'entorn, pero la carpeta no)
+        // Eliminar literals del logg
+
+        // diem quin és el path (GETPATH)
+        // Guardem el format a la variable d'entorn del format (SETFORMAT)
+
         private static readonly Logger logger = new Logger();
 
         public static string GetPath()
@@ -39,9 +46,9 @@ namespace Vueling.Common.Logic
             }
         }
 
+        // posar loggs
         public static void SetFormat(Config con)
         {
-            string st = CommonResources.ResourceLogger.StartMethod;
             try
             {
                 Environment.SetEnvironmentVariable("Save_Format", con.ToString(), EnvironmentVariableTarget.User);

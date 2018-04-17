@@ -11,6 +11,11 @@ namespace Vueling.Common.Logic.LoggerAdapter
 {
     public class Logger : ITargetAdapterForLogger
     {
+        // SERILOOGGG
+
+        // Patro adapter, configurem el nostre propi logger
+
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private bool isInfoEnabled = true;
         private bool isWarnEnabled = true;

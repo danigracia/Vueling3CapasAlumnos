@@ -11,7 +11,7 @@ namespace Vueling.Common.Logic
 {
     public class LanguageUtils
     {
-
+        // posar loggs
         public static void SetLanguaje()
         {
             //CultureInfo culture = new CultureInfo(Environment.GetEnvironmentVariable("Student_Languaje", EnvironmentVariableTarget.User));

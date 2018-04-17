@@ -15,6 +15,12 @@ namespace Vueling.DataAccess.Dao
 {
     public class StudentDaoJson : IStudentDao
     {
+        // Eliminar literals
+
+        //Afegim al fitxer (SETSTUDENT)
+        //Llegim del fitxer (GETSTUDENTBYGUID)
+        //Llegim una llista del fitxer (READALL)
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".json";

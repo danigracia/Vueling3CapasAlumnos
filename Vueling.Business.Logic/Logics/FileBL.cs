@@ -16,6 +16,13 @@ namespace Vueling.Business.Logic.Logics
 {
     public class FileBL : IFileBL
     {
+        // Refactoritzar con SOLID (eliminar els switchs)
+        // Colocar try catch a ReadFile
+
+
+        // Llegim   del fitxer txt, o dels singletons json i xml   una llista del fitxer (READFILE)
+        // Busquem al fitxer corresponent amb una query sobre les llistes creades per ReadFile (BUSCAR)
+
         private readonly AbstarctFactory formfact;
         private static SingletonJson sinjson;
         private static SingletonXml sinxml;
@@ -32,6 +39,7 @@ namespace Vueling.Business.Logic.Logics
         {
             logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
+            // Aplicar SOLID eliminar switch
             switch (con)
             {
                 case Config.txt:
@@ -57,21 +65,24 @@ namespace Vueling.Business.Logic.Logics
 
             try
             {
-                switch (format)
-                {
-                    case Config.txt:
-                        liststudent = this.ReadFile(format);
-                        break;
-                    case Config.json:
-                        liststudent = sinjson.LoadAll();
-                        break;
-                    case Config.xml:
-                        liststudent = sinxml.LoadAll();
-                        break;
-                    default:
-                        liststudent = this.ReadFile(format);
-                        break;
-                }
+                // Aplicar SOLID eliminar switch
+                //switch (format)
+                //{
+                //    case Config.txt:
+                //        liststudent = this.ReadFile(format);
+                //        break;
+                //    case Config.json:
+                //        liststudent = sinjson.LoadAll();
+                //        break;
+                //    case Config.xml:
+                //        liststudent = sinxml.LoadAll();
+                //        break;
+                //    default:
+                //        liststudent = this.ReadFile(format);
+                //        break;
+                //}
+
+                liststudent = this.ReadFile(format);
 
                 IEnumerable<Student> liststudentfound = from st in liststudent
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
