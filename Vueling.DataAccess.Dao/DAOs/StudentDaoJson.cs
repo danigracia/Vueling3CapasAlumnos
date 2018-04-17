@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.CommonResources;
+using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 
 namespace Vueling.DataAccess.Dao
@@ -14,6 +16,7 @@ namespace Vueling.DataAccess.Dao
     public class StudentDaoJson : IStudentDao
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly Logger logger = new Logger();
         private readonly string path = FileUtils.GetPath() + ".json";
 
         List<Student> liststudents;
@@ -21,7 +24,8 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             Student studentread;
             try
             {
@@ -34,14 +38,14 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             return studentread;
         }
 
         private void SetStudent(Student student, string path)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             try
             {
@@ -101,14 +105,13 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
         }
 
         private Student GetStudentByGuid(Guid studentguid, string path)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             studentread = new Student();
             try
@@ -165,15 +168,15 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file json:");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             return studentread;
         }
 
         public List<Student> ReadAll()
         {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             liststudents = new List<Student>();
 
             try
@@ -181,8 +184,6 @@ namespace Vueling.DataAccess.Dao
                 if (File.Exists(path))
                 {
                     liststudents = JsonConvert.DeserializeObject<List<Student>>(File.ReadAllText(path));
-
-                    log.Info("Datos del student leido del file json:");
                 }
             }
             catch (System.Security.SecurityException e)
@@ -230,9 +231,8 @@ namespace Vueling.DataAccess.Dao
                 log.Error("Error en el metodo GetStudentFromJsonByGuid()" + e.Message);
                 throw;
             }
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
             return liststudents;
         }
     }

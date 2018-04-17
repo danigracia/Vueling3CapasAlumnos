@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,9 +15,14 @@ namespace Vueling.Presentation.WinSite
         [STAThread]
         static void Main()
         {
+            CultureInfo culture = new CultureInfo(Environment.GetEnvironmentVariable("Student_Languaje", EnvironmentVariableTarget.User));
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StudentForm());
+            Application.Run(new StartingForm());
         }
     }
 }

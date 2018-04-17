@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.CommonResources;
 using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Common.Logic.Models;
 
@@ -26,9 +27,8 @@ namespace Vueling.DataAccess.Dao
 
         public Student Add(Student student)
         {
-            logger.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
-            
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             try
             {
                 this.SetStudent(student, path);
@@ -40,23 +40,17 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            #region logs
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            foreach (PropertyInfo prop in typeof(Student).GetProperties())
-            {
-                log.Info("studentread." + prop.Name + ": " + prop.GetValue(studentread) + ", student." + prop.Name + ": " + prop.GetValue(student));
-                Console.WriteLine(prop.Name);
-            }
-            #endregion
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            logger.Debug(studentread);
+            logger.Debug(student);
 
             return studentread;
         }
 
         private void SetStudent(Student student, string path)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             liststudents = new List<Student>();
 
             try
@@ -127,15 +121,14 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
         }
 
         private Student GetStudentByGuid(Guid studentguid, string path)
         {
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " iniciado");
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
 
             alllines = new List<Student>();
             studentread = new Student();
@@ -197,15 +190,16 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
-            log.Info("Datos del student leido del file xml:");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
 
             return studentread;
         }
 
         public List<Student> ReadAll()
         {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             liststudents = new List<Student>();
 
             try
@@ -263,10 +257,8 @@ namespace Vueling.DataAccess.Dao
                 throw;
             }
 
-            log.Info("Datos del student leido del file xml:");
+            logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name +
-                " terminado");
             return liststudents;
         }
     }

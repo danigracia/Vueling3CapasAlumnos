@@ -9,23 +9,40 @@ using Vueling.DataAccess.Dao.Singletons;
 using Vueling.DataAccess.Dao.Factories;
 using System.IO;
 using Vueling.Common.Logic.LoggerAdapter;
+using System.Collections.ObjectModel;
+using Vueling.Common.Logic.CommonResources;
 
 namespace Vueling.Business.Logic.Logics
 {
     public class FileBL : IFileBL
     {
-        private AbstarctFactory formfact;
-        private SingletonJson sinjson;
-        private SingletonXml sinxml;
+        private readonly AbstarctFactory formfact;
+        private static SingletonJson sinjson;
+        private static SingletonXml sinxml;
         private List<Student> liststudent;
-        private List<Student> liststudentfound;
 
         private readonly Logger logger = new Logger();
 
-        public List<Student> ReadFile(Config con)
+        public FileBL()
         {
             formfact = new FormatFactory();
-            return (formfact.CreateStudentFormat(con)).ReadAll();
+        }
+
+        public List<Student> ReadFile(Config con)
+        {
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            switch (con)
+            {
+                case Config.txt:
+                    return (formfact.CreateStudentFormat(con)).ReadAll();
+                case Config.json:
+                    return sinjson.LoadAll();
+                case Config.xml:
+                    return sinxml.LoadAll();
+                default:
+                    return (formfact.CreateStudentFormat(con)).ReadAll();
+            }
         }
 
         public void FillSingletons()
@@ -36,33 +53,49 @@ namespace Vueling.Business.Logic.Logics
 
         public List<Student> Buscar(Config format, string textabuscar, string propertyabuscar)
         {
-            formfact = new FormatFactory();
+            logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             try
             {
-                liststudent = this.ReadFile(format);
-                liststudentfound = new List<Student>();
+                switch (format)
+                {
+                    case Config.txt:
+                        liststudent = this.ReadFile(format);
+                        break;
+                    case Config.json:
+                        liststudent = sinjson.LoadAll();
+                        break;
+                    case Config.xml:
+                        liststudent = sinxml.LoadAll();
+                        break;
+                    default:
+                        liststudent = this.ReadFile(format);
+                        break;
+                }
 
-                IEnumerable<Student> query = from st in liststudent
+                IEnumerable<Student> liststudentfound = from st in liststudent
                                              where st.GetType().GetProperty(propertyabuscar).GetValue(st).ToString() == textabuscar
                                              select st;
 
-                foreach (Student student in query)
-                {
-                    liststudentfound.Add(student);
-                }
+                logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+                return liststudentfound.ToList<Student>();
+            }
+            catch (System.Reflection.AmbiguousMatchException e)
+            {
+                logger.Error(e.StackTrace + e.Message);
+                throw;
             }
             catch (ArgumentNullException e)
             {
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 logger.Error(e.StackTrace + e.Message);
                 throw;
             }
-            return liststudentfound;
         }
     }
 }

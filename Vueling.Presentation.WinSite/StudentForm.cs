@@ -17,6 +17,7 @@ using Vueling.Common.Logic.LoggerAdapter;
 using Vueling.Presentation.WinSite.Resources;
 using System.Globalization;
 using System.Threading;
+using Vueling.Common.Logic.CommonResources;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -35,14 +36,17 @@ namespace Vueling.Presentation.WinSite
             studentBL = new StudentBL();
             AplicarIdioma();
 
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
             logger.Warn("Warning de proba");
             log.Warn("Error de proba");
 
+            this.ChangeFormatLabel();
         }
 
-        private void buttonTxt_Click(object sender, EventArgs e)
+        private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            this.SaveStudentData(sender);
+            this.SaveStudentData();
 
             try
             {
@@ -50,13 +54,28 @@ namespace Vueling.Presentation.WinSite
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace + ex.Message);
+                MessageBox.Show(new StringBuilder(ex.StackTrace).Append(ex.Message).ToString());
+            }
+        }
+
+        #region buttons a borrar
+        private void buttonTxt_Click(object sender, EventArgs e)
+        {
+            this.SaveStudentData();
+
+            try
+            {
+                studentBL.BusinessLogic(student);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(new StringBuilder(ex.StackTrace).Append(ex.Message).ToString());
             }
         }
 
         private void buttonJson_Click(object sender, EventArgs e)
         {
-            this.SaveStudentData(sender);
+            this.SaveStudentData();
 
             try
             {
@@ -64,13 +83,13 @@ namespace Vueling.Presentation.WinSite
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace + ex.Message);
+                MessageBox.Show(new StringBuilder(ex.StackTrace).Append(ex.Message).ToString());
             }
         }
 
         private void buttonXml_Click(object sender, EventArgs e)
         {
-            this.SaveStudentData(sender);
+            this.SaveStudentData();
 
             try
             {
@@ -78,51 +97,45 @@ namespace Vueling.Presentation.WinSite
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace + ex.Message);
+                MessageBox.Show(new StringBuilder(ex.StackTrace).Append(ex.Message).ToString());
             }
         }
+        #endregion
 
-        private void SaveStudentData(object sender)
+        private void SaveStudentData()
         {
             try
             {
-                logger.Info("Metodo SaveStudentData iniciado");
+                logger.Debug(ResourceLogger.StartMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
                 student.Nombre = this.textBoxNombre.Text;
                 student.IdAlumno = Convert.ToInt32(this.textBoxId.Text);
                 student.Apellido = this.textBoxApellidos.Text;
                 student.FechaNacimiento = Convert.ToDateTime(this.textBoxFechaNacimiento.Text);
                 student.Dni = this.textBoxDni.Text;
                 student.Student_Guid = Guid.NewGuid();
-                student.SavedFormat = ((Button)sender).Text.ToLower();
-                log.Info("Metodo " + System.Reflection.MethodBase.GetCurrentMethod().Name + " terminado");
+                student.SavedFormat = Environment.GetEnvironmentVariable("Save_Format", EnvironmentVariableTarget.User);
+
+                logger.Debug(ResourceLogger.EndMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             catch (FormatException e)
             {
-                MessageBox.Show(String.Format(e.StackTrace + e.Message));
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
             }
             catch (TargetException e)
             {
-                MessageBox.Show(String.Format(e.StackTrace + e.Message));
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
             }
             catch (OverflowException e)
             {
-                MessageBox.Show(String.Format(e.StackTrace + e.Message));
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
             }
         }
 
-        private void buttonToList_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                this.Hide();
-                StudentListForm studentlist = new StudentListForm();
-                studentlist.ShowDialog();
-
-            }
-            catch (InvalidOperationException inv)
-            {
-                MessageBox.Show(String.Format(inv.StackTrace + inv.Message));
-            }
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedItem.ToString());
+            AplicarIdioma();
         }
 
         public void AplicarIdioma()
@@ -132,14 +145,27 @@ namespace Vueling.Presentation.WinSite
             labelApellido.Text = StringResources.labelApellido;
             labelDni.Text = StringResources.labelDni;
             labelFechaNacimiento.Text = StringResources.labelFechaNacimiento;
-            buttonToList.Text = StringResources.labelListaForm;
             this.Text = StringResources.FormName;
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        
+        public void ChangeFormatLabel()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cbLanguages.SelectedItem.ToString());
-            AplicarIdioma();
+            try
+            {
+                labelFormat.Text = Environment.GetEnvironmentVariable("Save_Format", EnvironmentVariableTarget.User).ToString();
+            }
+            catch (ArgumentNullException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
+            catch (System.Security.SecurityException e)
+            {
+                logger.Error(new StringBuilder(e.StackTrace).Append(e.Message).ToString());
+            }
         }
     }
 }
