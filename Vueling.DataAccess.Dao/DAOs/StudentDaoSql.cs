@@ -99,22 +99,28 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-                using (cmd = SqlCommand(sql, conn))
+                using (conn = new SqlConnection("conectionstring con una variable de entorno encriptada"))
                 {
-                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    using (cmd = new SqlCommand(sql, conn))
                     {
-                        while (rdr.Read())
+                        using (SqlDataReader rdr = cmd.ExecuteReader())
                         {
-                            Student st = new Student();
-                            st.Nombre = rdr["Nombre"].ToString();
-                            st.Apellido = rdr["Apellidos"].ToString();
-                            st.Edad = (int)rdr["Edad"];
-                            st.Dni = rdr["Dni"].ToString();
+                            while (rdr.Read())
+                            {
+                                Student st = new Student();
+                                st.IdAlumno = (int)rdr["Id"];
+                                st.Nombre = rdr["Nombre"].ToString();
+                                st.Apellido = rdr["Apellidos"].ToString();
+                                st.Edad = (int)rdr["Edad"];
+                                st.Dni = rdr["Dni"].ToString();
+                                st.FechaNacimiento = Convert.ToDateTime(rdr["FechaNacimiento"]);
+                                st.HoraRegistro = Convert.ToDateTime(rdr["HoraRegistro"]);
+                                st.Student_Guid = (Guid)rdr["Student_Guid"];
 
+                                liststudents.Add(st);
+                            }
 
-                            liststudents.Add(st);
                         }
-
                     }
                 }
             }
